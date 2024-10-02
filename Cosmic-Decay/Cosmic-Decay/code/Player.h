@@ -15,6 +15,4 @@ public:
 	Player();
 
 	void spawn();
-
-corey
 };
