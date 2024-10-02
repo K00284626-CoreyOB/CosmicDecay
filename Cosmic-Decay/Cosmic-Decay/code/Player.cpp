@@ -2,11 +2,10 @@
 
 Player::Player()
 {
-	henlo
+
 }
 
 void Player::spawn()
 {
 
 }
-whaddup
