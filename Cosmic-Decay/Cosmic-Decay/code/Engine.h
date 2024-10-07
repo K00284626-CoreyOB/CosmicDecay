@@ -1,11 +1,11 @@
 #pragma once
 
-using namespace sf;
+//using namespace sf;
 
 class Engine
 {
 private:
-	Player p;
+	/*Player p;
 
 	Enemy e;
 
@@ -15,10 +15,10 @@ private:
 
 	LevelLoader l;
 
-	Arena a;
+	Arena a;*/
 
 public:
-	Engine();
+	//Engine();
 
-	void run();
+	//void run();
 };

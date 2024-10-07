@@ -10,7 +10,7 @@ int main()
 	Engine engine;
 
 	//Start the engine
-	engine.run();
+	//engine.run();
 
 	return 0;
 }

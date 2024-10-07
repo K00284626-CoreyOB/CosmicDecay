@@ -9,6 +9,6 @@ class Arena
 private:
 
 public:
-	Arena();
+	//Arena();
 };
 #pragma once
