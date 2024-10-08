@@ -3,7 +3,10 @@
 #include "Player.h"
 #include "Arena.h"
 #include "TextureHolder.h"
-#include "loadBackground.h"
+#include "Character.h"
+#include "Enemy.h"
+#include "Bullet.h"
+
 
 //using namespace sf;
 
