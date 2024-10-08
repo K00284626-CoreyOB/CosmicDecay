@@ -45,6 +45,19 @@ private:
 	// Create the background
 	VertexArray background;
 
+	// The Hud
+	//Hud m_Hud;
+	int m_FramesSinceLastHUDUpdate = 0;
+	int m_TargetFramesPerHUDUpdate = 500;
+
+	// A regular RenderWindow
+	RenderWindow m_Window;
+
+	// Private functions for internal use only
+	void input();
+	void update(float dtAsSeconds);
+	void draw();
+
 public:
 	Engine();
 
