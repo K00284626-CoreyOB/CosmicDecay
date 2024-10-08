@@ -1,5 +1,4 @@
 //Zach Ahearn
-
 #include "Pickup.h"
 #include "TextureHolder.h"
 

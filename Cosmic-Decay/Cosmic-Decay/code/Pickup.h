@@ -1,5 +1,4 @@
 //Zach Ahearn
-
 #pragma once
 #include <SFML/Graphics.hpp>
 
