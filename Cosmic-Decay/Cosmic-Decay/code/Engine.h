@@ -58,9 +58,10 @@ private:
 	void update(float dtAsSeconds);
 	void draw();
 
-public:
+	//create background function
 	int createBackground(VertexArray& rVA, IntRect arena);
 
+public:
 	Engine();
 
 	void run();
