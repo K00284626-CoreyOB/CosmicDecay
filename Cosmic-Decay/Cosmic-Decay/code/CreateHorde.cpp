@@ -1,6 +1,3 @@
-//Zach Ahearn
-//Creating The Enemy Hordes
-
 //#include "ZombieArena.h"
 //#include "Zombie.h"
 
