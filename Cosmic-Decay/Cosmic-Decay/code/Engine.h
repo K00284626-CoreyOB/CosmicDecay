@@ -59,7 +59,7 @@ private:
 	void draw();
 
 	//create background function
-	int createBackground(VertexArray& rVA, IntRect arena);
+	int loadBackground(VertexArray& rVA, IntRect arena);
 
 public:
 	Engine();
