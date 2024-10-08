@@ -6,6 +6,8 @@ Calls the run() method to initialise the game.*/
 
 Engine::Engine()
 {
+	Texture textureBackground = TextureHolder::GetTexture(
+		"textures/");
 
 }
 
