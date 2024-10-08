@@ -59,6 +59,8 @@ private:
 	void draw();
 
 public:
+	int createBackground(VertexArray& rVA, IntRect arena);
+
 	Engine();
 
 	void run();
