@@ -57,7 +57,7 @@ void Engine::run()
 		// Make a decimal fraction from the delta time
 		float dtAsSeconds = dt.asSeconds();
 
-		//input();
+		input();
 		//update(dtAsSeconds);
 		draw();
 	}
