@@ -3,9 +3,9 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-/*
-using namespace sf;
 
+using namespace sf;
+/*
 class Zombie
 {
 private:
@@ -58,4 +58,5 @@ public:
 
 	// Update the zombie each frame
 	void update(float elapsedTime, Vector2f playerLocation);
-};*/
+}
+*/
