@@ -26,10 +26,12 @@ private:
 	Vector2f resolution;
 
 	// Create a an SFML View for the main action
-	View mainView;
+	View m_MainView;
+	View m_BGMainView;
 
 	// Here is our clock for timing everything
 	Clock clock;
+	Time m_GameTimeTotal;
 
 	// Where is the mouse in relation to world coordinates
 	Vector2f mouseWorldPosition;
@@ -37,13 +39,20 @@ private:
 	Vector2i mouseScreenPosition;
 
 	// Create an instance of the Player class
-	Player player;
+	//Player player;
 
 	// The boundaries of the arena
 	IntRect arena;
 
 	// Create the background
 	VertexArray background;
+
+	// Declare a sprite and a Texture for the background
+	Sprite m_BackgroundSprite;
+	Texture m_BackgroundTexture;
+
+	// Texture for the background and the level tiles
+	Texture m_TextureTiles;
 
 	// The Hud
 	//Hud m_Hud;
