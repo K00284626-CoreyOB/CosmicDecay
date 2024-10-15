@@ -1,18 +1,21 @@
+//Zach Ahearn
 //#include "ZombieArena.h"
-//#include "Zombie.h"
-//zach
+#include "Enemy.h"
 
-/*
-Zombie* createHorde(int numZombies, IntRect arena, int wave)
+
+
+
+
+Enemy* createHorde(int numEnemies, IntRect arena, int wave)
 {
-	Zombie* zombies = new Zombie[numZombies];
+	Enemy* enemies = new Enemy[numEnemies];
 
 	int maxY = arena.height - 20;
 	int minY = arena.top + 20;
 	int maxX = arena.width - 20;
 	int minX = arena.left + 20;
 
-	for (int i = 0; i < numZombies; i++)
+	for (int i = 0; i < numEnemies; i++)
 	{
 
 		// Which side should the zombie spawn
@@ -62,10 +65,9 @@ Zombie* createHorde(int numZombies, IntRect arena, int wave)
 			type = (rand() % 3);
 		}
 		// Spawn the new zombie into the array
-		zombies[i].spawn(x, y, type, i);
+		enemies[i].spawn(x, y, type, i);
 
 	}
-	return zombies;
+	return enemies;
 }
 
-*/
