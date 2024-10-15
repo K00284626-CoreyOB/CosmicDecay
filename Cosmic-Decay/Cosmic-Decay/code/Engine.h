@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "Arena.h"
+#include "LevelManager.h"
 #include "TextureHolder.h"
 #include "Character.h"
 #include "Enemy.h"
