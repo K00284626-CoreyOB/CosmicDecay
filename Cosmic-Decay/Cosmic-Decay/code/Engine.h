@@ -31,7 +31,6 @@ private:
 
 	// Here is our clock for timing everything
 	Clock clock;
-	Time m_GameTimeTotal;
 
 	// Where is the mouse in relation to world coordinates
 	Vector2f mouseWorldPosition;

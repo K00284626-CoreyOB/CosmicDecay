@@ -5,11 +5,6 @@
 
 
 #include "enemy.h"
-
-/*
-
-
-
 #include "TextureHolder.h"
 #include <cstdlib>
 #include <ctime>

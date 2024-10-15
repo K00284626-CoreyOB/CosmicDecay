@@ -1,5 +1,6 @@
-#include "stdafx.h"
+//Zach Ahearn
 
+#include "stdafx.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "TextureHolder.h"
@@ -169,6 +170,7 @@ int LevelManager::getCurrentLevel()
 
 void LevelManager::setCurrentLevel(int levelNum)
 {
+
 	m_CurrentLevel = levelNum;
 }
 
