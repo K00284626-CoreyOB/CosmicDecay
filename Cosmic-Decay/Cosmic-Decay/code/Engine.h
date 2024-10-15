@@ -93,7 +93,7 @@ private:
 
 	float m_TimeRemaining = 5;
 	Time m_GameTimeTotal;
-=======
+
 	//Enemy* createHorde(int numEnemies, IntRect arena, int wave);
 
 public:
