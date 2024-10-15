@@ -15,8 +15,7 @@ void Engine::draw()
 	// Switch to m_MainView
 	m_Window.setView(m_MainView);
 
-	
-	//corey sux
+	m_Window.draw(player.getSprite());
 
 
 	// Show everything we have just drawn

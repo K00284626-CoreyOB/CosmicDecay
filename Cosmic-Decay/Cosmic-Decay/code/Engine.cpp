@@ -37,6 +37,7 @@ Engine::Engine()
 
 	// Associate the sprite with the texture
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
+	m_BackgroundSprite.setScale(1.5, 1.5);
 
 
 	// Load the texture for the background vertex array
@@ -57,7 +58,7 @@ void Engine::run()
 		// Make a decimal fraction from the delta time
 		float dtAsSeconds = dt.asSeconds();
 
-		//input();
+		input();
 		//update(dtAsSeconds);
 		draw();
 	}
