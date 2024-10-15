@@ -31,7 +31,6 @@ private:
 
 	// Here is our clock for timing everything
 	Clock clock;
-	Time m_GameTimeTotal;
 
 	// Where is the mouse in relation to world coordinates
 	Vector2f mouseWorldPosition;
@@ -93,7 +92,7 @@ private:
 
 	float m_TimeRemaining = 5;
 	Time m_GameTimeTotal;
-=======
+
 	//Enemy* createHorde(int numEnemies, IntRect arena, int wave);
 
 public:
