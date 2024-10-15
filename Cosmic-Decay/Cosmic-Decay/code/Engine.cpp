@@ -34,6 +34,7 @@ Engine::Engine()
 
 	m_BackgroundTexture = TextureHolder::GetTexture(
 		"graphics/tempBackground.png");
+	
 
 	// Associate the sprite with the texture
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);

@@ -70,6 +70,8 @@ private:
 	//create background function
 	int loadBackground(VertexArray& rVA, IntRect arena);
 
+	//Enemy* createHorde(int numEnemies, IntRect arena, int wave);
+
 public:
 	Engine();
 
