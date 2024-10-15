@@ -39,7 +39,7 @@ private:
 	Vector2i mouseScreenPosition;
 
 	// Create an instance of the Player class
-	//Player player;
+	Player player;
 
 	// The boundaries of the arena
 	IntRect arena;
@@ -69,6 +69,8 @@ private:
 
 	//create background function
 	int loadBackground(VertexArray& rVA, IntRect arena);
+
+	//Enemy* createHorde(int numEnemies, IntRect arena, int wave);
 
 public:
 	Engine();
