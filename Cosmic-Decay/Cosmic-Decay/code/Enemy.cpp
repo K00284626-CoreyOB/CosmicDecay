@@ -2,7 +2,7 @@
 //Creates enemies
 
 /*
-* zzzzzzzzzzz
+
 #include "zombie.h"
 #include "TextureHolder.h"
 #include <cstdlib>
