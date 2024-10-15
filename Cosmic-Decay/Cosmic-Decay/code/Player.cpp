@@ -1,6 +1,6 @@
 #include "player.h"
 #include "TextureHolder.h"
-/*
+
 Player::Player()
 {
 	m_Speed = START_SPEED;
@@ -210,4 +210,3 @@ void Player::increaseHealthLevel(int amount)
 	}
 }
 
-*/
