@@ -39,7 +39,7 @@ private:
 	Vector2i mouseScreenPosition;
 
 	// Create an instance of the Player class
-	//Player player;
+	Player player;
 
 	// The boundaries of the arena
 	IntRect arena;
