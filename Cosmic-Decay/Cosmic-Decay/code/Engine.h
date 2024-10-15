@@ -92,7 +92,6 @@ private:
 	//std::list<PlayableCharacter> m_KeyList;
 
 	float m_TimeRemaining = 5;
-	Time m_GameTimeTotal;
 
 	//Enemy* createHorde(int numEnemies, IntRect arena, int wave);
 

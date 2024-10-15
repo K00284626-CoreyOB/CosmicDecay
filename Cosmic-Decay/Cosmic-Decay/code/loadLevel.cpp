@@ -78,6 +78,8 @@ void Engine::loadLevel()
 	// How long is this new time limit
 	m_TimeRemaining = m_LM.getTimeLimit();
 
+	player.spawn(m_LM.getStartPosition(), GRAVITY);
+
 	// Spawn Enemy and Player
 	//m_BlinkyGhost.setSprite(1);
 	//m_PinkyGhost.setSprite(2);

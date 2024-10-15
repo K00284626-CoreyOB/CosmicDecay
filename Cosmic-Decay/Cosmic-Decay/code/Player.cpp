@@ -24,24 +24,17 @@ void Player::resetPlayerStats()
 	m_MaxHealth = START_HEALTH;
 }
 
-void Player::spawn(IntRect arena, Vector2f resolution, int tileSize)
+void Player::spawn(Vector2f startPosition, float gravity)
 {
-	// Place the player in the middle of the arena
-	m_Position.x = arena.width / 2;
-	m_Position.y = arena.height / 2;
+	// Place the player at the starting point
+	m_Position.x = startPosition.x;
+	m_Position.y = startPosition.y;
 
-	// Copy the details of the arena to the player's m_Arena
-	m_Arena.left = arena.left;
-	m_Arena.width = arena.width;
-	m_Arena.top = arena.top;
-	m_Arena.height = arena.height;
+	// Initialize the gravity
+	m_Gravity = gravity;
 
-	// Remember how big the tiles are in this arena
-	m_TileSize = tileSize;
-
-	// Strore the resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
+	// Move the sprite in to position
+	m_Sprite.setPosition(m_Position);
 
 }
 
@@ -133,7 +126,7 @@ void Player::handleInput()
 	}
 }
 
-void Player::update(float elapsedTime, Vector2i mousePosition)
+void Player::update(float elapsedTime)
 {
 
 	if (m_UpPressed)
