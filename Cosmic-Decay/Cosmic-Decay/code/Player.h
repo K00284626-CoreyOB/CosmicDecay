@@ -95,6 +95,9 @@ public:
 
 	void stopDown();
 
+	//Handle the inputs
+	void handleInput();
+
 	// We will call this function once every frame
 	void update(float elapsedTime, Vector2i mousePosition);
 

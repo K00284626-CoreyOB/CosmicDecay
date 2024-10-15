@@ -90,44 +90,47 @@ int Player::getHealth()
 	return m_Health;
 }
 
-void Player::moveLeft()
+void Player::handleInput()
 {
-	m_LeftPressed = true;
-}
+	//up and down movement
+	if (Keyboard::isKeyPressed(Keyboard::W))
+	{
+		m_UpPressed = true;
 
-void Player::moveRight()
-{
-	m_RightPressed = true;
-}
+	}
+	else
+	{
+		m_UpPressed = false;
+	}
 
-void Player::moveUp()
-{
-	m_UpPressed = true;
-}
+	if (Keyboard::isKeyPressed(Keyboard::S))
+	{
+		m_DownPressed = true;
 
-void Player::moveDown()
-{
-	m_DownPressed = true;
-}
+	}
+	else
+	{
+		m_DownPressed = false;
+	}
 
-void Player::stopLeft()
-{
-	m_LeftPressed = false;
-}
+	if (Keyboard::isKeyPressed(Keyboard::A))
+	{
+		m_LeftPressed = true;
 
-void Player::stopRight()
-{
-	m_RightPressed = false;
-}
+	}
+	else
+	{
+		m_LeftPressed = false;
+	}
 
-void Player::stopUp()
-{
-	m_UpPressed = false;
-}
-
-void Player::stopDown()
-{
-	m_DownPressed = false;
+	if (Keyboard::isKeyPressed(Keyboard::D))
+	{
+		m_RightPressed = true;
+	}
+	else
+	{
+		m_RightPressed = false;
+	}
 }
 
 void Player::update(float elapsedTime, Vector2i mousePosition)
@@ -158,7 +161,7 @@ void Player::update(float elapsedTime, Vector2i mousePosition)
 
 
 	// Keep the player in the arena
-	if (m_Position.x > m_Arena.width - m_TileSize)
+	/*if (m_Position.x > m_Arena.width - m_TileSize)
 	{
 		m_Position.x = m_Arena.width - m_TileSize;
 	}
@@ -176,14 +179,7 @@ void Player::update(float elapsedTime, Vector2i mousePosition)
 	if (m_Position.y < m_Arena.top + m_TileSize)
 	{
 		m_Position.y = m_Arena.top + m_TileSize;
-	}
-
-	// Calculate the angle the player is facing
-	float angle = (atan2(mousePosition.y - m_Resolution.y / 2,
-		mousePosition.x - m_Resolution.x / 2)
-		* 180) / 3.141;
-
-	m_Sprite.setRotation(angle);
+	}*/
 }
 
 void Player::upgradeSpeed()
