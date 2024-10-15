@@ -6,7 +6,7 @@
 #include "Character.h"
 #include "Enemy.h"
 #include "Bullet.h"
-
+#include <list>
 
 //using namespace sf;
 
@@ -69,6 +69,29 @@ private:
 
 	//create background function
 	int loadBackground(VertexArray& rVA, IntRect arena);
+
+
+	//Matthew changes ----
+	void loadLevel();
+	
+	int** m_ArrayLevel = NULL;
+	int** m_ArraySpawningPointsLevel = NULL;
+
+	bool m_Playing = false;
+
+	
+
+	LevelManager m_LM;
+
+	const int GRAVITY = 0;
+
+	VertexArray m_VALevel;
+
+	bool m_NewLevelRequired = true;
+
+	//std::list<PlayableCharacter> m_DotsList;
+
+	//std::list<PlayableCharacter> m_KeyList;
 
 public:
 	Engine();
