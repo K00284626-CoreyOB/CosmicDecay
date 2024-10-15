@@ -43,6 +43,9 @@ private:
 	// The boundaries of the arena
 	IntRect arena;
 
+	// The vertex array for the level design
+	VertexArray m_VALevel;
+
 	// Create the background
 	VertexArray background;
 

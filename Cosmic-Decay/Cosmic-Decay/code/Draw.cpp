@@ -15,6 +15,8 @@ void Engine::draw()
 	// Switch to m_MainView
 	m_Window.setView(m_MainView);
 
+	m_Window.draw(m_VALevel, &m_TextureTiles);
+
 	m_Window.draw(player.getSprite());
 
 
