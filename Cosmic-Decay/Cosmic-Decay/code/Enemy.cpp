@@ -1,9 +1,9 @@
 //Szymon
 //Creates enemies
 
-/*
-* zzzzzzzzzzz
-#include "zombie.h"
+
+
+#include "enemy.h"
 #include "TextureHolder.h"
 #include <cstdlib>
 #include <ctime>
@@ -11,7 +11,7 @@
 using namespace std;
 
 
-void Zombie::spawn(float startX, float startY, int type, int seed)
+void Enemy::spawn(float startX, float startY, int type, int seed)
 {
 
 	switch (type)
@@ -44,7 +44,7 @@ void Zombie::spawn(float startX, float startY, int type, int seed)
 		break;
 
 	case 3:
-		// BOSS ZOMBIE
+		// BOSS ENEMY
 
 		m_Sprite = Sprite(TextureHolder::GetTexture(
 			"graphics/hitbox.png"));
@@ -54,8 +54,8 @@ void Zombie::spawn(float startX, float startY, int type, int seed)
 		break;
 	}
 
-	// Modify the speed to make the zombie unique
-	// Every zombie is unique. Create a speed modifier
+	// Modify the speed to make the enemy unique
+	// Every enemy is unique. Create a speed modifier
 	srand((int)time(0) * seed);
 	// Somewhere between 80 an 100
 	float modifier = (rand() % MAX_VARRIANCE) + OFFSET;
@@ -70,7 +70,7 @@ void Zombie::spawn(float startX, float startY, int type, int seed)
 	m_Sprite.setPosition(m_Position);
 }
 
-bool Zombie::hit()
+bool Enemy::hit()
 {
 	m_Health--;
 
@@ -88,29 +88,29 @@ bool Zombie::hit()
 	return false;
 }
 
-bool Zombie::isAlive()
+bool Enemy::isAlive()
 {
 	return m_Alive;
 }
 
-FloatRect Zombie::getPosition()
+FloatRect Enemy::getPosition()
 {
 	return m_Sprite.getGlobalBounds();
 }
 
 
-Sprite Zombie::getSprite()
+Sprite Enemy::getSprite()
 {
 	return m_Sprite;
 }
 
-void Zombie::update(float elapsedTime,
+void Enemy::update(float elapsedTime,
 	Vector2f playerLocation)
 {
 	float playerX = playerLocation.x;
 	float playerY = playerLocation.y;
 
-	// Update the zombie position variables
+	// Update the enemy position variables
 	if (playerX > m_Position.x)
 	{
 		m_Position.x = m_Position.x +
@@ -149,20 +149,19 @@ void Zombie::update(float elapsedTime,
 }
 
 //Method used to changed the size scale of zombies
-void Zombie::setScale(float scaleX, float scaleY)
+void Enemy::setScale(float scaleX, float scaleY)
 {
 	m_Sprite.setScale(scaleX, scaleY);
 }
 
 //Method used to change the speed of zombies
-void Zombie::setSpeed(float speed)
+void Enemy::setSpeed(float speed)
 {
 	m_Speed = speed;
 }
 
 //Method used for the boss to convert its position to a vector rather than a rectangle
-Vector2f Zombie::getPositionVector()
+Vector2f Enemy::getPositionVector()
 {
 	return Vector2f(m_Position.x, m_Position.y);
 }
-*/
