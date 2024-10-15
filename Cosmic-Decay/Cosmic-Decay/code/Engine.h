@@ -79,8 +79,6 @@ private:
 
 	bool m_Playing = false;
 
-	
-
 	LevelManager m_LM;
 
 	const int GRAVITY = 0;
@@ -92,6 +90,9 @@ private:
 	//std::list<PlayableCharacter> m_DotsList;
 
 	//std::list<PlayableCharacter> m_KeyList;
+
+	float m_TimeRemaining = 5;
+	Time m_GameTimeTotal;
 
 public:
 	Engine();
