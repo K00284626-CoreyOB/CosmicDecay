@@ -40,6 +40,8 @@ private:
 	// Create an instance of the Player class
 	Player player;
 
+	Enemy enemy;
+
 	// The boundaries of the arena
 	IntRect arena;
 
