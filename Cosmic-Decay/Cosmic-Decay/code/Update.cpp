@@ -21,16 +21,10 @@ void Engine::update(float dtAsSeconds)
 
 	if (state == State::PLAYING)
 	{
-		
-
 		// Update Player
 		player.update(dtAsSeconds);
 		Vector2f playerPosition(player.getCenter());
 		FloatRect pr = player.getPosition();
-
-
-
-
 	}// End if playing
 		
 
