@@ -1,5 +1,6 @@
 #include "SzymonAbility.h"
-#include "Player.h"
+#include "PlayableCharacter.h"
+#include "Engine.h"
 #include <iostream>
 
 SzymonAbility::SzymonAbility(Player& player)

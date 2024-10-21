@@ -1,5 +1,6 @@
 #include "CoreyAbility.h"
-#include "Player.h"
+#include "PlayableCharacter.h"
+#include "Engine.h"
 #include <iostream>
 
 CoreyAbility::CoreyAbility(Player& player)

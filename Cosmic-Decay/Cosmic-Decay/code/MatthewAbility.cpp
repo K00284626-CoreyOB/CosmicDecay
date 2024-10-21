@@ -1,5 +1,6 @@
 #include "MatthewAbility.h"
-#include "Player.h"
+#include "PlayableCharacter.h"
+#include "Engine.h"
 #include <iostream>
 
 MatthewAbility::MatthewAbility(Player& player)

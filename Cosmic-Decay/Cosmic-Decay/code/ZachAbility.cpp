@@ -1,5 +1,6 @@
 #include "ZachAbility.h"
-#include "Player.h"
+#include "PlayableCharacter.h"
+#include "Engine.h"
 #include <iostream>
 
 ZachAbility::ZachAbility(Player& player)
