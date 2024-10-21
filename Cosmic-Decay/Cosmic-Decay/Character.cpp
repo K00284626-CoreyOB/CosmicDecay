@@ -1,2 +1,0 @@
-//Szymon
-//Handle Characters

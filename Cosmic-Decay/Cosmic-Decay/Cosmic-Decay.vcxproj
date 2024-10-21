@@ -19,20 +19,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\Arena.cpp" />
-    <ClCompile Include="code\CosmicDecay.cpp" />
-    <ClCompile Include="code\Player.cpp" />
+    <ClInclude Include="code\Dots.h" />
+    <ClInclude Include="code\Enemy.h" />
+    <ClInclude Include="code\Engine.h" />
+    <ClInclude Include="code\LevelManager.h" />
+    <ClInclude Include="code\PlayableCharacter.h" />
+    <ClInclude Include="code\Player.h" />
+    <ClInclude Include="code\stdafx.h" />
+    <ClInclude Include="code\targetver.h" />
+    <ClInclude Include="code\TextureHolder.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="code\Arena.h" />
-    <ClInclude Include="code\CosmicDecay.h" />
-    <ClInclude Include="code\Engine.h" />
-    <ClInclude Include="code\Player.h" />
+    <ClCompile Include="code\DetectCollisions.cpp" />
+    <ClCompile Include="code\Dots.cpp" />
+    <ClCompile Include="code\Draw.cpp" />
+    <ClCompile Include="code\Enemy.cpp" />
+    <ClCompile Include="code\Engine.cpp" />
+    <ClCompile Include="code\Input.cpp" />
+    <ClCompile Include="code\LevelManager.cpp" />
+    <ClCompile Include="code\LoadLevel.cpp" />
+    <ClCompile Include="code\Main.cpp" />
+    <ClCompile Include="code\PlayableCharacter.cpp" />
+    <ClCompile Include="code\Player.cpp" />
+    <ClCompile Include="code\stdafx.cpp" />
+    <ClCompile Include="code\TextureHolder.cpp" />
+    <ClCompile Include="code\Update.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{093f3e45-4eba-4bd1-911c-ac3f7feeb8fd}</ProjectGuid>
+    <ProjectGuid>{6c02187f-ea04-468a-9cfc-6f1482ac087f}</ProjectGuid>
     <RootNamespace>Cosmic_Decay</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
