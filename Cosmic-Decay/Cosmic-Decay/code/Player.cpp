@@ -1,164 +1,114 @@
-#include "stdafx.h"
 #include "Player.h"
 #include "TextureHolder.h"
 #include <iostream>
 
 Player::Player()
-
 {
-	// Associate a texture with the sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"graphics/pacman-spritesheet-resized-810-730.png"));
-	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
-	ani_counter = 1;
-
-	m_JumpDuration = .25;
-
-
+    // Associate a texture with the sprite
+    m_Sprite = sf::Sprite(TextureHolder::GetTexture(
+        "graphics/pacman-spritesheet-resized-810-730.png"));
+    m_Sprite.setTextureRect(sf::IntRect{ 12, 62, 50, 50 });
 }
 
 bool Player::handleInput()
 {
-	m_JustJumped = false;
-	
-	float joyOnePovY = 0;
-	float joyOnePovX = 0;
-	bool joyOneConnected = sf::Joystick::isConnected(0);
-	if (joyOneConnected) {
-		joyOnePovY = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
-		joyOnePovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
-	}
+    m_JustJumped = false;
 
+    // Joystick input variables
+    float joyOnePovY = 0;
+    float joyOnePovX = 0;
+    bool joyOneConnected = sf::Joystick::isConnected(0);
+    if (joyOneConnected) {
+        joyOnePovY = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+        joyOnePovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+    }
 
+    // Keyboard and joystick input handling
+    m_UpPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (joyOnePovY == 100);
+    m_DownPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (joyOnePovY == -100);
+    m_LeftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (joyOnePovX == -100);
+    m_RightPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (joyOnePovX == 100);
 
-	//2019 up and down movement
-	if (Keyboard::isKeyPressed(Keyboard::Up) || (joyOnePovY == 100))
-	{
-		m_UpPressed = true;
-
-	}
-	else
-	{
-		m_UpPressed = false;
-	}
-
-
-	if (Keyboard::isKeyPressed(Keyboard::Down) || (joyOnePovY==-100))
-	{
-		m_DownPressed = true;
-
-	}
-	else
-	{
-		m_DownPressed = false;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Left) || (joyOnePovX == -100))
-	{
-		m_LeftPressed = true;
-
-	}
-	else
-	{
-		m_LeftPressed = false;
-	}
-
-
-	if (Keyboard::isKeyPressed(Keyboard::Right) || (joyOnePovX == 100))
-	{
-		m_RightPressed = true;
-	}
-	else
-	{
-		m_RightPressed = false;
-	}
-
-	return m_JustJumped;
+    return m_JustJumped;
 }
+
 void Player::update(float elapsedTime)
 {
-	timeElapsed = elapsedTime;
+    if (m_RightPressed) {
+        m_Position.x += m_Speed * elapsedTime;
+        setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
+    }
+    else if (m_LeftPressed) {
+        m_Position.x -= m_Speed * elapsedTime;
+        setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
+    }
+    else if (m_UpPressed) {
+        m_Position.y -= m_Speed * elapsedTime;
+        setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
+    }
+    else if (m_DownPressed) {
+        m_Position.y += m_Speed * elapsedTime;
+        setSpriteFromSheet(sf::IntRect(12, 162, 150, 50));
+    }
 
-	if (m_RightPressed)
-	{
-		m_Position.x += m_Speed * elapsedTime;
-		direction = sf::Vector2f(0, -1);
-		//2nd row of sprite sheet 3 characters 150 pixels by 50 pixels
-		setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+    // Update collision boxes
+    sf::FloatRect r = getPosition();
+    m_Feet = { r.left + 3, r.top + r.height - 1, r.width - 6, 1 };
+    m_Head = { r.left + 3, r.top - 1, r.width - 6, 1 };
+    m_Right = { r.left + r.width - 1, r.top + r.height * .35, 1, r.height * .3 };
+    m_Left = { r.left + 1, r.top + r.height * .35, 1, r.height * .3 };
 
-	}
-	if (m_LeftPressed)
-	{
-		m_Position.x -= m_Speed * elapsedTime;
-		direction = sf::Vector2f(0, 1);
-		//1st row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+    // Move the sprite into position
+    updateLeftRightHeadFeet();
+    m_Sprite.setPosition(m_Position);
+}
 
-	}
+// Ability methods
+void Player::switchToMelee() {
+    // Logic to switch to melee weapon
+    std::cout << "Switched to melee weapon.\n";
+}
 
-	if (m_UpPressed)
-	{
-		m_Position.y -= m_Speed * elapsedTime;
-		direction = sf::Vector2f(1, 0);
-		//3rd row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+void Player::switchToGun() {
+    // Logic to switch to gun weapon
+    std::cout << "Switched to gun weapon.\n";
+}
 
+void Player::increaseHealthLevel(int amount) {
+    // Logic to increase health level
+    std::cout << "Health increased by " << amount << ".\n";
+}
 
-	}
+void Player::setHealth(float health) {
+    // Logic to set health
+    std::cout << "Health set to " << health << ".\n";
+}
 
-	if (m_DownPressed)
-	{
+float Player::getMaxHealth() const {
+    return m_MaxHealth;
+}
 
-		m_Position.y += m_Speed * elapsedTime;
-		direction = sf::Vector2f(-1, 0);
-		//4th row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 162, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+void Player::setInvulnerable(bool state) {
+    m_Invulnerable = state;
+    std::cout << "Invulnerability set to " << (state ? "true" : "false") << ".\n";
+}
 
-	}
+void Player::setEnemiesIgnore(bool state) {
+    m_EnemiesIgnore = state;
+    std::cout << "Enemies ignore set to " << (state ? "true" : "false") << ".\n";
+}
 
+void Player::setCanAttack(bool state) {
+    m_CanAttack = state;
+    std::cout << "Can attack set to " << (state ? "true" : "false") << ".\n";
+}
 
+void Player::setFireRateMultiplier(float multiplier) {
+    m_FireRateMultiplier = multiplier;
+    std::cout << "Fire rate multiplier set to " << multiplier << ".\n";
+}
 
-
-
-
-
-	// Update the rect for all body parts
-	FloatRect r = getPosition();
-
-
-	// Feet
-	m_Feet.left = r.left + 3;
-	m_Feet.top = r.top + r.height - 1;
-	m_Feet.width = r.width - 6;
-	m_Feet.height = 1;
-
-	// Head
-	m_Head.left = r.left + 3;
-	m_Head.top = r.top-1;
-	m_Head.width = r.width - 6;
-	m_Head.height = 1;
-
-	// Right
-	m_Right.left = r.left + r.width - 1;
-	m_Right.top = r.top + r.height * .35;
-	m_Right.width = 1;
-	m_Right.height = r.height * .3;
-
-	// Left
-	m_Left.left = r.left+1;
-	m_Left.top = r.top + r.height * .35;
-	m_Left.width = 1;
-	m_Left.height = r.height * .3;
-
-	// Move the sprite into position
-	updateLeftRightHeadFeet();
-	m_Sprite.setPosition(m_Position);
-
+void Player::setInfiniteAmmo(bool state) {
+    m_InfiniteAmmo = state;
+    std::cout << "Infinite ammo set to " << (state ? "true" : "false") << ".\n";
 }

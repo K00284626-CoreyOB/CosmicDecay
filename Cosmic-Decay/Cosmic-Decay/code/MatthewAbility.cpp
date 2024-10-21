@@ -4,7 +4,7 @@
 #include <iostream>
 
 MatthewAbility::MatthewAbility(Player& player)
-    : Abilities(player), enemiesIgnore(false), canAttack(true)
+    : Abilities(player), m_Player(player), enemiesIgnore(false), canAttack(true) // Initialize m_Player here
 {
 }
 

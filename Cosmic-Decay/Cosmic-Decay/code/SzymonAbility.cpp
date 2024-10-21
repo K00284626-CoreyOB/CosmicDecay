@@ -4,7 +4,7 @@
 #include <iostream>
 
 SzymonAbility::SzymonAbility(Player& player)
-    : Abilities(player), increasedFireRate(false), infiniteAmmo(false)
+    : Abilities(player), m_Player(player), increasedFireRate(false), infiniteAmmo(false)
 {
 }
 
