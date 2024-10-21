@@ -1,161 +1,246 @@
-#include "stdafx.h"
 #include "Player.h"
 #include "TextureHolder.h"
+#include <cmath>
 #include <iostream>
 
+// Constructor
 Player::Player()
+    : m_Speed(START_SPEED),
+    m_Health(static_cast<int>(START_HEALTH)),
+    m_MaxHealth(static_cast<int>(START_HEALTH)),
+    m_Position(0.f, 0.f),
+    m_UpPressed(false),
+    m_DownPressed(false),
+    m_LeftPressed(false),
+    m_RightPressed(false),
+    m_Invulnerable(false),
+    m_FireRateMultiplier(1.0f),
+    m_InfiniteAmmo(false),
+    m_EnemiesIgnore(false),
+    m_CanAttack(true)
 {
-	// Associate a texture with the sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"graphics/pacman-spritesheet-resized-810-730.png"));
-	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
-	ani_counter = 1;
+    // Load default texture (assuming Zach is default)
+    m_Texture = TextureHolder::GetTexture("graphics/zachIdle.png");
+    m_Sprite.setTexture(m_Texture);
 
-	m_JumpDuration = .25;
+    // Set origin to center for smooth rotation
+    m_Sprite.setOrigin(m_Texture.getSize().x / 2.f, m_Texture.getSize().y / 2.f);
 }
 
-bool Player::handleInput()
+// Reset player stats
+void Player::resetPlayerStats()
 {
-	m_JustJumped = false;
-	
-	float joyOnePovY = 0;
-	float joyOnePovX = 0;
-	bool joyOneConnected = sf::Joystick::isConnected(0);
-	if (joyOneConnected) {
-		joyOnePovY = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
-		joyOnePovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
-	}
+    m_Speed = START_SPEED;
+    m_Health = static_cast<int>(START_HEALTH);
+    m_MaxHealth = static_cast<int>(START_HEALTH);
+    m_Invulnerable = false;
+    m_FireRateMultiplier = 1.0f;
+    m_InfiniteAmmo = false;
+    m_EnemiesIgnore = false;
+    m_CanAttack = true;
 
-
-
-	//2019 up and down movement
-	if (Keyboard::isKeyPressed(Keyboard::Up) || (joyOnePovY == 100))
-	{
-		m_UpPressed = true;
-
-	}
-	else
-	{
-		m_UpPressed = false;
-	}
-
-
-	if (Keyboard::isKeyPressed(Keyboard::Down) || (joyOnePovY==-100))
-	{
-		m_DownPressed = true;
-
-	}
-	else
-	{
-		m_DownPressed = false;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Left) || (joyOnePovX == -100))
-	{
-		m_LeftPressed = true;
-
-	}
-	else
-	{
-		m_LeftPressed = false;
-	}
-
-
-	if (Keyboard::isKeyPressed(Keyboard::Right) || (joyOnePovX == 100))
-	{
-		m_RightPressed = true;
-	}
-	else
-	{
-		m_RightPressed = false;
-	}
-
-	return m_JustJumped;
+    // Switch back to default weapon if necessary
+    switchToGun();
 }
-void Player::update(float elapsedTime)
+
+// Spawn the player
+void Player::spawn(IntRect arena, Vector2f resolution, int tileSize)
 {
-	timeElapsed = elapsedTime;
+    m_Arena = arena;
+    m_Resolution = resolution;
+    m_TileSize = tileSize;
 
-	if (m_RightPressed)
-	{
-		m_Position.x += m_Speed * elapsedTime;
-		direction = sf::Vector2f(0, -1);
-		//2nd row of sprite sheet 3 characters 150 pixels by 50 pixels
-		setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+    // Place the player in the middle of the arena
+    m_Position.x = arena.width / 2.f;
+    m_Position.y = arena.height / 2.f;
 
-	}
-	if (m_LeftPressed)
-	{
-		m_Position.x -= m_Speed * elapsedTime;
-		direction = sf::Vector2f(0, 1);
-		//1st row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+    m_Sprite.setPosition(m_Position);
+}
 
-	}
+// Handle getting hit
+bool Player::hit(Time timeHit)
+{
+    if (m_Invulnerable)
+        return false;
 
-	if (m_UpPressed)
-	{
-		m_Position.y -= m_Speed * elapsedTime;
-		direction = sf::Vector2f(1, 0);
-		//3rd row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+    if (timeHit.asMilliseconds() - m_LastHit.asMilliseconds() > 200)
+    {
+        m_LastHit = timeHit;
+        if (m_Health > 0)
+        {
+            m_Health -= 10;
+            if (m_Health < 0)
+                m_Health = 0;
+            return true;
+        }
+    }
+    return false;
+}
 
+// Get last hit time
+Time Player::getLastHitTime()
+{
+    return m_LastHit;
+}
 
-	}
+// Get position
+FloatRect Player::getPosition()
+{
+    return m_Sprite.getGlobalBounds();
+}
 
-	if (m_DownPressed)
-	{
+// Get center
+Vector2f Player::getCenter()
+{
+    return m_Position;
+}
 
-		m_Position.y += m_Speed * elapsedTime;
-		direction = sf::Vector2f(-1, 0);
-		//4th row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(12, 162, 150, 50));
-		//move the rectangle to the appropriate cell
-		moveTextureRect();
+// Get rotation
+float Player::getRotation()
+{
+    return m_Sprite.getRotation();
+}
 
-	}
+// Get sprite
+Sprite Player::getSprite()
+{
+    return m_Sprite;
+}
 
+// Get health
+int Player::getHealth()
+{
+    return m_Health;
+}
 
+// Movement functions
+void Player::moveLeft() { m_LeftPressed = true; }
+void Player::moveRight() { m_RightPressed = true; }
+void Player::moveUp() { m_UpPressed = true; }
+void Player::moveDown() { m_DownPressed = true; }
 
+void Player::stopLeft() { m_LeftPressed = false; }
+void Player::stopRight() { m_RightPressed = false; }
+void Player::stopUp() { m_UpPressed = false; }
+void Player::stopDown() { m_DownPressed = false; }
 
+// Update player state
+void Player::update(float elapsedTime, Vector2i mousePosition)
+{
+    // Handle movement
+    if (m_UpPressed)
+        m_Position.y -= m_Speed * elapsedTime;
+    if (m_DownPressed)
+        m_Position.y += m_Speed * elapsedTime;
+    if (m_LeftPressed)
+        m_Position.x -= m_Speed * elapsedTime;
+    if (m_RightPressed)
+        m_Position.x += m_Speed * elapsedTime;
 
+    m_Sprite.setPosition(m_Position);
 
+    // Keep player within arena
+    if (m_Position.x > m_Arena.width - m_TileSize)
+        m_Position.x = m_Arena.width - m_TileSize;
+    if (m_Position.x < m_Arena.left + m_TileSize)
+        m_Position.x = m_Arena.left + m_TileSize;
+    if (m_Position.y > m_Arena.height - m_TileSize)
+        m_Position.y = m_Arena.height - m_TileSize;
+    if (m_Position.y < m_Arena.top + m_TileSize)
+        m_Position.y = m_Arena.top + m_TileSize;
 
-	// Update the rect for all body parts
-	FloatRect r = getPosition();
+    m_Sprite.setPosition(m_Position);
 
+    // Calculate rotation towards mouse
+    float angle = (atan2(
+        static_cast<float>(mousePosition.y) - (m_Resolution.y / 2.f),
+        static_cast<float>(mousePosition.x) - (m_Resolution.x / 2.f)
+    ) * 180.f) / 3.14159265358979323846f;
 
-	// Feet
-	m_Feet.left = r.left + 3;
-	m_Feet.top = r.top + r.height - 1;
-	m_Feet.width = r.width - 6;
-	m_Feet.height = 1;
+    m_Sprite.setRotation(angle);
 
-	// Head
-	m_Head.left = r.left + 3;
-	m_Head.top = r.top-1;
-	m_Head.width = r.width - 6;
-	m_Head.height = 1;
+    // Update ability
+    updateAbility();
+}
 
-	// Right
-	m_Right.left = r.left + r.width - 1;
-	m_Right.top = r.top + r.height * .35;
-	m_Right.width = 1;
-	m_Right.height = r.height * .3;
+// Upgrades
+void Player::upgradeSpeed()
+{
+    m_Speed += (START_SPEED * 0.2f); // 20% speed increase
+}
 
-	// Left
-	m_Left.left = r.left+1;
-	m_Left.top = r.top + r.height * .35;
-	m_Left.width = 1;
-	m_Left.height = r.height * .3;
+void Player::upgradeHealth()
+{
+    m_MaxHealth += static_cast<int>(START_HEALTH * 0.2f); // 20% max health increase
+}
 
-	// Move the sprite into position
-	updateLeftRightHeadFeet();
-	m_Sprite.setPosition(m_Position);
+void Player::increaseHealthLevel(int amount)
+{
+    m_Health += amount;
+    if (m_Health > m_MaxHealth)
+        m_Health = m_MaxHealth;
+}
 
+// Ability management
+void Player::setAbility(std::unique_ptr<Abilities> ability)
+{
+    m_Ability = std::move(ability);
+}
+
+void Player::useAbility()
+{
+    if (m_Ability)
+        m_Ability->useAbility();
+}
+
+void Player::updateAbility()
+{
+    if (m_Ability)
+        m_Ability->update();
+}
+
+// Ability-related setters
+void Player::switchToMelee()
+{
+    // Change texture to melee (ensure "zachMelee.png" exists)
+    m_Texture = TextureHolder::GetTexture("graphics/zachMelee.png");
+    m_Sprite.setTexture(m_Texture);
+    m_Sprite.setOrigin(m_Texture.getSize().x / 2.f, m_Texture.getSize().y / 2.f);
+}
+
+void Player::switchToGun()
+{
+    // Change texture back to gun (ensure "zachIdle.png" exists)
+    m_Texture = TextureHolder::GetTexture("graphics/zachIdle.png");
+    m_Sprite.setTexture(m_Texture);
+    m_Sprite.setOrigin(m_Texture.getSize().x / 2.f, m_Texture.getSize().y / 2.f);
+}
+
+void Player::setInvulnerable(bool invuln)
+{
+    m_Invulnerable = invuln;
+}
+
+void Player::setFireRateMultiplier(float multiplier)
+{
+    m_FireRateMultiplier = multiplier;
+    // Adjust fire rate accordingly in your shooting logic
+}
+
+void Player::setInfiniteAmmo(bool infinite)
+{
+    m_InfiniteAmmo = infinite;
+    // Adjust ammo logic accordingly in your shooting system
+}
+
+void Player::setEnemiesIgnore(bool ignore)
+{
+    m_EnemiesIgnore = ignore;
+    // Implement logic in enemy AI to respect this flag
+}
+
+void Player::setCanAttack(bool canAttack)
+{
+    m_CanAttack = canAttack;
+    // Implement logic in shooting/attack system to respect this flag
 }
