@@ -28,7 +28,7 @@ void Engine::draw()
 			m_Window.draw((it)->getSprite());
 		}
 		// Draw player
-		m_Window.draw(m_PacMan.getSpriteFromSheet());
+		m_Window.draw(m_Player.getSpriteFromSheet());
 
 		// Draw Enemy
 		m_Window.draw(m_BlinkyGhost.getSprite());

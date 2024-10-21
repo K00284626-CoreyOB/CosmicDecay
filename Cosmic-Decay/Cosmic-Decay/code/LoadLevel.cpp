@@ -66,12 +66,13 @@ void Engine::loadLevel()
 	m_BlinkyGhost.setSprite(1);
 	m_PinkyGhost.setSprite(2);
 	m_InkyGhost.setSprite(3);
-	m_PacMan.setName("PacMan");
-	m_PacMan.spawn(Vector2f(100, 900), GRAVITY);
+	
+	m_Player.setName("PacMan");
+	m_Player.spawn(Vector2f(100, 900), GRAVITY);
 	m_BlinkyGhost.spawn(Vector2f(850, 100), GRAVITY);
 	m_PinkyGhost.spawn(Vector2f(600, 100), GRAVITY);
 	m_InkyGhost.spawn(Vector2f(400, 100), GRAVITY);
-	float speed_Val = m_PacMan.getSpeed();
+	float speed_Val = m_Player.getSpeed();
 	m_BlinkyGhost.setSpeed(speed_Val * 0.5);
 	m_PinkyGhost.setSpeed(speed_Val * 0.4);
 	m_InkyGhost.setSpeed(speed_Val * 0.3);

@@ -21,9 +21,11 @@ void Engine::update(float dtAsSeconds)
 	if (state == State::PLAYING)
 	{
 		// Update Player
-		m_PacMan.update(dtAsSeconds);
-		Vector2f playerPosition(m_PacMan.getCenter());
-		FloatRect pr = m_PacMan.getPosition();
+		
+		
+		m_Player.update(dtAsSeconds);
+		Vector2f playerPosition(m_Player.getCenter());
+		FloatRect pr = m_Player.getPosition();
 
 
 // May 4 moving to top left coords not centre coords
@@ -38,7 +40,7 @@ void Engine::update(float dtAsSeconds)
 		// Detect collisions and see if characters have reached the goal tile
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
-		if  (detectCollisions(m_PacMan))
+		if  (detectCollisions(m_Player))
 		{
 			// New level required
 			m_NewLevelRequired = true;
@@ -47,7 +49,7 @@ void Engine::update(float dtAsSeconds)
 		else
 		{
 			// Run Players collision detection
-			detectCollisions(m_PacMan);
+			detectCollisions(m_Player);
 			detectCollisions(m_BlinkyGhost);
 			detectCollisions(m_PinkyGhost);
      		detectCollisions(m_InkyGhost);
@@ -57,13 +59,13 @@ void Engine::update(float dtAsSeconds)
 		std::list<PlayableCharacter>::iterator it;
 		
 		for (it = m_DotsList.begin(); it != m_DotsList.end();) {
-			if (m_PacMan.getPosition().intersects ((it)->getPosition()))
+			if (m_Player.getPosition().intersects ((it)->getPosition()))
 			{
 				
 				//Dec 14th 2021 calc distance d between the 2 points
 				//if distance is less than 30 pixels remove the dot
-				int x1 = m_PacMan.getPosition().left;
-				int y1 = m_PacMan.getPosition().top;
+				int x1 = m_Player.getPosition().left;
+				int y1 = m_Player.getPosition().top;
 				int x2 = (it)->getPosition().left;
 				int y2 = (it)->getPosition().top;
 				int xsquared = (x2 - x1) * (x2 - x1);
@@ -93,13 +95,13 @@ void Engine::update(float dtAsSeconds)
 
 
 //Dec 9th 2021 Desmond's Death Detection code and animation
-		if (m_PacMan.getPosition().intersects
-		(m_BlinkyGhost.getPosition()) || m_PacMan.getPosition().intersects
-		(m_PinkyGhost.getPosition()) || m_PacMan.getPosition().intersects
+		if (m_Player.getPosition().intersects
+		(m_BlinkyGhost.getPosition()) || m_Player.getPosition().intersects
+		(m_PinkyGhost.getPosition()) || m_Player.getPosition().intersects
 		(m_InkyGhost.getPosition()))
 		{
-			m_PacMan.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
-			m_PacMan.moveTextureRect();
+			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
+			m_Player.moveTextureRect();
 			score--;
 			std::stringstream ss;
 			ss << "Score = " << score;

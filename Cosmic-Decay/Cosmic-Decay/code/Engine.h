@@ -25,7 +25,7 @@ private:
 
 	// Enemy and his friend, Player
 	Enemy m_BlinkyGhost;
-	Player m_PacMan;
+	Player m_Player;
 	Enemy m_PinkyGhost;
 	Enemy m_InkyGhost;
 

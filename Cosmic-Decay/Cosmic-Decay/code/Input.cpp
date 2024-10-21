@@ -85,7 +85,7 @@ void Engine::input()
 
 
 	// Handle input specific to Player
-	if (m_PacMan.handleInput())
+	if (m_Player.handleInput())
 	{
 		// Play a jump sound
 	}
