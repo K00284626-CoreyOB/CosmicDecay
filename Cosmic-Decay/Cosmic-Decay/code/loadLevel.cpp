@@ -1,5 +1,3 @@
-//Matthew O'Rourke Bourke
-
 #include "stdafx.h"
 #include "Engine.h"
 
@@ -38,37 +36,17 @@ void Engine::loadLevel()
 		for (int y = 0; y < m_LM.getLevelSpawningPointsSize().y; y++)
 		{
 
-			/*
+
 			// check to see if its a dot (type 6)
 			int artefact = m_ArraySpawningPointsLevel[y][x];
 			if (artefact == 6)
 			{
 				//create a dot object , this calls the Dot constructor
-				Dots t_Dot;
+				
 				int locx = (x * 50) + 11;
 				int locy = (y * 50) + 11;
-
-				//set the Dot location
-				t_Dot.spawn(Vector2f(locx, locy), GRAVITY);
-
-				//add to the list
-				m_DotsList.push_back(t_Dot);
 			}
 
-			int artefact1 = m_ArraySpawningPointsLevel[y][x];
-			if (artefact1 == 7)
-			{
-				//create a dot object , this calls the Dot constructor
-				Keys t_Key;
-				int locx1 = (x * 50) + 11;
-				int locy1 = (y * 50) + 11;
-
-				//set the Dot location
-				t_Key.spawn(Vector2f(locx1, locy1), GRAVITY);
-
-				//add to the list
-				m_KeyList.push_back(t_Key);
-			}*/
 		}
 	}
 
@@ -79,18 +57,7 @@ void Engine::loadLevel()
 	m_TimeRemaining = m_LM.getTimeLimit();
 
 	// Spawn Enemy and Player
-	//m_BlinkyGhost.setSprite(1);
-	//m_PinkyGhost.setSprite(2);
-	//m_InkyGhost.setSprite(3);
-	//m_PacMan.setName("PacMan");
-	//m_PacMan.spawn(Vector2f(100, 900), GRAVITY);
-	//m_BlinkyGhost.spawn(Vector2f(850, 100), GRAVITY);
-	//m_PinkyGhost.spawn(Vector2f(600, 100), GRAVITY);
-	//m_InkyGhost.spawn(Vector2f(400, 100), GRAVITY);
-	//float speed_Val = m_PacMan.getSpeed();
-	//m_BlinkyGhost.setSpeed(speed_Val * 0.5);
-	//m_PinkyGhost.setSpeed(speed_Val * 0.4);
-	//m_InkyGhost.setSpeed(speed_Val * 0.3);
+	
 	// Make sure this code isn't run again
 	m_NewLevelRequired = false;
 }
