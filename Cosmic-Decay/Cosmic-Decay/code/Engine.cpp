@@ -11,6 +11,7 @@ Engine::Engine()
 
 	// Get the screen resolution and create an SFML window and View
 	Vector2f resolution;
+	state = State::PLAYING;
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
@@ -65,7 +66,7 @@ void Engine::run()
 		float dtAsSeconds = dt.asSeconds();
 
 		input();
-		//update(dtAsSeconds);
+		update(dtAsSeconds);
 		draw();
 	}
 }

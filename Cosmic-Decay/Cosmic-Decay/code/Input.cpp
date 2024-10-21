@@ -16,16 +16,12 @@ void Engine::input()
 			}
 
 			// Handle the player starting the game
-			if (Keyboard::isKeyPressed(Keyboard::Return))
+			/*if (Keyboard::isKeyPressed(Keyboard::Return))
 			{
 				//m_Playing = true;
-			}
-
-			// Switch between full and split-screen
-			/*if (Keyboard::isKeyPressed(Keyboard::E))
-			{
-				m_SplitScreen = !m_SplitScreen;
 			}*/
+
+			
 		}
 	}
 }

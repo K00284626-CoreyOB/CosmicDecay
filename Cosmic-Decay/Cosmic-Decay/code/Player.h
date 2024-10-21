@@ -45,6 +45,9 @@ private:
 	// Speed in pixels per second
 	float m_Speed;
 
+	// What is the gravity
+	float m_Gravity;
+
 
 	// All our public functions will come next
 public:
@@ -54,7 +57,7 @@ public:
 	// Call this at the end of every game
 	void resetPlayerStats();
 
-	void spawn(IntRect arena, Vector2f resolution, int tileSize);
+	void spawn(Vector2f startPosition, float gravity);
 
 	// Handle the player getting hit by a zombie
 	bool hit(Time timeHit);
@@ -95,8 +98,11 @@ public:
 
 	void stopDown();
 
+	//Handle the inputs
+	void handleInput();
+
 	// We will call this function once every frame
-	void update(float elapsedTime, Vector2i mousePosition);
+	void update(float elapsedTime);
 
 	// Give player a speed boost
 	void upgradeSpeed();
