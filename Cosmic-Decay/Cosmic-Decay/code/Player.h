@@ -26,9 +26,9 @@ public:
     void setFireRateMultiplier(float multiplier);
     void setInfiniteAmmo(bool state);
 
-    sf::FloatRect getPosition() const;
+    
     //had to move to public
-    void moveTextureRect();
+   
     
 
 private:
@@ -56,8 +56,6 @@ private:
     sf::Vector2f m_Position;
    
 
-    // Methods to handle animation and positioning
-   
-    void updateLeftRightHeadFeet();
+    
     
 };

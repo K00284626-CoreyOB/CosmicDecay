@@ -19,17 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code\Abilities.h" />
+    <ClInclude Include="code\CoreyAbility.h" />
     <ClInclude Include="code\Dots.h" />
     <ClInclude Include="code\Enemy.h" />
     <ClInclude Include="code\Engine.h" />
     <ClInclude Include="code\LevelManager.h" />
+    <ClInclude Include="code\MatthewAbility.h" />
     <ClInclude Include="code\PlayableCharacter.h" />
     <ClInclude Include="code\Player.h" />
     <ClInclude Include="code\stdafx.h" />
+    <ClInclude Include="code\SzymonAbility.h" />
     <ClInclude Include="code\targetver.h" />
     <ClInclude Include="code\TextureHolder.h" />
+    <ClInclude Include="code\ZachAbility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code\CoreyAbility.cpp" />
     <ClCompile Include="code\DetectCollisions.cpp" />
     <ClCompile Include="code\Dots.cpp" />
     <ClCompile Include="code\Draw.cpp" />
@@ -39,11 +45,14 @@
     <ClCompile Include="code\LevelManager.cpp" />
     <ClCompile Include="code\LoadLevel.cpp" />
     <ClCompile Include="code\Main.cpp" />
+    <ClCompile Include="code\MatthewAbility.cpp" />
     <ClCompile Include="code\PlayableCharacter.cpp" />
     <ClCompile Include="code\Player.cpp" />
     <ClCompile Include="code\stdafx.cpp" />
+    <ClCompile Include="code\SzymonAbility.cpp" />
     <ClCompile Include="code\TextureHolder.cpp" />
     <ClCompile Include="code\Update.cpp" />
+    <ClCompile Include="code\ZachAbility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -53,10 +53,30 @@ void Player::update(float elapsedTime)
 
     // Update collision boxes
     sf::FloatRect r = getPosition();
-    m_Feet = { r.left + 3, r.top + r.height - 1, r.width - 6, 1 };
-    m_Head = { r.left + 3, r.top - 1, r.width - 6, 1 };
-    m_Right = { r.left + r.width - 1, r.top + r.height * .35, 1, r.height * .3 };
-    m_Left = { r.left + 1, r.top + r.height * .35, 1, r.height * .3 };
+
+    // Feet
+    m_Feet.left = r.left + 3;
+    m_Feet.top = r.top + r.height - 1;
+    m_Feet.width = r.width - 6;
+    m_Feet.height = 1;
+
+    // Head
+    m_Head.left = r.left + 3;
+    m_Head.top = r.top - 1;
+    m_Head.width = r.width - 6;
+    m_Head.height = 1;
+
+    // Right
+    m_Right.left = r.left + r.width - 1;
+    m_Right.top = r.top + r.height * .35;
+    m_Right.width = 1;
+    m_Right.height = r.height * .3;
+
+    // Left
+    m_Left.left = r.left + 1;
+    m_Left.top = r.top + r.height * .35;
+    m_Left.width = 1;
+    m_Left.height = r.height * .3;
 
     // Move the sprite into position
     updateLeftRightHeadFeet();

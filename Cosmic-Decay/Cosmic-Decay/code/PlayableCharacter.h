@@ -89,6 +89,7 @@ public:
 
 	void setSpeed(float value);
 	float getSpeed();
+
 	//setSprite to use correct animation cell
 	void setSpriteFromSheet(sf::IntRect textureBox);
 
