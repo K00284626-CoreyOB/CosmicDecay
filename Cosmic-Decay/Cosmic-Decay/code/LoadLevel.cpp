@@ -68,7 +68,7 @@ void Engine::loadLevel()
 	m_InkyGhost.setSprite(3);
 	
 	m_Player.setName("PacMan");
-	m_Player.spawn(Vector2f(100, 900), GRAVITY);
+	m_Player.spawn(Vector2f(1500, 700), GRAVITY);
 	m_BlinkyGhost.spawn(Vector2f(850, 100), GRAVITY);
 	m_PinkyGhost.spawn(Vector2f(600, 100), GRAVITY);
 	m_InkyGhost.spawn(Vector2f(400, 100), GRAVITY);
