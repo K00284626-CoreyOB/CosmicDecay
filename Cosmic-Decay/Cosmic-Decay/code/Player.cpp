@@ -23,11 +23,46 @@ bool Player::handleInput()
         joyOnePovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
     }
 
-    // Keyboard and joystick input handling
-    m_UpPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (joyOnePovY == 100);
-    m_DownPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (joyOnePovY == -100);
-    m_LeftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (joyOnePovX == -100);
-    m_RightPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (joyOnePovX == 100);
+    //2019 up and down movement
+    if (Keyboard::isKeyPressed(Keyboard::Up) || (joyOnePovY == 100))
+    {
+        m_UpPressed = true;
+
+    }
+    else
+    {
+        m_UpPressed = false;
+    }
+
+
+    if (Keyboard::isKeyPressed(Keyboard::Down) || (joyOnePovY == -100))
+    {
+        m_DownPressed = true;
+
+    }
+    else
+    {
+        m_DownPressed = false;
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Left) || (joyOnePovX == -100))
+    {
+        m_LeftPressed = true;
+
+    }
+    else
+    {
+        m_LeftPressed = false;
+    }
+
+
+    if (Keyboard::isKeyPressed(Keyboard::Right) || (joyOnePovX == 100))
+    {
+        m_RightPressed = true;
+    }
+    else
+    {
+        m_RightPressed = false;
+    }
 
     return m_JustJumped;
 }
@@ -37,18 +72,22 @@ void Player::update(float elapsedTime)
     if (m_RightPressed) {
         m_Position.x += m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
+        moveTextureRect();
     }
     else if (m_LeftPressed) {
         m_Position.x -= m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
+        moveTextureRect();
     }
     else if (m_UpPressed) {
         m_Position.y -= m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
+        moveTextureRect();
     }
     else if (m_DownPressed) {
         m_Position.y += m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(12, 162, 150, 50));
+        moveTextureRect();
     }
 
     // Update collision boxes
