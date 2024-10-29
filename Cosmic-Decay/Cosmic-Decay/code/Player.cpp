@@ -72,22 +72,22 @@ void Player::update(float elapsedTime)
     if (m_RightPressed) {
         m_Position.x += m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
-        moveTextureRect();
+        moveTextureRect(elapsedTime);
     }
     else if (m_LeftPressed) {
         m_Position.x -= m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
-        moveTextureRect();
+        moveTextureRect(elapsedTime);
     }
     else if (m_UpPressed) {
         m_Position.y -= m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
-        moveTextureRect();
+        moveTextureRect(elapsedTime);
     }
     else if (m_DownPressed) {
         m_Position.y += m_Speed * elapsedTime;
         setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
-        moveTextureRect();
+        moveTextureRect(elapsedTime);
     }
 
     // Update collision boxes

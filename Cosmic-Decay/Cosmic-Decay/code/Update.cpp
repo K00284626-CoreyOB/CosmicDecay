@@ -34,13 +34,13 @@ void Engine::update(float dtAsSeconds)
 
 // May 4 moving to top left coords not centre coords
 		m_BlinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_BlinkyGhost.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
-		m_BlinkyGhost.updateSprite(1);
+		m_BlinkyGhost.updateSprite(1, dtAsSeconds);
 
 		m_PinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_PinkyGhost.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
-		m_PinkyGhost.updateSprite(2);
+		m_PinkyGhost.updateSprite(2, dtAsSeconds);
 
 		m_InkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_InkyGhost.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
-		m_InkyGhost.updateSprite(3);
+		m_InkyGhost.updateSprite(3, dtAsSeconds);
 		// Detect collisions and see if characters have reached the goal tile
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
@@ -105,7 +105,7 @@ void Engine::update(float dtAsSeconds)
 		(m_InkyGhost.getPosition()))
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
-			m_Player.moveTextureRect();
+			m_Player.moveTextureRect(dtAsSeconds);
 			score--;
 			std::stringstream ss;
 			ss << "Score = " << score;

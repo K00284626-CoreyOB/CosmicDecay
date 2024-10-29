@@ -570,13 +570,13 @@ void PlayableCharacter::setSpriteFromSheet(sf::IntRect textureBox)
 	spriteSize = sf::Vector2i(tile_size, tile_size);
 	if (textureBox.width > tile_size)
 	{
-		animation_it_limit = textureBox.width / tile_size;
+		animation_it_limit = (textureBox.width / tile_size) - 1;
 
 		horizontal = true;
 	}
 	else if (textureBox.height > tile_size)
 	{
-		animation_it_limit = textureBox.height / tile_size;
+		animation_it_limit = (textureBox.height / tile_size) - 1;
 		horizontal = false;
 	}
 	else
@@ -597,7 +597,7 @@ bool PlayableCharacter::handleInput()
 {
 	return true;
 }
-void PlayableCharacter::moveTextureRect()
+void PlayableCharacter::moveTextureRect(float timeElapsed)
 {
 	// if the animation counter is greater than the animation limit reset to 0
 	if (ani_counter == animation_it_limit)
@@ -624,8 +624,18 @@ void PlayableCharacter::moveTextureRect()
 		));
 	}
 
-	// Increment the animation counter for the next frame
-	ani_counter++;
+	//increment animation counter to point to the next frame
+	double timePerFrame;
+	timePerFrame = 1.0 / 4.0;
+	animationTimer = animationTimer + timeElapsed;
+	if (animationTimer > timePerFrame)
+	{
+		ani_counter++;
+		animationTimer = 0;
+	}
+
+	cout << "Animation Counter: " << ani_counter << std::endl;
+	cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
 

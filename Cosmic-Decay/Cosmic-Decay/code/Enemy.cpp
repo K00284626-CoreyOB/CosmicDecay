@@ -39,7 +39,7 @@ void Enemy::setSprite(int e_type)
 	m_JumpDuration = .45;
 }
 
-void Enemy::updateSprite(int e_type)
+void Enemy::updateSprite(int e_type, float timeElapsed)
 {
 	int offset=0;
 	//up
@@ -70,23 +70,23 @@ void Enemy::updateSprite(int e_type)
 	{
 
 		setSpriteFromSheet(sf::IntRect{ 12+offset,212,100,50 });
-		moveTextureRect();
+		moveTextureRect(timeElapsed);
 	}
 	else if (e_type == 2)
 	{
 		setSpriteFromSheet(sf::IntRect{ 12 + offset,262,100,50 });
-		moveTextureRect();
+		moveTextureRect(timeElapsed);
 	}
 	else if (e_type == 3)
 	{
 
 		setSpriteFromSheet(sf::IntRect{ 12 + offset,312,100,50 });
-		moveTextureRect();
+		moveTextureRect(timeElapsed);
 	}
 	else
 	{
 		setSpriteFromSheet(sf::IntRect{ 12 + offset,312,100,50 });
-		moveTextureRect();
+		moveTextureRect(timeElapsed);
 	}
 
 
