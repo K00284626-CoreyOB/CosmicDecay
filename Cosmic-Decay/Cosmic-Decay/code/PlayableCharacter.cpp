@@ -599,34 +599,31 @@ bool PlayableCharacter::handleInput()
 }
 void PlayableCharacter::moveTextureRect()
 {
-	// if the animation counter is greater than the animation limit reset to 0
+	// if the animation counter is greater than the animation limit reset to 1;
 	if (ani_counter == animation_it_limit)
 	{
 		ani_counter = 0;
 	}
 
 	if (horizontal) {
-		// Move the texture rectangle horizontally
-		m_Sprite.setTextureRect(sf::IntRect(
-			sheetCoordinate.x + ani_counter * spriteSize.x,
-			sheetCoordinate.y,
-			spriteSize.x,
-			spriteSize.y
-		));
+		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(spriteSize.x * ani_counter, 0), spriteSize));
 	}
 	else {
-		// Move the texture rectangle vertically
-		m_Sprite.setTextureRect(sf::IntRect(
-			sheetCoordinate.x,
-			sheetCoordinate.y + ani_counter * spriteSize.y,
-			spriteSize.x,
-			spriteSize.y
-		));
+		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(0, spriteSize.y * ani_counter), spriteSize));
 	}
 
-	// Increment the animation counter for the next frame
-	ani_counter++;
+	//increment animation counter to point to the next frame
+	double timePerFrame;
+	timePerFrame = 1.0 / 6.0;
+	animationTimer = animationTimer + timeElapsed;
+	if (animationTimer > timePerFrame)
+	{
+		ani_counter++;
+		animationTimer = 0;
+	}
+
 }
+
 
 
 

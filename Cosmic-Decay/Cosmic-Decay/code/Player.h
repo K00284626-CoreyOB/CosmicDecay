@@ -51,9 +51,6 @@ private:
     float m_FireRateMultiplier = 1.0f; // Track fire rate multiplier
     bool m_InfiniteAmmo = false; // Track if player has infinite ammo
 
-    // Animation and positioning
-    sf::Sprite m_Sprite;
-    sf::Vector2f m_Position;
    
 
     
