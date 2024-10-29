@@ -49,5 +49,10 @@ private:
     bool m_EnemiesIgnore = false; // Track if enemies ignore player
     bool m_CanAttack = true; // Track if player can attack
     float m_FireRateMultiplier = 1.0f; // Track fire rate multiplier
-    bool m_InfiniteAmmo = false; // Track if player has infinite ammo 
+    bool m_InfiniteAmmo = false; // Track if player has infinite ammo
+
+   
+
+    
+    
 };
