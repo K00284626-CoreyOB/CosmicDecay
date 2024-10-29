@@ -6,8 +6,8 @@ Player::Player()
 {
     // Associate a texture with the sprite
     m_Sprite = sf::Sprite(TextureHolder::GetTexture(
-        "graphics/pacman-spritesheet-resized-810-730.png"));
-    m_Sprite.setTextureRect(sf::IntRect{ 12, 62, 50, 50 });
+        "graphics/playerSpriteSheet2.png"));
+    m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
 }
 
 bool Player::handleInput()
@@ -71,22 +71,22 @@ void Player::update(float elapsedTime)
 {
     if (m_RightPressed) {
         m_Position.x += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
+        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
         moveTextureRect();
     }
     else if (m_LeftPressed) {
         m_Position.x -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
+        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
         moveTextureRect();
     }
     else if (m_UpPressed) {
         m_Position.y -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
+        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
         moveTextureRect();
     }
     else if (m_DownPressed) {
         m_Position.y += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(12, 162, 150, 50));
+        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
         moveTextureRect();
     }
 
