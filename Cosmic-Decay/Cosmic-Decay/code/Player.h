@@ -14,6 +14,8 @@ public:
     // Overridden update method for Player
     void update(float elapsedTime) override;
 
+    void virtual moveTextureRect(float timeElapsed);
+
     // Ability methods
     void switchToMelee();
     void switchToGun();

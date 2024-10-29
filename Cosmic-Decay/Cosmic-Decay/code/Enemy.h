@@ -10,7 +10,8 @@ public:
 
 	// The overriden input handler for Enemy
 	bool virtual handleInput();
-	void updateSprite(int e_type, float timeElapseds);
+	void updateSprite(int e_type, float timeElapsed);
+	void virtual moveTextureRect(float timeElapsed);
 
 };
 #pragma once

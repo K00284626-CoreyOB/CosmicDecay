@@ -94,7 +94,7 @@ public:
 	void setSpriteFromSheet(sf::IntRect textureBox);
 
 	//move the rectangle to the next cell in the animation
-	void moveTextureRect(float timeElapsed);
+	void virtual moveTextureRect(float timeElapsed);
 
 
 

@@ -71,22 +71,22 @@ void Player::update(float elapsedTime)
 {
     if (m_RightPressed) {
         m_Position.x += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
+        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         moveTextureRect(elapsedTime);
     }
     else if (m_LeftPressed) {
         m_Position.x -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
+        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         moveTextureRect(elapsedTime);
     }
     else if (m_UpPressed) {
         m_Position.y -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
+        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         moveTextureRect(elapsedTime);
     }
     else if (m_DownPressed) {
         m_Position.y += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(50, 50, 250, 50));
+        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         moveTextureRect(elapsedTime);
     }
 
@@ -120,6 +120,47 @@ void Player::update(float elapsedTime)
     // Move the sprite into position
     updateLeftRightHeadFeet();
     m_Sprite.setPosition(m_Position);
+}
+
+void Player::moveTextureRect(float timeElapsed)
+{
+    // if the animation counter is greater than the animation limit reset to 0
+    if (ani_counter == animation_it_limit - 1)
+    {
+        ani_counter = 0;
+    }
+
+    if (horizontal) {
+        // Move the texture rectangle horizontally
+        m_Sprite.setTextureRect(sf::IntRect(
+            sheetCoordinate.x + ani_counter * spriteSize.x,
+            sheetCoordinate.y,
+            spriteSize.x,
+            spriteSize.y
+        ));
+    }
+    else {
+        // Move the texture rectangle vertically
+        m_Sprite.setTextureRect(sf::IntRect(
+            sheetCoordinate.x,
+            sheetCoordinate.y + ani_counter * spriteSize.y,
+            spriteSize.x,
+            spriteSize.y
+        ));
+    }
+
+    //increment animation counter to point to the next frame
+    double timePerFrame;
+    timePerFrame = 1.0 / 5.0;
+    animationTimer = animationTimer + timeElapsed;
+    if (animationTimer > timePerFrame)
+    {
+        ani_counter++;
+        animationTimer = 0;
+    }
+
+    cout << "Animation Counter: " << ani_counter << std::endl;
+    cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
 // Ability methods

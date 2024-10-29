@@ -94,6 +94,47 @@ void Enemy::updateSprite(int e_type, float timeElapsed)
 	m_Sprite.setPosition(m_Position);
 }
 
+void Enemy::moveTextureRect(float timeElapsed)
+{
+	// if the animation counter is greater than the animation limit reset to 0
+	if (ani_counter == animation_it_limit)
+	{
+		ani_counter = 0;
+	}
+
+	if (horizontal) {
+		// Move the texture rectangle horizontally
+		m_Sprite.setTextureRect(sf::IntRect(
+			sheetCoordinate.x + ani_counter * spriteSize.x,
+			sheetCoordinate.y,
+			spriteSize.x,
+			spriteSize.y
+		));
+	}
+	else {
+		// Move the texture rectangle vertically
+		m_Sprite.setTextureRect(sf::IntRect(
+			sheetCoordinate.x,
+			sheetCoordinate.y + ani_counter * spriteSize.y,
+			spriteSize.x,
+			spriteSize.y
+		));
+	}
+
+	//increment animation counter to point to the next frame
+	double timePerFrame;
+	timePerFrame = 1.0 / 5.0;
+	animationTimer = animationTimer + timeElapsed;
+	if (animationTimer > timePerFrame)
+	{
+		ani_counter++;
+		animationTimer = 0;
+	}
+
+	cout << "Animation Counter: " << ani_counter << std::endl;
+	cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
+}
+
 
 // A virtual function
 bool Enemy::handleInput()
