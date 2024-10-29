@@ -10,6 +10,10 @@ int score = 0;
 
 void Engine::update(float dtAsSeconds)
 {
+	if (m_Character1)
+	{
+		m_MainView.setCenter(m_Player.getCenter());
+	}
 	
 	
 	//start of a new game we will need a new level
