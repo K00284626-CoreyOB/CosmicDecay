@@ -21,11 +21,23 @@ void Engine::draw()
 
 		m_Window.draw(m_VALevel, &m_TextureTiles);
 
-		//Dec 13th 2021 Draw Dots
+		//Dec 13th 2021 Draw fuses
 		std::list<PlayableCharacter>::iterator it;
 
-		for (it = m_DotsList.begin(); it != m_DotsList.end(); it++) {
+		for (it = m_FusesList.begin(); it != m_FusesList.end(); it++) {
 			m_Window.draw((it)->getSprite());
+		}
+
+		std::list<PlayableCharacter>::iterator itH;
+
+		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end(); itH++) {
+			m_Window.draw((itH)->getSprite());
+		}
+
+		std::list<PlayableCharacter>::iterator itA;
+
+		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end(); itA++) {
+			m_Window.draw((itA)->getSprite());
 		}
 		// Draw player
 		m_Window.draw(m_Player.getSpriteFromSheet());

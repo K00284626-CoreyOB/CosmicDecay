@@ -3,7 +3,9 @@
 #include "TextureHolder.h"
 #include "Enemy.h"
 #include "Player.h"
-#include "Dots.h"
+#include "Fuses.h"
+#include "HealthPickup.h"
+#include "AmmoPickup.h"
 #include <list>
 #include <math.h>
 
@@ -85,8 +87,12 @@ private:
 	int** m_ArrayLevel = NULL;
 	int** m_ArraySpawningPointsLevel = NULL;
 
-	//Dec 13th a list of dots
-	std::list<PlayableCharacter> m_DotsList;
+	//a list of fuses
+	std::list<PlayableCharacter> m_FusesList;
+
+	std::list<PlayableCharacter> m_HealthPickupList;
+
+	std::list<PlayableCharacter> m_AmmoPickupList;
 
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
