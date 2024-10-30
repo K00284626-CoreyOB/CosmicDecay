@@ -96,4 +96,3 @@ void Arm::update(float elapsedTime, Vector2i mousePosition)
 
 	m_Sprite.setRotation(angle);
 }
-
