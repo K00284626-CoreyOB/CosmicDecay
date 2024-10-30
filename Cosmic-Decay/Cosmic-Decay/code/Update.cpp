@@ -58,16 +58,20 @@ void Engine::update(float dtAsSeconds)
 			detectCollisions(m_PinkyGhost);
      		detectCollisions(m_InkyGhost);
 		}
-//Dec 13th 2021 Check list of Dots to see if they intersect with Pacman
-//if they intersect erase the dot from the list
+		//Check list of fuses to see if they intersect with Pacman
+		//if they intersect erase the fuse from the list
 		std::list<PlayableCharacter>::iterator it;
+
+		std::list<PlayableCharacter>::iterator itH;
+
+		std::list<PlayableCharacter>::iterator itA;
 		
-		for (it = m_DotsList.begin(); it != m_DotsList.end();) {
+		for (it = m_FusesList.begin(); it != m_FusesList.end();) {
 			if (m_Player.getPosition().intersects ((it)->getPosition()))
 			{
 				
-				//Dec 14th 2021 calc distance d between the 2 points
-				//if distance is less than 30 pixels remove the dot
+				//calculate distance d between the 2 points
+				//if distance is less than 30 pixels remove the fuse
 				int x1 = m_Player.getPosition().left;
 				int y1 = m_Player.getPosition().top;
 				int x2 = (it)->getPosition().left;
@@ -78,7 +82,7 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
-					m_DotsList.erase(it++);
+					m_FusesList.erase(it++);
 					score++;
 					cout << score << endl;
 					std::stringstream ss;
@@ -97,7 +101,67 @@ void Engine::update(float dtAsSeconds)
 
 		}
 
+		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end();) {
+			if (m_Player.getPosition().intersects((itH)->getPosition()))
+			{
 
+				//calculate distance d between the 2 points
+				//if distance is less than 30 pixels remove the fuse
+				int x1 = m_Player.getPosition().left;
+				int y1 = m_Player.getPosition().top;
+				int x2 = (itH)->getPosition().left;
+				int y2 = (itH)->getPosition().top;
+				int xsquared = (x2 - x1) * (x2 - x1);
+				int ysquared = (y2 - y1) * (y2 - y1);
+				double d = sqrt(xsquared + ysquared);
+
+				if (d < 30)
+				{
+					m_HealthPickupList.erase(itH++);
+					//ADD A LINE TO TO REGAIN HEALTH**************************************************
+				}
+				else
+				{
+					++itH;
+				}
+			}
+			else
+			{
+				++itH;
+			}
+
+		}
+
+		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
+			if (m_Player.getPosition().intersects((itA)->getPosition()))
+			{
+
+				//calculate distance d between the 2 points
+				//if distance is less than 30 pixels remove the fuse
+				int x1 = m_Player.getPosition().left;
+				int y1 = m_Player.getPosition().top;
+				int x2 = (itA)->getPosition().left;
+				int y2 = (itA)->getPosition().top;
+				int xsquared = (x2 - x1) * (x2 - x1);
+				int ysquared = (y2 - y1) * (y2 - y1);
+				double d = sqrt(xsquared + ysquared);
+
+				if (d < 30)
+				{
+					m_AmmoPickupList.erase(itA++);
+					//ADD A LINE A TO ADD AMMO TO STOCKPILE******************************************
+				}
+				else
+				{
+					++itA;
+				}
+			}
+			else
+			{
+				++itA;
+			}
+
+		}
 //Dec 9th 2021 Desmond's Death Detection code and animation
 		if (m_Player.getPosition().intersects
 		(m_BlinkyGhost.getPosition()) || m_Player.getPosition().intersects
