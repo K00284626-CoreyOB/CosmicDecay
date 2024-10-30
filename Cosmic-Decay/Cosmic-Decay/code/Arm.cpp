@@ -12,10 +12,6 @@ Arm::Arm(Player& player)
 	m_Sprite.setTextureRect(sf::IntRect{ 0, 50, 50, 50 });
 
 	m_Sprite.setOrigin(15, 77);
-
-	m_Position.x = player.getPosition().x;
-	m_Position.y = player.getPosition().y;
-
 }
 
 
@@ -44,9 +40,9 @@ Sprite Arm::getSprite()
 void Arm::update(float elapsedTime, Vector2i mousePosition)
 {
 	// Set the Arm's position relative to the player's position
-	/*FloatRect playerPos = m_Player.getPosition();
+	FloatRect playerPos = m_Player.getPosition();
 	m_Position.x = playerPos.left;  // Adjust this if necessary for your positioning
-	m_Position.y = playerPos.top;*/
+	m_Position.y = playerPos.top;
 
 	// Update the sprite position
 	m_Sprite.setPosition(m_Position);

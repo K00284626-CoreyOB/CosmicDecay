@@ -18,7 +18,7 @@ public:
 
 
     // Where is the player
-    Vector2f getPosition();
+    FloatRect getPosition();
 
     // Ability methods
     void switchToMelee();
