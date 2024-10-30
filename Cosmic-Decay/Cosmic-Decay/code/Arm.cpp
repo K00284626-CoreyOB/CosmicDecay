@@ -3,7 +3,7 @@
 #include "Engine.h"
 #include "TextureHolder.h"
 
-Arm::Arm()
+Arm::Arm(Player& player) : m_Player(player)
 {
 
 	// Associate a texture with the sprite
@@ -12,28 +12,6 @@ Arm::Arm()
 	m_Sprite.setTextureRect(sf::IntRect{ 0, 50, 50, 50 });
 
 	m_Sprite.setOrigin(15, 77);
-}
-
-
-void Arm::spawn(IntRect arena, Vector2f resolution, int tileSize)
-{
-	// Place the Arm in the middle of the arena
-	m_Position.x = m_Player;
-	m_Position.y = arena.height / 2;
-
-	// Copy the details of the arena to the Arm's m_Arena
-	m_Arena.left = arena.left;
-	m_Arena.width = arena.width;
-	m_Arena.top = arena.top;
-	m_Arena.height = arena.height;
-
-	// Remember how big the tiles are in this arena
-	m_TileSize = tileSize;
-
-	// Strore the resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
-
 }
 
 
@@ -61,39 +39,16 @@ Sprite Arm::getSprite()
 
 void Arm::update(float elapsedTime, Vector2i mousePosition)
 {
+	// Set the Arm's position relative to the player's position
+	FloatRect playerPos = m_Player.getPosition();
+	m_Position.x = playerPos.left;  // Adjust this if necessary for your positioning
+	m_Position.y = playerPos.top;
 
-	
-
+	// Update the sprite position
 	m_Sprite.setPosition(m_Position);
 
-
-
-	// Keep the Arm in the arena
-	if (m_Position.x > m_Arena.width - m_TileSize)
-	{
-		m_Position.x = m_Arena.width - m_TileSize;
-	}
-
-	if (m_Position.x < m_Arena.left + m_TileSize)
-	{
-		m_Position.x = m_Arena.left + m_TileSize;
-	}
-
-	if (m_Position.y > m_Arena.height - m_TileSize)
-	{
-		m_Position.y = m_Arena.height - m_TileSize;
-	}
-
-	if (m_Position.y < m_Arena.top + m_TileSize)
-	{
-		m_Position.y = m_Arena.top + m_TileSize;
-	}
-
-	// Calculate the angle the Arm is facing
+	
 	float angle = (atan2(mousePosition.y - m_Resolution.y / 2,
-		mousePosition.x - m_Resolution.x / 2)
-		* 180) / 3.141;
-
+		mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
 	m_Sprite.setRotation(angle);
 }
-

@@ -35,8 +35,6 @@ public:
 
 	// Call this at the end of every game
 	
-	void spawn(IntRect arena, Vector2f resolution, int tileSize);
-
 	
 	// Where is the Arm
 	FloatRect getPosition();
