@@ -31,7 +31,7 @@ private:
 	// All our public functions will come next
 public:
 
-	Arm();
+	Arm(Player& player);
 
 	// Call this at the end of every game
 	
