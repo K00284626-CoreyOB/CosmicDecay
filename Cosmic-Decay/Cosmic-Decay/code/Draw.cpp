@@ -39,6 +39,8 @@ void Engine::draw()
 		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end(); itA++) {
 			m_Window.draw((itA)->getSprite());
 		}
+		m_Window.draw(spriteCrosshair);
+
 		// Draw player
 		m_Window.draw(m_Player.getSpriteFromSheet());
 
@@ -48,9 +50,13 @@ void Engine::draw()
 		m_Window.draw(m_InkyGhost.getSprite());
 
 		
-		
-
-
+		for (int i = 0; i < 100; i++)
+		{
+			if (bullets[i].isInFlight())
+			{
+				m_Window.draw(bullets[i].getShape());
+			}
+		}
 
 
 		// Draw the HUD

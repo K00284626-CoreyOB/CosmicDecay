@@ -32,7 +32,7 @@ void Engine::update(float dtAsSeconds)
 		FloatRect pr = m_Player.getPosition();
 
 
-// May 4 moving to top left coords not centre coords
+		// May 4 moving to top left coords not centre coords
 		m_BlinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_BlinkyGhost.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
 		m_BlinkyGhost.updateSprite(1, dtAsSeconds);
 
@@ -162,7 +162,7 @@ void Engine::update(float dtAsSeconds)
 			}
 
 		}
-//Dec 9th 2021 Desmond's Death Detection code and animation
+        //Dec 9th 2021 Desmond's Death Detection code and animation
 		if (m_Player.getPosition().intersects
 		(m_BlinkyGhost.getPosition()) || m_Player.getPosition().intersects
 		(m_PinkyGhost.getPosition()) || m_Player.getPosition().intersects
@@ -182,6 +182,15 @@ void Engine::update(float dtAsSeconds)
 		if (m_TimeRemaining <= 0)
 		{
 			//m_NewLevelRequired = true;
+		}
+
+		// Update any bullets that are in-flight
+		for (int i = 0; i < 100; i++)
+		{
+			if (bullets[i].isInFlight())
+			{
+				bullets[i].update(dtAsSeconds);
+			}
 		}
 
 	}// End if playing

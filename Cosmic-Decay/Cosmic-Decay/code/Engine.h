@@ -3,6 +3,7 @@
 #include "TextureHolder.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "Fuses.h"
 #include "HealthPickup.h"
 #include "AmmoPickup.h"
@@ -21,6 +22,16 @@ private:
 	sf::Font scoreFont;   // Font for the score text
 
 	int score;            // Score value
+
+	Text ammoText;
+
+
+	Bullet bullets[100];
+	int currentBullet;
+	int bulletsSpare;
+	int bulletsInClip;
+	int clipSize;
+	float fireRate;
 
 	// The texture holder
 	TextureHolder th;
@@ -75,6 +86,7 @@ private:
 	// How much time is left in the current level
 	float m_TimeRemaining = 10;
 	Time m_GameTimeTotal;
+	Time m_LastPressed;
 
 	// Is it time for a new/first level?
 	bool m_NewLevelRequired = true;
@@ -86,6 +98,14 @@ private:
 	// A pointer to a pointer
 	int** m_ArrayLevel = NULL;
 	int** m_ArraySpawningPointsLevel = NULL;
+
+	// Where is the mouse in relation to world coordinates
+	Vector2f mouseWorldPosition;
+	// Where is the mouse in relation to screen coordinates
+	Vector2i mouseScreenPosition;
+
+	Sprite spriteCrosshair;
+	Texture textureCrosshair;
 
 	//a list of fuses
 	std::list<PlayableCharacter> m_FusesList;
@@ -115,7 +135,7 @@ public:
 	// Run will call all the private functions
 	void run();
 
-	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING,MAIN_MENU};
+	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU};
 	State state = State::GAME_OVER;
 
 

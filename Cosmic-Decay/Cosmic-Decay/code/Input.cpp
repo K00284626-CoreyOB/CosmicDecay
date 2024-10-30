@@ -17,6 +17,20 @@ void Engine::input()
 				m_LM.setCurrentLevel(0);
 				m_NewLevelRequired = true;
 				state = State::PLAYING;
+
+				//wave = 0;
+				score = 0;
+
+				// Prepare the gun and ammo for next game
+				currentBullet = 0;
+				bulletsSpare = 24;
+				bulletsInClip = 6;
+				clipSize = 6;
+				fireRate = 1;
+
+				// Reset the player's stats
+				//player.resetPlayerStats();
+			
 			}
 
 			if (event.key.code == Keyboard::Num2)
@@ -63,10 +77,7 @@ void Engine::input()
 				{
 					state = State::MAIN_MENU;
 				}
-			
-		}
-		if (state == State::PLAYING)
-		{
+		
 
 			// Handle the player quitting
 
@@ -75,7 +86,60 @@ void Engine::input()
 				state = State::PAUSED;
 			}
 
+		
+			// Reloading
+			if (event.key.code == Keyboard::R)
+			{
+				if (bulletsSpare >= clipSize)
+				{
+					// Plenty of bullets. Reload.
+					bulletsInClip = clipSize;
+					bulletsSpare -= clipSize;
+					//reload.play();
+				}
+				else if (bulletsSpare > 0)
+				{
+					// Only few bullets left
+					bulletsInClip = bulletsSpare;
+					bulletsSpare = 0;
+					//reload.play();
+				}
+				else
+				{
+					// More here soon?!
+					//reloadFailed.play();
+				}
+			}
+
+			// Fire a bullet
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+
+				if (m_GameTimeTotal.asMilliseconds()
+					- m_LastPressed.asMilliseconds()
+					> 1000 / fireRate && bulletsInClip > 0)
+				{
+
+					// Pass the centre of the player and the centre of the crosshair
+					// to the shoot function
+					bullets[currentBullet].shoot(
+						m_Player.getCenter().x, m_Player.getCenter().y,
+						mouseWorldPosition.x, mouseWorldPosition.y);
+
+					currentBullet++;
+					if (currentBullet > 99)
+					{
+						currentBullet = 0;
+					}
+					m_LastPressed = m_GameTimeTotal;
+					//shoot.play();
+					bulletsInClip--;
+				}
+
+			}// End fire a bullet
 		}
+
+
 
 			// Switch between Enemy and Player
 
