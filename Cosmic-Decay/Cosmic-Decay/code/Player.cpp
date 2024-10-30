@@ -163,6 +163,11 @@ void Player::moveTextureRect(float timeElapsed)
     cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
+FloatRect Player::getPosition()
+{
+    return m_Sprite.getGlobalBounds();
+}
+
 // Ability methods
 void Player::switchToMelee() {
     // Logic to switch to melee weapon

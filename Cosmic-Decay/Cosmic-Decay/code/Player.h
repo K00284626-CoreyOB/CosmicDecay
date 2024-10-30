@@ -16,6 +16,10 @@ public:
 
     void virtual moveTextureRect(float timeElapsed);
 
+
+    // Where is the player
+    FloatRect getPosition();
+
     // Ability methods
     void switchToMelee();
     void switchToGun();
