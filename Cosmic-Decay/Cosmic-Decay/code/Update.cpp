@@ -166,8 +166,12 @@ void Engine::update(float dtAsSeconds)
 					bulletsSpare = bulletsSpare + 16;
 					//debug
 					cout << bulletsSpare << endl;
-					m_Invincible = true;
-					m_InvincibleTime = INVINCIBILITY_DURATION;
+
+					if (!m_Invincible)
+					{
+						m_Invincible = true;
+						m_InvincibleTime = INVINCIBILITY_DURATION;
+					}
 				}
 				else
 				{
