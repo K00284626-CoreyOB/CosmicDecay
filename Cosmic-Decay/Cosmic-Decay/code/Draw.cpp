@@ -43,6 +43,7 @@ void Engine::draw()
 
 		// Draw player
 		m_Window.draw(m_Player.getSpriteFromSheet());
+		m_Window.draw(m_Arm.getSpriteFromSheet());
 
 		// Draw Enemy
 		m_Window.draw(m_BlinkyGhost.getSprite());

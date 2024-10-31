@@ -2,7 +2,7 @@
 #include "Engine.h"
 #include "TextureHolder.h"
 
-Arm::Arm()
+Arm::Arm(Player& player) : m_Player(player)
 {
 
 	// Associate a texture with the sprite

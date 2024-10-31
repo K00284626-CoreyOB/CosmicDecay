@@ -5,9 +5,11 @@
 
 using namespace sf;
 
-class Arm
+class Arm : public PlayableCharacter
 {
 private:
+
+	Player& m_Player;
 
 	// Where is the Arm
 	Vector2f m_Position;
@@ -33,7 +35,7 @@ private:
 	// All our public functions will come next
 public:
 
-	Arm();
+	Arm(Player& player);
 
 	// Call this at the end of every game
 	
@@ -53,12 +55,5 @@ public:
 
 	// We will call this function once every frame
 	void update(float elapsedTime, Vector2i mousePosition);
-
-	
-
-
 };
-
-
-
 #pragma once

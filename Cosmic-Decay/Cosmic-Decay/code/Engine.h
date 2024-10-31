@@ -3,13 +3,13 @@
 #include "TextureHolder.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Arm.h"
 #include "Bullet.h"
 #include "Fuses.h"
 #include "HealthPickup.h"
 #include "AmmoPickup.h"
 #include <list>
 #include <math.h>
-
 #include "LevelManager.h"
 
 using namespace sf;
@@ -39,6 +39,7 @@ private:
 	// Enemy and his friend, Player
 	Enemy m_BlinkyGhost;
 	Player m_Player;
+	Arm m_Arm;
 	Enemy m_PinkyGhost;
 	Enemy m_InkyGhost;
 
