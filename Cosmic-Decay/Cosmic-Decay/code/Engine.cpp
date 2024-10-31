@@ -81,6 +81,8 @@ Engine::Engine()
 
 	
 	m_TextureTiles = TextureHolder::GetTexture(
+		"graphics/tiles_sheet.png");
+	
 	
 
 
