@@ -170,26 +170,42 @@ void Engine::update(float dtAsSeconds)
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
 			m_Player.moveTextureRect(dtAsSeconds);
-			score--;
+			//score--;
 			std::stringstream ss;
 			ss << "Score = " << score;
 			scoreText.setString(ss.str());
 		}
-		// Count down the time the player has left
-		m_TimeRemaining -= dtAsSeconds;
 
-		// Have Enemy and Player run out of time?
-		if (m_TimeRemaining <= 0)
+		//BULLET COLLISION WIP****************
+		for (int i = 0; i <= 100; i++) 
 		{
-			//m_NewLevelRequired = true;
-		}
-
-		// Update any bullets that are in-flight
-		for (int i = 0; i < 100; i++)
-		{
-			if (bullets[i].isInFlight())
+			if (bullets[i].isInFlight()) 
 			{
 				bullets[i].update(dtAsSeconds);
+				if (bullets[i].getPosition().intersects(m_BlinkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
+				else if (bullets[i].getPosition().intersects(m_PinkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
+				else if (bullets[i].getPosition().intersects(m_InkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
 			}
 		}
 
