@@ -58,6 +58,17 @@ void Engine::update(float dtAsSeconds)
 			detectCollisions(m_PinkyGhost);
      		detectCollisions(m_InkyGhost);
 		}
+
+		if (m_Invincible)
+		{
+			m_InvincibleTime -= dtAsSeconds;
+			if (m_InvincibleTime <= 0)
+			{
+				m_Invincible = false;
+				m_InvincibleTime = INVINCIBILITY_DURATION;
+			}
+		}
+
 		//Check list of fuses to see if they intersect with Pacman
 		//if they intersect erase the fuse from the list
 		std::list<PlayableCharacter>::iterator it;
@@ -133,7 +144,7 @@ void Engine::update(float dtAsSeconds)
 		}
 
 		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
-			if (m_Player.getPosition().intersects((itA)->getPosition()))
+			if (!m_Invincible && m_Player.getPosition().intersects((itA)->getPosition()))
 			{
 
 				//calculate distance d between the 2 points
@@ -146,6 +157,8 @@ void Engine::update(float dtAsSeconds)
 				int ysquared = (y2 - y1) * (y2 - y1);
 				double d = sqrt(xsquared + ysquared);
 
+				
+
 				if (d < 30)
 				{
 					m_AmmoPickupList.erase(itA++);
@@ -153,6 +166,8 @@ void Engine::update(float dtAsSeconds)
 					bulletsSpare = bulletsSpare + 16;
 					//debug
 					cout << bulletsSpare << endl;
+					m_Invincible = true;
+					m_InvincibleTime = INVINCIBILITY_DURATION;
 				}
 				else
 				{

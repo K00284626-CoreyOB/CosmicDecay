@@ -110,6 +110,12 @@ private:
 	Sprite spriteCrosshair;
 	Texture textureCrosshair;
 
+	// Is player Invincible
+	bool m_Invincible = false;
+	//Invincibility timer
+	float m_InvincibleTime;
+	const float INVINCIBILITY_DURATION = 2.0f;
+
 	//a list of fuses
 	std::list<PlayableCharacter> m_FusesList;
 
