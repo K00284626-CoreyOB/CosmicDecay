@@ -1,9 +1,8 @@
 #include "Arm.h"
-#include "Player.h"
 #include "Engine.h"
 #include "TextureHolder.h"
 
-Arm::Arm(Player& player)
+Arm::Arm()
 {
 
 	// Associate a texture with the sprite

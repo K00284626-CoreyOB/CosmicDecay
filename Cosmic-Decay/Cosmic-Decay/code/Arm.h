@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "PlayableCharacter.h"
+#include "Player.h"
 
 using namespace sf;
 
