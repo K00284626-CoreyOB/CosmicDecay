@@ -73,9 +73,8 @@ Engine::Engine()
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
 
 	// Load the texture for the background vertex array
-	LevelManager levelManager;
 
-	std::string currentLevelFile = levelManager.getLevelToLoad();
+	std::string currentLevelFile = m_levelManager.getLevelToLoad();
 
 	cout << currentLevelFile << endl;
 

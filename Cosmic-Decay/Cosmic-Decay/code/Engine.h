@@ -17,6 +17,8 @@ using namespace sf;
 class Engine
 {
 private:
+	LevelManager m_levelManager;
+
 
 	sf::Text scoreText;   // Text object to display the score
 	sf::Font scoreFont;   // Font for the score text
