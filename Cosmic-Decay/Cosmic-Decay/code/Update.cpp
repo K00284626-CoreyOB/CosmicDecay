@@ -176,7 +176,7 @@ void Engine::update(float dtAsSeconds)
 			scoreText.setString(ss.str());
 		}
 
-		//BULLET COLLISION WIP****************
+		//BULLET COLLISION WIP**************** - Matthew
 		for (int i = 0; i <= 100; i++) 
 		{
 			if (bullets[i].isInFlight()) 
