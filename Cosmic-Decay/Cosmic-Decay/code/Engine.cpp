@@ -52,6 +52,8 @@ Engine::Engine()
 	clipSize = 6;
 	fireRate = 1;
 
+	
+
 	// Hide the mouse pointer and replace it with crosshair
 	m_Window.setMouseCursorVisible(false);
 	textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");

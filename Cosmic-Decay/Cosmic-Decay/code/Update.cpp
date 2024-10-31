@@ -149,7 +149,10 @@ void Engine::update(float dtAsSeconds)
 				if (d < 30)
 				{
 					m_AmmoPickupList.erase(itA++);
-					//ADD A LINE A TO ADD AMMO TO STOCKPILE******************************************
+					//ADD A LINE A TO ADD AMMO TO STOCKPILE******** - Done
+					bulletsSpare = bulletsSpare + 16;
+					//debug
+					cout << bulletsSpare << endl;
 				}
 				else
 				{
