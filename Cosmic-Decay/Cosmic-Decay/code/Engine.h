@@ -39,7 +39,7 @@ private:
 	// Enemy and his friend, Player
 	Enemy m_BlinkyGhost;
 	Player m_Player;
-	Arm m_Arm;
+	//Arm m_Arm;
 	Enemy m_PinkyGhost;
 	Enemy m_InkyGhost;
 

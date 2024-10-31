@@ -2,7 +2,7 @@
 #include "Engine.h"
 #include "TextureHolder.h"
 
-Arm::Arm(Player& player) : m_Player(player)
+Arm::Arm()
 {
 
 	// Associate a texture with the sprite
@@ -20,22 +20,8 @@ FloatRect Arm::getPosition()
 	return m_Sprite.getGlobalBounds();
 }
 
-Vector2f Arm::getCenter()
-{
-	return m_Position;
-}
 
-float Arm::getRotation()
-{
-	return m_Sprite.getRotation();
-}
-
-Sprite Arm::getSprite()
-{
-	return m_Sprite;
-}
-
-
+/*
 void Arm::update(float elapsedTime, Vector2i mousePosition)
 {
 	// Set the Arm's position relative to the player's position
@@ -50,4 +36,7 @@ void Arm::update(float elapsedTime, Vector2i mousePosition)
 	float angle = (atan2(mousePosition.y - m_Resolution.y / 2,
 		mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
 	m_Sprite.setRotation(angle);
+
+	m_Sprite.setPosition(m_Position);
 }
+*/
