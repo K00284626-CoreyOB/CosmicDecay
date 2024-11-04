@@ -13,7 +13,7 @@ Enemy::Enemy()
 void Enemy::setSprite(int e_type)
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"graphics/enemySpritesheet2.png"));
+		"graphics/enemy1SpritesheetSmll.png"));
 	// Associate a texture with the sprite
 	if (e_type == 1)
 	{
