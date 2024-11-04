@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayableCharacter.h"
+#include "Bullet.h"
 #include <SFML/Graphics.hpp>
 
 class Player : public PlayableCharacter
@@ -18,7 +19,7 @@ public:
 
 
     // Where is the player
-    Vector2f getPosition();
+    FloatRect getPosition();
 
     // Ability methods
     void switchToMelee();

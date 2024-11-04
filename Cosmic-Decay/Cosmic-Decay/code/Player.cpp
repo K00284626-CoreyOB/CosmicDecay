@@ -24,7 +24,7 @@ bool Player::handleInput()
     }
 
     //2019 up and down movement
-    if (Keyboard::isKeyPressed(Keyboard::Up) || (joyOnePovY == 100))
+    if (Keyboard::isKeyPressed(Keyboard::W) || (joyOnePovY == 100))
     {
         m_UpPressed = true;
 
@@ -35,7 +35,7 @@ bool Player::handleInput()
     }
 
 
-    if (Keyboard::isKeyPressed(Keyboard::Down) || (joyOnePovY == -100))
+    if (Keyboard::isKeyPressed(Keyboard::S) || (joyOnePovY == -100))
     {
         m_DownPressed = true;
 
@@ -44,7 +44,7 @@ bool Player::handleInput()
     {
         m_DownPressed = false;
     }
-    if (Keyboard::isKeyPressed(Keyboard::Left) || (joyOnePovX == -100))
+    if (Keyboard::isKeyPressed(Keyboard::A) || (joyOnePovX == -100))
     {
         m_LeftPressed = true;
 
@@ -55,7 +55,7 @@ bool Player::handleInput()
     }
 
 
-    if (Keyboard::isKeyPressed(Keyboard::Right) || (joyOnePovX == 100))
+    if (Keyboard::isKeyPressed(Keyboard::D) || (joyOnePovX == 100))
     {
         m_RightPressed = true;
     }
@@ -63,6 +63,8 @@ bool Player::handleInput()
     {
         m_RightPressed = false;
     }
+
+
 
     return m_JustJumped;
 }
@@ -159,8 +161,8 @@ void Player::moveTextureRect(float timeElapsed)
         animationTimer = 0;
     }
 
-    cout << "Animation Counter: " << ani_counter << std::endl;
-    cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
+    //cout << "Animation Counter: " << ani_counter << std::endl;
+    //cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
 FloatRect Player::getPosition()

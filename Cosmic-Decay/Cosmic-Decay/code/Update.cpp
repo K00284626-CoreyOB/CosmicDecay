@@ -32,7 +32,7 @@ void Engine::update(float dtAsSeconds)
 		FloatRect pr = m_Player.getPosition();
 
 
-// May 4 moving to top left coords not centre coords
+		// May 4 moving to top left coords not centre coords
 		m_BlinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_BlinkyGhost.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
 		m_BlinkyGhost.updateSprite(1, dtAsSeconds);
 
@@ -58,6 +58,17 @@ void Engine::update(float dtAsSeconds)
 			detectCollisions(m_PinkyGhost);
      		detectCollisions(m_InkyGhost);
 		}
+
+		if (m_Invincible)
+		{
+			m_InvincibleTime -= dtAsSeconds;
+			if (m_InvincibleTime <= 0)
+			{
+				m_Invincible = false;
+				m_InvincibleTime = INVINCIBILITY_DURATION;
+			}
+		}
+
 		//Check list of fuses to see if they intersect with Pacman
 		//if they intersect erase the fuse from the list
 		std::list<PlayableCharacter>::iterator it;
@@ -133,7 +144,7 @@ void Engine::update(float dtAsSeconds)
 		}
 
 		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
-			if (m_Player.getPosition().intersects((itA)->getPosition()))
+			if (!m_Invincible && m_Player.getPosition().intersects((itA)->getPosition()))
 			{
 
 				//calculate distance d between the 2 points
@@ -146,10 +157,21 @@ void Engine::update(float dtAsSeconds)
 				int ysquared = (y2 - y1) * (y2 - y1);
 				double d = sqrt(xsquared + ysquared);
 
+				
+
 				if (d < 30)
 				{
 					m_AmmoPickupList.erase(itA++);
-					//ADD A LINE A TO ADD AMMO TO STOCKPILE******************************************
+					//ADD A LINE A TO ADD AMMO TO STOCKPILE******** - Done
+					bulletsSpare = bulletsSpare + 16;
+					//debug
+					cout << bulletsSpare << endl;
+
+					if (!m_Invincible)
+					{
+						m_Invincible = true;
+						m_InvincibleTime = INVINCIBILITY_DURATION;
+					}
 				}
 				else
 				{
@@ -162,7 +184,7 @@ void Engine::update(float dtAsSeconds)
 			}
 
 		}
-//Dec 9th 2021 Desmond's Death Detection code and animation
+        //Dec 9th 2021 Desmond's Death Detection code and animation
 		if (m_Player.getPosition().intersects
 		(m_BlinkyGhost.getPosition()) || m_Player.getPosition().intersects
 		(m_PinkyGhost.getPosition()) || m_Player.getPosition().intersects
@@ -170,18 +192,43 @@ void Engine::update(float dtAsSeconds)
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
 			m_Player.moveTextureRect(dtAsSeconds);
-			score--;
+			//score--;
 			std::stringstream ss;
 			ss << "Score = " << score;
 			scoreText.setString(ss.str());
 		}
-		// Count down the time the player has left
-		m_TimeRemaining -= dtAsSeconds;
 
-		// Have Enemy and Player run out of time?
-		if (m_TimeRemaining <= 0)
+		//BULLET COLLISION WIP**************** - Matthew
+		for (int i = 0; i <= 100; i++) 
 		{
-			//m_NewLevelRequired = true;
+			if (bullets[i].isInFlight()) 
+			{
+				bullets[i].update(dtAsSeconds);
+				if (bullets[i].getPosition().intersects(m_BlinkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
+				else if (bullets[i].getPosition().intersects(m_PinkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
+				else if (bullets[i].getPosition().intersects(m_InkyGhost.getPosition())) 
+				{
+					bullets[i].stop();
+					score++;
+					std::stringstream ss;
+					ss << "Score = " << score;
+					scoreText.setString(ss.str());
+				}
+			}
 		}
 
 	}// End if playing

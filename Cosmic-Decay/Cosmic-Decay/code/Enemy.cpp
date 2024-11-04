@@ -131,8 +131,8 @@ void Enemy::moveTextureRect(float timeElapsed)
 		animationTimer = 0;
 	}
 
-	cout << "Animation Counter: " << ani_counter << std::endl;
-	cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
+	//cout << "Animation Counter: " << ani_counter << std::endl;
+	//cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
 

@@ -15,6 +15,7 @@ private:
 	float m_BaseTimeLimit = 0;
 	int m_CurrentLevel = 0;
 	const int NUM_LEVELS = 4;
+	std::string levelToLoad;
 
 public:
 
@@ -26,6 +27,7 @@ public:
 	Vector2f getStartPosition();
 
 	int** nextLevel(VertexArray& rVaLevel);
+	std::string getLevelToLoad() const;
 	int** nextLevelSpawningPoints();
 
 	Vector2i getLevelSize();
