@@ -11,6 +11,7 @@
 #include <list>
 #include <math.h>
 #include "LevelManager.h"
+#include "Arm.h"
 
 using namespace sf;
 

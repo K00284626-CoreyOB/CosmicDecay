@@ -1,14 +1,40 @@
 #include "Player.h"
 #include "TextureHolder.h"
+#include "Arm.h"
 #include <iostream>
 
-Player::Player()
-{
+Player::Player() {
     // Associate a texture with the sprite
-    m_Sprite = sf::Sprite(TextureHolder::GetTexture(
-        "graphics/playerSpriteSheet2.png"));
+    m_Sprite = sf::Sprite(TextureHolder::GetTexture("graphics/playerSpriteSheet2.png"));
     m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
 }
+
+void Player::draw(sf::RenderWindow& window) {
+    window.draw(m_Sprite);       // Draw the player sprite
+    window.draw(m_Arm.getSprite()); // Draw the arm sprite
+}
+
+// Define the getArm() method to return a reference to m_Arm
+Arm& Player::getArm() {
+    return m_Arm;
+}
+
+void Player::rotateArm(sf::RenderWindow& window) {
+    // Get the mouse position relative to the window
+    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+    sf::Vector2f playerPos = m_Sprite.getPosition();
+
+    // Calculate the angle between the player and the mouse position
+    float dx = mousePos.x - playerPos.x;
+    float dy = mousePos.y - playerPos.y;
+    float rotation = atan2(dy, dx) * 180 / 3.14159;
+
+    // Set the rotation of the arm
+    m_Arm.setRotation(rotation);
+    m_Arm.setPosition(playerPos);
+}
+
+
 
 bool Player::handleInput()
 {
