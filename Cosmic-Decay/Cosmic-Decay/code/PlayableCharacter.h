@@ -35,11 +35,17 @@ protected:
 	// Has the player just initialted a jump
 	bool m_JustJumped = false;
 
+	// Is the character Active
+	bool m_Active;
+
 	//which direction is the character headed? used to see if we need to reset the animation to first frame as we have changed direction
 	sf::Vector2f direction{ 0, 1 }; //default value is left
 
 	// What is the gravity
 	float m_Gravity;
+
+	// How much health does the character have?
+	float m_Health;
 
 	// How fast is the character
 	float m_Speed = 400;
@@ -85,7 +91,7 @@ private:
 	// All our public functions will come next
 public:
 
-	void spawn(Vector2f startPosition, float gravity);
+	void spawn(Vector2f startPosition, float gravity, int m_type);
 
 	void setSpeed(float value);
 	float getSpeed();

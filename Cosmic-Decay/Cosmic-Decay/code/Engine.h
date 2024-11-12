@@ -40,11 +40,11 @@ private:
 	TextureHolder th;
 
 	// Enemy and his friend, Player
-	Enemy m_BlinkyGhost;
+	Enemy m_ZombieAlien1;
 	Player m_Player;
 	//Arm m_Arm;
-	Enemy m_PinkyGhost;
-	Enemy m_InkyGhost;
+	Enemy m_ZombieAlien2;
+	Enemy m_ZombieAlien3;
 
 	// A class to manage all the levels
 	LevelManager m_LM;
