@@ -135,6 +135,20 @@ void Enemy::moveTextureRect(float timeElapsed)
 	//cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
+void Enemy::gotShot()
+{
+	m_Health--;
+	if (m_Health <= 0)
+	{
+		m_Active = false;
+	}
+}
+
+bool Enemy::isActive()
+{
+	return m_Active;
+}
+
 
 // A virtual function
 bool Enemy::handleInput()

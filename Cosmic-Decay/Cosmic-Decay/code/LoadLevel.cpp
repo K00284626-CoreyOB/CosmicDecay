@@ -42,7 +42,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the fuse location
-				t_Fuse.spawn(Vector2f(locx,locy), GRAVITY);
+				t_Fuse.spawn(Vector2f(locx,locy), GRAVITY, 4);
 
 				//add to the list
 				m_FusesList.push_back(t_Fuse);
@@ -56,7 +56,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the fuse location
-				t_Health.spawn(Vector2f(locx, locy), GRAVITY);
+				t_Health.spawn(Vector2f(locx, locy), GRAVITY, 4);
 
 				//add to the list
 				m_HealthPickupList.push_back(t_Health);
@@ -70,7 +70,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the fuse location
-				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY);
+				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY, 4);
 
 				//add to the list
 				m_AmmoPickupList.push_back(t_Ammo);
@@ -83,19 +83,19 @@ void Engine::loadLevel()
 	m_TimeRemaining = m_LM.getTimeLimit();
 
 	// Spawn Enemy and Player
-	m_BlinkyGhost.setSprite(1);
-	m_PinkyGhost.setSprite(2);
-	m_InkyGhost.setSprite(3);
+	m_ZombieAlien1.setSprite(1);
+	m_ZombieAlien2.setSprite(2);
+	m_ZombieAlien3.setSprite(3);
 	
 	m_Player.setName("Player");
-	m_Player.spawn(Vector2f(1500, 700), GRAVITY);
-	m_BlinkyGhost.spawn(Vector2f(850, 100), GRAVITY);
-	m_PinkyGhost.spawn(Vector2f(600, 100), GRAVITY);
-	m_InkyGhost.spawn(Vector2f(400, 100), GRAVITY);
+	m_Player.spawn(Vector2f(1500, 700), GRAVITY, 0);
+	m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 1);
+	m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
+	m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
 	float speed_Val = m_Player.getSpeed();
-	m_BlinkyGhost.setSpeed(speed_Val * 0.5);
-	m_PinkyGhost.setSpeed(speed_Val * 0.4);
-	m_InkyGhost.setSpeed(speed_Val * 0.3);
+	m_ZombieAlien1.setSpeed(speed_Val * 0.5);
+	m_ZombieAlien2.setSpeed(speed_Val * 0.4);
+	m_ZombieAlien3.setSpeed(speed_Val * 0.3);
 	// Make sure this code isn't run again
 	m_NewLevelRequired = false;
 }

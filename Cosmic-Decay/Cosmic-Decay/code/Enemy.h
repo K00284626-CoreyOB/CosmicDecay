@@ -12,6 +12,8 @@ public:
 	bool virtual handleInput();
 	void updateSprite(int e_type, float timeElapsed);
 	void virtual moveTextureRect(float timeElapsed);
+	void gotShot();
+	bool isActive();
 
 };
 #pragma once
