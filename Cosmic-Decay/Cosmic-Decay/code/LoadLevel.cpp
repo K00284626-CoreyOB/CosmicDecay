@@ -25,11 +25,6 @@ void Engine::loadLevel()
 	delete[] m_ArraySpawningPointsLevel;
 
 	// load spawning points data
-	//analyse 2d array for location of dots
-	//add dots to a list
-	// each dot is an allocated object with a vector2f position
-	// e.g. if a dot is in cell 6,8 then its x loc is 6*50+ 11 = 311
-	// its y value is 8*50+11=411
 	m_ArraySpawningPointsLevel = m_LM.nextLevelSpawningPoints();
 	for (int x = 0; x < m_LM.getLevelSpawningPointsSize().x; x++)
 	{
@@ -37,27 +32,52 @@ void Engine::loadLevel()
 		{
 
 
-			// check to see if its a dot (type 6)
+			// check to see if its a fuse (type 6)
 			int artefact = m_ArraySpawningPointsLevel[y][x];
 			if (artefact == 6)
 			{
-				//create a dot object , this calls the Dot constructor
-				Dots t_Dot;
+				//create a fuse object , this calls the fuses constructor
+				Fuses t_Fuse;
 				int locx = (x * 50) + 11;
 				int locy = (y * 50) + 11;
 
-				//set the Dot location
-				t_Dot.spawn(Vector2f(locx,locy), GRAVITY);
+				//set the fuse location
+				t_Fuse.spawn(Vector2f(locx,locy), GRAVITY);
 
 				//add to the list
-				m_DotsList.push_back(t_Dot);
+				m_FusesList.push_back(t_Fuse);
+			}
+
+			if (artefact == 9)
+			{
+				//create a fuse object , this calls the fuses constructor
+				HealthPickup t_Health;
+				int locx = (x * 50) + 11;
+				int locy = (y * 50) + 11;
+
+				//set the fuse location
+				t_Health.spawn(Vector2f(locx, locy), GRAVITY);
+
+				//add to the list
+				m_HealthPickupList.push_back(t_Health);
+			}
+
+			if (artefact == 8)
+			{
+				//create a fuse object , this calls the fuses constructor
+				AmmoPickup t_Ammo;
+				int locx = (x * 50) + 11;
+				int locy = (y * 50) + 11;
+
+				//set the fuse location
+				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY);
+
+				//add to the list
+				m_AmmoPickupList.push_back(t_Ammo);
 			}
 
 		}
 	}
-
-
-
 
 	// How long is this new time limit
 	m_TimeRemaining = m_LM.getTimeLimit();
@@ -67,8 +87,8 @@ void Engine::loadLevel()
 	m_PinkyGhost.setSprite(2);
 	m_InkyGhost.setSprite(3);
 	
-	m_Player.setName("PacMan");
-	m_Player.spawn(Vector2f(100, 900), GRAVITY);
+	m_Player.setName("Player");
+	m_Player.spawn(Vector2f(1500, 700), GRAVITY);
 	m_BlinkyGhost.spawn(Vector2f(850, 100), GRAVITY);
 	m_PinkyGhost.spawn(Vector2f(600, 100), GRAVITY);
 	m_InkyGhost.spawn(Vector2f(400, 100), GRAVITY);

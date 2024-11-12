@@ -4,7 +4,7 @@
 #include <iostream>
 
 CoreyAbility::CoreyAbility(Player& player)
-    : Abilities(player), invulnerable(false)
+    : Abilities(player), m_Player(player), invulnerable(false) // Initialize m_Player here
 {
 }
 
@@ -17,7 +17,7 @@ void CoreyAbility::useAbility()
         invulnerable = true;
 
         // Grant invulnerability
-        m_Player.setInvulnerable(true);
+        m_Player.setInvulnerable(true); // Ensure this method exists in Player class
 
         // Start the ability timer
         m_Clock.restart();
@@ -33,6 +33,6 @@ void CoreyAbility::update()
         invulnerable = false;
 
         // Remove invulnerability
-        m_Player.setInvulnerable(false);
+        m_Player.setInvulnerable(false); // Ensure this method exists in Player class
     }
 }

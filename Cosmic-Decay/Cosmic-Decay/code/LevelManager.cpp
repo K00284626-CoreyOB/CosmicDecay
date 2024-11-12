@@ -152,6 +152,10 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	return arrayLevel;
 }
 
+std::string LevelManager::getLevelToLoad() const {
+	return levelToLoad;
+}
+
 Vector2i LevelManager::getLevelSize()
 {
 	return m_LevelSize;

@@ -12,8 +12,14 @@ Engine::Engine()
 	scoreText.setString("Score = 0");
 	scoreText.setCharacterSize(50);
 	scoreText.setFillColor(Color::Magenta);
-	scoreText.setPosition(1120, 20);
+	scoreText.setPosition(1500, 20);
 	score = 0;
+
+	// Ammo
+	ammoText.setFont(font);
+	ammoText.setCharacterSize(55);
+	ammoText.setFillColor(Color::Magenta);
+	ammoText.setPosition(200, 20);
 
 	// Get the screen resolution and create an SFML window and View
 	Vector2f resolution;
@@ -35,11 +41,24 @@ Engine::Engine()
 
 	// Two lines below used to create zoomed our screenshots for the book
 	//m_BGMainView.zoom(2.5);
-	m_MainView.zoom(1.5);
+	m_MainView.zoom(0.8);
 	m_HudView.reset(
 		FloatRect(0, 0, resolution.x, resolution.y));
 
+	// 100 bullets should do
+	currentBullet = 0;
+	bulletsSpare = 24;
+	bulletsInClip = 6;
+	clipSize = 6;
+	fireRate = 1;
 
+	
+
+	// Hide the mouse pointer and replace it with crosshair
+	m_Window.setMouseCursorVisible(false);
+	textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");
+	spriteCrosshair.setTexture(textureCrosshair);
+	spriteCrosshair.setOrigin(25, 25);
 
 
 	// Can this graphics card use shaders?
@@ -56,8 +75,16 @@ Engine::Engine()
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
 
 	// Load the texture for the background vertex array
+
+	std::string currentLevelFile = m_levelManager.getLevelToLoad();
+
+	cout << currentLevelFile << endl;
+
+	
 	m_TextureTiles = TextureHolder::GetTexture(
 		"graphics/tiles_sheet.png");
+	
+	
 
 
 	textureMainMenu = TextureHolder::GetTexture("graphics/background-menu.png");
@@ -92,7 +119,6 @@ Engine::Engine()
 		"\nM - Exit to Menu";
 
 	pauseMenuText.setString(pauseMenuStream.str());
-
 }
 
 void Engine::run()
@@ -107,6 +133,19 @@ void Engine::run()
 		m_GameTimeTotal += dt;
 		// Make a decimal fraction from the delta time
 		float dtAsSeconds = dt.asSeconds();
+
+		if (state == State::PLAYING)
+		{
+			// Where is the mouse pointer
+			mouseScreenPosition = Mouse::getPosition();
+
+			// Convert mouse position to world coordinates of mainView
+			mouseWorldPosition = m_Window.mapPixelToCoords(
+				Mouse::getPosition(), m_MainView);
+
+			// Set the crosshair to the mouse world location
+			spriteCrosshair.setPosition(mouseWorldPosition);
+		}
 
 		input();
 		update(dtAsSeconds);

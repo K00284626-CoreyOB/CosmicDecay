@@ -1,13 +1,12 @@
-
 #pragma once
 #include "PlayableCharacter.h"
 
 
-class Dots : public PlayableCharacter
+class HealthPickup : public PlayableCharacter
 {
 public:
 	// A constructor specific to Player
-	Dots();
+	HealthPickup();
 
 	// The overriden input handler for Player
 

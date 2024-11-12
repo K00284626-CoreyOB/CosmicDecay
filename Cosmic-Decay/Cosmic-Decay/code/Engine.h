@@ -3,10 +3,13 @@
 #include "TextureHolder.h"
 #include "Enemy.h"
 #include "Player.h"
-#include "Dots.h"
+#include "Arm.h"
+#include "Bullet.h"
+#include "Fuses.h"
+#include "HealthPickup.h"
+#include "AmmoPickup.h"
 #include <list>
 #include <math.h>
-
 #include "LevelManager.h"
 
 using namespace sf;
@@ -14,11 +17,23 @@ using namespace sf;
 class Engine
 {
 private:
+	LevelManager m_levelManager;
+
 
 	sf::Text scoreText;   // Text object to display the score
 	sf::Font scoreFont;   // Font for the score text
 
 	int score;            // Score value
+
+	Text ammoText;
+
+
+	Bullet bullets[100];
+	int currentBullet;
+	int bulletsSpare;
+	int bulletsInClip;
+	int clipSize;
+	float fireRate;
 
 	// The texture holder
 	TextureHolder th;
@@ -26,6 +41,7 @@ private:
 	// Enemy and his friend, Player
 	Enemy m_BlinkyGhost;
 	Player m_Player;
+	//Arm m_Arm;
 	Enemy m_PinkyGhost;
 	Enemy m_InkyGhost;
 
@@ -73,6 +89,7 @@ private:
 	// How much time is left in the current level
 	float m_TimeRemaining = 10;
 	Time m_GameTimeTotal;
+	Time m_LastPressed;
 
 	// Is it time for a new/first level?
 	bool m_NewLevelRequired = true;
@@ -85,8 +102,26 @@ private:
 	int** m_ArrayLevel = NULL;
 	int** m_ArraySpawningPointsLevel = NULL;
 
-	//Dec 13th a list of dots
-	std::list<PlayableCharacter> m_DotsList;
+	// Where is the mouse in relation to world coordinates
+	Vector2f mouseWorldPosition;
+	// Where is the mouse in relation to screen coordinates
+	Vector2i mouseScreenPosition;
+
+	Sprite spriteCrosshair;
+	Texture textureCrosshair;
+
+	// Is player Invincible
+	bool m_Invincible = false;
+	//Invincibility timer
+	float m_InvincibleTime;
+	const float INVINCIBILITY_DURATION = 2.0f;
+
+	//a list of fuses
+	std::list<PlayableCharacter> m_FusesList;
+
+	std::list<PlayableCharacter> m_HealthPickupList;
+
+	std::list<PlayableCharacter> m_AmmoPickupList;
 
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
@@ -109,7 +144,7 @@ public:
 	// Run will call all the private functions
 	void run();
 
-	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING,MAIN_MENU};
+	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU};
 	State state = State::GAME_OVER;
 
 

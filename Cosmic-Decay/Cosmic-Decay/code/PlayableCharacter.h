@@ -89,11 +89,12 @@ public:
 
 	void setSpeed(float value);
 	float getSpeed();
+
 	//setSprite to use correct animation cell
 	void setSpriteFromSheet(sf::IntRect textureBox);
 
 	//move the rectangle to the next cell in the animation
-	void moveTextureRect();
+	void virtual moveTextureRect(float timeElapsed);
 
 
 

@@ -1,15 +1,20 @@
 #pragma once
 #include "Abilities.h"
-#include <SFML/Graphics.hpp>
+
+class Player; // Forward declaration
 
 class ZachAbility : public Abilities
 {
 public:
     ZachAbility(Player& player);
-    virtual void useAbility() override;
-    virtual void update() override;
+
+    void useAbility() override;
+    void update() override;
 
 private:
-    bool meleeMode;
-    float originalHealth;
+    Player& m_Player;              // Reference to the Player
+    bool m_Active = false;         // Track if the ability is active
+    bool meleeMode = false;        // Track melee mode
+    float originalHealth = 0.0f;   // Store original health
+    sf::Clock m_Clock;             // Clock to manage ability duration
 };

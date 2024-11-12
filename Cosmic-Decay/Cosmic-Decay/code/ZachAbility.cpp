@@ -4,7 +4,7 @@
 #include <iostream>
 
 ZachAbility::ZachAbility(Player& player)
-    : Abilities(player), meleeMode(false), originalHealth(0.0f)
+    : Abilities(player), m_Player(player), meleeMode(false), originalHealth(0.0f)
 {
 }
 
@@ -39,7 +39,7 @@ void ZachAbility::update()
         // Switch back to gun
         m_Player.switchToGun();
 
-        
+        // Uncomment this line if you want to revert health
         // m_Player.setHealth(originalHealth);
     }
 }
