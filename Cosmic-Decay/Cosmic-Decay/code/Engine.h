@@ -12,6 +12,7 @@
 #include <math.h>
 #include "LevelManager.h"
 #include "Arm.h"
+#include "HUD.h"
 
 using namespace sf;
 
@@ -26,7 +27,8 @@ private:
 
 	int score;            // Score value
 
-	Text ammoText;
+	sf::Text ammoText;
+	sf::Font ammoFont;
 
 
 	Bullet bullets[100];
@@ -137,6 +139,11 @@ private:
 
 	// Run will call all the private functions
 	bool detectCollisions(PlayableCharacter& character);
+
+	// The Hud
+	Hud m_Hud;
+	int m_FramesSinceLastHUDUpdate = 0;
+	int m_TargetFramesPerHUDUpdate = 500;
 	
 public:
 	// The Engine constructor
