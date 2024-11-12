@@ -23,17 +23,17 @@ void Enemy::setSprite(int e_type)
 	else if (e_type == 2)
 	{
 		//Pinky Pink
-		m_Sprite.setTextureRect(sf::IntRect{ 0, 0, 150, 50 });
+		m_Sprite.setTextureRect(sf::IntRect{ 0, 50, 150, 50 });
 	}
 	else if (e_type == 3)
 	{
 		//inky Cyan
-		m_Sprite.setTextureRect(sf::IntRect{ 0, 0, 150, 50 });
+		m_Sprite.setTextureRect(sf::IntRect{ 0, 100, 150, 50 });
 	}
 	else if (e_type == 4)
 	{
 		//Clyde Orange
-		m_Sprite.setTextureRect(sf::IntRect{ 12,362,50,50 });
+		m_Sprite.setTextureRect(sf::IntRect{ 0, 100, 150, 50 });
 	}
 
 	m_JumpDuration = .45;
@@ -63,7 +63,7 @@ void Enemy::updateSprite(int e_type, float timeElapsed)
 	//right
 	if (direction == sf::Vector2f(0, -1))
 	{
-		offset = 0;
+		offset = 50;
 	}
 
 	if (e_type == 1)
@@ -80,7 +80,7 @@ void Enemy::updateSprite(int e_type, float timeElapsed)
 	else if (e_type == 3)
 	{
 
-		setSpriteFromSheet(sf::IntRect{ 0 + offset, 150, 150, 50 });
+		setSpriteFromSheet(sf::IntRect{ 0 + offset, 100, 150, 50 });
 		moveTextureRect(timeElapsed);
 	}
 	else
@@ -123,7 +123,7 @@ void Enemy::moveTextureRect(float timeElapsed)
 
 	//increment animation counter to point to the next frame
 	double timePerFrame;
-	timePerFrame = 1.0 / 5.0;
+	timePerFrame = 1.0 / 4.0;
 	animationTimer = animationTimer + timeElapsed;
 	if (animationTimer > timePerFrame)
 	{
