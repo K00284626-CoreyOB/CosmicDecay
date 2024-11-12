@@ -90,25 +90,24 @@ void Engine::input()
 			// Reloading
 			if (event.key.code == Keyboard::R)
 			{
-				if (bulletsSpare >= clipSize)
-				{
-					// Plenty of bullets. Reload.
-					bulletsInClip = clipSize;
-					bulletsSpare -= clipSize;
-					//reload.play();
+				int bulletsNeeded = clipSize - bulletsInClip;
+
+				if (bulletsSpare >= bulletsNeeded) {
+					// Enough bullets in spare to fill the clip
+					bulletsInClip += bulletsNeeded;
+					bulletsSpare -= bulletsNeeded;
 				}
-				else if (bulletsSpare > 0)
-				{
-					// Only few bullets left
-					bulletsInClip = bulletsSpare;
+				else if (bulletsSpare > 0) {
+					// Not enough bullets in spare, so add all remaining
+					bulletsInClip += bulletsSpare;
 					bulletsSpare = 0;
-					//reload.play();
 				}
-				else
-				{
-					// More here soon?!
-					//reloadFailed.play();
-				}
+
+				// Update the HUD ammo display
+				std::stringstream ss;
+				ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+				m_Hud.setAmmo(ss.str());
+				
 			}
 
 			// Fire a bullet
@@ -119,7 +118,6 @@ void Engine::input()
 					- m_LastPressed.asMilliseconds()
 					> 1000 / fireRate && bulletsInClip > 0)
 				{
-
 					// Pass the centre of the player and the centre of the crosshair
 					// to the shoot function
 					bullets[currentBullet].shoot(
@@ -134,6 +132,11 @@ void Engine::input()
 					m_LastPressed = m_GameTimeTotal;
 					//shoot.play();
 					bulletsInClip--;
+
+					//update ammo count on screen
+					std::stringstream ss;
+					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+					m_Hud.setAmmo(ss.str());
 				}
 
 			}// End fire a bullet

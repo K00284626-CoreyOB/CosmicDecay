@@ -59,12 +59,19 @@ void Engine::draw()
 			}
 		}
 
-
 		// Draw the HUD
-		// Switch to m_HudView
+	// Switch to m_HudView
 		m_Window.setView(m_HudView);
+		m_Window.draw(m_Hud.getLevel());
+		m_Window.draw(m_Hud.getScore());
+		m_Window.draw(m_Hud.getAmmo());
+		m_Window.draw(m_Hud.getHealth());
+		if (!m_Playing)
+		{
+			m_Window.draw(m_Hud.getMessage());
+		}
 
-		m_Window.draw(scoreText);
+		//m_Window.draw(scoreText);
 	}
 	if (state == State::MAIN_MENU)
 	{
@@ -76,9 +83,6 @@ void Engine::draw()
 		// Draw the background
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(mainMenuText);
-		// Switch to m_MainView
-//		m_Window.setView(m_MainView);
-		m_Window.setView(m_HudView);
 
 	}
 
@@ -92,9 +96,6 @@ void Engine::draw()
 		// Draw the background
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(pauseMenuText);
-		// Switch to m_MainView
-//		m_Window.setView(m_MainView);
-		m_Window.setView(m_HudView);
 
 	}
 	

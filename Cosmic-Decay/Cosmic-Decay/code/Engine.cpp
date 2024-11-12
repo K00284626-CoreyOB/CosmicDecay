@@ -15,6 +15,8 @@ Engine::Engine()
 	scoreText.setPosition(1500, 20);
 	score = 0;
 
+	m_InvincibleTime = 0;
+
 	// Ammo
 	ammoText.setFont(font);
 	ammoText.setCharacterSize(55);

@@ -7,6 +7,7 @@
 using namespace sf;
 
 int score = 0;
+int health = 100;
 
 void Engine::update(float dtAsSeconds)
 {
@@ -98,7 +99,7 @@ void Engine::update(float dtAsSeconds)
 					cout << score << endl;
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 				else
 				{
@@ -130,6 +131,20 @@ void Engine::update(float dtAsSeconds)
 				{
 					m_HealthPickupList.erase(itH++);
 					//ADD A LINE TO TO REGAIN HEALTH**************************************************
+					if (health > 50)
+					{
+						health = 100;
+						std::stringstream ss;
+						ss << "Health: " << health;
+						m_Hud.setHealth(ss.str());
+					}
+					else if (health <= 50)
+					{
+						health = health + 50;
+						std::stringstream ss;
+						ss << "Health: " << health;
+						m_Hud.setHealth(ss.str());
+					}
 				}
 				else
 				{
@@ -167,11 +182,9 @@ void Engine::update(float dtAsSeconds)
 					//debug
 					cout << bulletsSpare << endl;
 
-					if (!m_Invincible)
-					{
-						m_Invincible = true;
-						m_InvincibleTime = INVINCIBILITY_DURATION;
-					}
+					std::stringstream ss;
+					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+					m_Hud.setAmmo(ss.str());
 				}
 				else
 				{
@@ -192,10 +205,10 @@ void Engine::update(float dtAsSeconds)
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
 			m_Player.moveTextureRect(dtAsSeconds);
-			//score--;
+			health--;
 			std::stringstream ss;
-			ss << "Score = " << score;
-			scoreText.setString(ss.str());
+			ss << "Health: " << health;
+			m_Hud.setHealth(ss.str());
 		}
 
 		//BULLET COLLISION WIP**************** - Matthew
@@ -210,7 +223,7 @@ void Engine::update(float dtAsSeconds)
 					score++;
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 				else if (bullets[i].getPosition().intersects(m_PinkyGhost.getPosition())) 
 				{
@@ -218,7 +231,7 @@ void Engine::update(float dtAsSeconds)
 					score++;
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 				else if (bullets[i].getPosition().intersects(m_InkyGhost.getPosition())) 
 				{
@@ -226,12 +239,27 @@ void Engine::update(float dtAsSeconds)
 					score++;
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 			}
 		}
 
 	}// End if playing
-		
+	
+	//HUD Update
+	m_FramesSinceLastHUDUpdate++;
+
+	// Update the HUD every m_TargetFramesPerHUDUpdate frames
+	if (m_FramesSinceLastHUDUpdate > m_TargetFramesPerHUDUpdate)
+	{
+		// Update game HUD text
+		stringstream ssLevel;
+
+		// Update the level text
+		ssLevel << "Level:" << m_LM.getCurrentLevel();
+		m_Hud.setLevel(ssLevel.str());
+
+		m_FramesSinceLastHUDUpdate = 0;
+	}
 
 }
