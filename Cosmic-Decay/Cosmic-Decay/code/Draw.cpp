@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Engine.h"
 
+
 void Engine::draw()
 {
 
@@ -41,14 +42,22 @@ void Engine::draw()
 		}
 		m_Window.draw(spriteCrosshair);
 
-		// Draw player
 		m_Window.draw(m_Player.getSpriteFromSheet());
-		//m_Window.draw(m_Arm.getSpriteFromSheet());
+		m_Window.draw(m_Player.getArm().getSprite());
 
 		// Draw Enemy
-		m_Window.draw(m_BlinkyGhost.getSprite());
-		m_Window.draw(m_PinkyGhost.getSprite());
-		m_Window.draw(m_InkyGhost.getSprite());
+		if (m_ZombieAlien1.isActive())
+		{
+			m_Window.draw(m_ZombieAlien1.getSprite());
+		}
+		if (m_ZombieAlien2.isActive())
+		{
+			m_Window.draw(m_ZombieAlien2.getSprite());
+		}
+		if (m_ZombieAlien3.isActive())
+		{
+			m_Window.draw(m_ZombieAlien3.getSprite());
+		}
 
 		
 		for (int i = 0; i < 100; i++)

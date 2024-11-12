@@ -11,7 +11,7 @@
 #include <list>
 #include <math.h>
 #include "LevelManager.h"
-#include "HUD.h"
+#include "Arm.h"
 
 using namespace sf;
 
@@ -26,8 +26,7 @@ private:
 
 	int score;            // Score value
 
-	sf::Text ammoText;
-	sf::Font ammoFont;
+	Text ammoText;
 
 
 	Bullet bullets[100];
@@ -41,11 +40,11 @@ private:
 	TextureHolder th;
 
 	// Enemy and his friend, Player
-	Enemy m_BlinkyGhost;
+	Enemy m_ZombieAlien1;
 	Player m_Player;
 	//Arm m_Arm;
-	Enemy m_PinkyGhost;
-	Enemy m_InkyGhost;
+	Enemy m_ZombieAlien2;
+	Enemy m_ZombieAlien3;
 
 	// A class to manage all the levels
 	LevelManager m_LM;
@@ -138,12 +137,6 @@ private:
 
 	// Run will call all the private functions
 	bool detectCollisions(PlayableCharacter& character);
-
-	//HUD
-	Hud m_Hud;
-
-	int m_FramesSinceLastHUDUpdate = 0;
-	int m_TargetFramesPerHUDUpdate = 500;
 	
 public:
 	// The Engine constructor

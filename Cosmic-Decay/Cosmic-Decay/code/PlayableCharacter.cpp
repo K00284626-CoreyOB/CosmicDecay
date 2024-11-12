@@ -5,7 +5,7 @@ using namespace std;
 #include <iostream>
 #include <cmath>
 
-void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
+void PlayableCharacter::spawn(Vector2f startPosition, float gravity, int m_type)
 {
 	// Place the player at the starting point
 	m_Position.x = startPosition.x;
@@ -14,10 +14,33 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 	// Initialize the gravity
 	m_Gravity = gravity;
 
+	//Initialise the health
+
+	if (m_type == 0) //Player
+	{
+		m_Health = 100;
+	}
+	else if (m_type == 1) //ZombieAlien1
+	{
+		m_Health = 3;
+	}
+	else if (m_type == 2) //ZombieAlien2
+	{
+		m_Health = 5;
+	}
+	else if (m_type == 3) //ZombieAlien3
+	{
+		m_Health = 2;
+	}
+	else if (m_type == 4) //Pickups
+	{
+	}
 
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
 	//m_SpriteSheet.setPosition(m_Position);
+
+	m_Active = true;
 
 }
 void PlayableCharacter::setSpeed(float value)
