@@ -33,14 +33,14 @@ void Engine::update(float dtAsSeconds)
 
 
 		// May 4 moving to top left coords not centre coords
-		m_BlinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_BlinkyGhost.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
-		m_BlinkyGhost.updateSprite(1, dtAsSeconds);
+		m_ZombieAlien1.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien1.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
+		m_ZombieAlien1.updateSprite(1, dtAsSeconds);
 
-		m_PinkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_PinkyGhost.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
-		m_PinkyGhost.updateSprite(2, dtAsSeconds);
+		m_ZombieAlien2.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien2.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
+		m_ZombieAlien2.updateSprite(2, dtAsSeconds);
 
-		m_InkyGhost.GhostChaseMoveTo(dtAsSeconds, pr, m_InkyGhost.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
-		m_InkyGhost.updateSprite(3, dtAsSeconds);
+		m_ZombieAlien3.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien3.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
+		m_ZombieAlien3.updateSprite(3, dtAsSeconds);
 		// Detect collisions and see if characters have reached the goal tile
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
@@ -54,9 +54,18 @@ void Engine::update(float dtAsSeconds)
 		{
 			// Run Players collision detection
 			detectCollisions(m_Player);
-			detectCollisions(m_BlinkyGhost);
-			detectCollisions(m_PinkyGhost);
-     		detectCollisions(m_InkyGhost);
+			if (m_ZombieAlien1.isActive())
+			{
+				detectCollisions(m_ZombieAlien1);
+			}
+			if (m_ZombieAlien2.isActive())
+			{
+				detectCollisions(m_ZombieAlien2);
+			}
+			if (m_ZombieAlien3.isActive())
+			{
+				detectCollisions(m_ZombieAlien3);
+			}
 		}
 
 		if (m_Invincible)
@@ -185,10 +194,9 @@ void Engine::update(float dtAsSeconds)
 
 		}
         //Dec 9th 2021 Desmond's Death Detection code and animation
-		if (m_Player.getPosition().intersects
-		(m_BlinkyGhost.getPosition()) || m_Player.getPosition().intersects
-		(m_PinkyGhost.getPosition()) || m_Player.getPosition().intersects
-		(m_InkyGhost.getPosition()))
+		if ((m_Player.getPosition().intersects(m_ZombieAlien1.getPosition()) && m_ZombieAlien1.isActive()) || 
+			(m_Player.getPosition().intersects(m_ZombieAlien2.getPosition()) && m_ZombieAlien2.isActive()) || 
+			(m_Player.getPosition().intersects(m_ZombieAlien3.getPosition())) && m_ZombieAlien3.isActive())
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
 			m_Player.moveTextureRect(dtAsSeconds);
@@ -204,26 +212,29 @@ void Engine::update(float dtAsSeconds)
 			if (bullets[i].isInFlight()) 
 			{
 				bullets[i].update(dtAsSeconds);
-				if (bullets[i].getPosition().intersects(m_BlinkyGhost.getPosition())) 
+				if (bullets[i].getPosition().intersects(m_ZombieAlien1.getPosition()) && m_ZombieAlien1.isActive())
 				{
 					bullets[i].stop();
 					score++;
+					m_ZombieAlien1.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
 					scoreText.setString(ss.str());
 				}
-				else if (bullets[i].getPosition().intersects(m_PinkyGhost.getPosition())) 
+				else if (bullets[i].getPosition().intersects(m_ZombieAlien2.getPosition()) && m_ZombieAlien2.isActive())
 				{
 					bullets[i].stop();
 					score++;
+					m_ZombieAlien2.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
 					scoreText.setString(ss.str());
 				}
-				else if (bullets[i].getPosition().intersects(m_InkyGhost.getPosition())) 
+				else if (bullets[i].getPosition().intersects(m_ZombieAlien3.getPosition()) && m_ZombieAlien3.isActive())
 				{
 					bullets[i].stop();
 					score++;
+					m_ZombieAlien3.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
 					scoreText.setString(ss.str());

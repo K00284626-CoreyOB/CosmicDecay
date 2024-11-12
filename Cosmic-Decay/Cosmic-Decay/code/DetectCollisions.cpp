@@ -39,7 +39,7 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 	if (!character.getPosition().intersects(level))
 	{
 		// respawn the character as it is outside the level
-		character.spawn(m_LM.getStartPosition(), GRAVITY);
+		character.spawn(m_LM.getStartPosition(), GRAVITY, 0);
 	}
 
 	for (int x = startX; x < endX; x++)
@@ -57,7 +57,7 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 			{
 				if (character.getHead().intersects(block))
 				{
-					character.spawn(m_LM.getStartPosition(), GRAVITY);
+					character.spawn(m_LM.getStartPosition(), GRAVITY, 0);
 					// Which sound should be played?
 					if (m_ArrayLevel[y][x] == 2)// Fire, ouch!
 					{
