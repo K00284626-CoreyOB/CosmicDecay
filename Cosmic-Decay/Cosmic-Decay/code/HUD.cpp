@@ -46,14 +46,14 @@ Hud::Hud()
 	m_LevelText.setFont(m_Font);
 	m_LevelText.setCharacterSize(75);
 	m_LevelText.setFillColor(Color::Black);
-	m_LevelText.setPosition(resolution.x - 2530, 0);
+	m_LevelText.setPosition(resolution.x - 1900, 0);
 	m_LevelText.setString("1");
 
 	//Score
 	m_ScoreText.setFont(m_Font);
 	m_ScoreText.setCharacterSize(75);
 	m_ScoreText.setFillColor(Color::Black);
-	m_ScoreText.setPosition(resolution.x - 2530, 100);
+	m_ScoreText.setPosition(resolution.x - 1900, 100);
 	m_ScoreText.setString("Score: -");
 
 	//Background
@@ -63,7 +63,7 @@ Hud::Hud()
 
 	//Background 2
 	hudBackground2.setSize(sf::Vector2f(600, 200));
-	hudBackground2.setPosition(resolution.x - 2550, 0);
+	hudBackground2.setPosition(resolution.x - 1920, 0);
 	hudBackground2.setFillColor(sf::Color(255, 255, 255, 120));
 }
 
