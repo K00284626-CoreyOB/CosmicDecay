@@ -8,6 +8,7 @@ using namespace sf;
 
 int score = 0;
 int health = 100;
+int fuses = 0;
 
 void Engine::update(float dtAsSeconds)
 {
@@ -103,12 +104,13 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
+					//adds fuse to inventory
 					m_FusesList.erase(it++);
-					score++;
-					cout << score << endl;
+					fuses++;
+					cout << fuses << endl;
 					std::stringstream ss;
-					ss << "Score = " << score;
-					m_Hud.setScore(ss.str());
+					ss << "Fuses: " << fuses;
+					m_Hud.setFuse(ss.str());
 				}
 				else
 				{
@@ -138,8 +140,8 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
+					//added health update - refills health by 50
 					m_HealthPickupList.erase(itH++);
-					//ADD A LINE TO TO REGAIN HEALTH**************************************************
 					if (health > 50)
 					{
 						health = 100;
@@ -185,12 +187,13 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
+					//ammo update on pickup - adds to ammo stockpile
 					m_AmmoPickupList.erase(itA++);
-					//ADD A LINE A TO ADD AMMO TO STOCKPILE******** - Done
 					bulletsSpare = bulletsSpare + 16;
 					//debug
 					cout << bulletsSpare << endl;
 
+					//update hud element
 					std::stringstream ss;
 					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
 					m_Hud.setAmmo(ss.str());

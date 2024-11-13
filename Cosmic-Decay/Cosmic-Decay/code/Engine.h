@@ -140,8 +140,9 @@ private:
 	// Run will call all the private functions
 	bool detectCollisions(PlayableCharacter& character);
 
-	// The Hud
+	//HUD
 	Hud m_Hud;
+
 	int m_FramesSinceLastHUDUpdate = 0;
 	int m_TargetFramesPerHUDUpdate = 500;
 	

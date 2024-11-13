@@ -75,6 +75,9 @@ void Engine::draw()
 		m_Window.draw(m_Hud.getScore());
 		m_Window.draw(m_Hud.getAmmo());
 		m_Window.draw(m_Hud.getHealth());
+		m_Window.draw(m_Hud.getFuse());
+		m_Window.draw(m_Hud.getBackground());
+		m_Window.draw(m_Hud.getBackground2());
 		if (!m_Playing)
 		{
 			m_Window.draw(m_Hud.getMessage());
