@@ -23,46 +23,46 @@ Hud::Hud()
 
 	//Ammo
 	m_AmmoText.setFont(m_Font);
-	m_AmmoText.setCharacterSize(75);
+	m_AmmoText.setCharacterSize(40);
 	m_AmmoText.setFillColor(Color::Black);
-	m_AmmoText.setPosition(resolution.x - 550, 100);
+	m_AmmoText.setPosition(resolution.x - 250, 50);
 	m_AmmoText.setString("Ammo: 6/24");
 
 	//Health
 	m_HealthText.setFont(m_Font);
-	m_HealthText.setCharacterSize(75);
+	m_HealthText.setCharacterSize(40);
 	m_HealthText.setFillColor(Color::Black);
-	m_HealthText.setPosition(resolution.x - 550, 0);
+	m_HealthText.setPosition(resolution.x - 250, 0);
 	m_HealthText.setString("Health: 100");
 
 	//Fuse
 	m_FuseText.setFont(m_Font);
-	m_FuseText.setCharacterSize(75);
+	m_FuseText.setCharacterSize(40);
 	m_FuseText.setFillColor(Color::Black);
-	m_FuseText.setPosition(resolution.x - 550, 200);
+	m_FuseText.setPosition(resolution.x - 250, 100);
 	m_FuseText.setString("Fuses: 0");
 
 	// Level
 	m_LevelText.setFont(m_Font);
-	m_LevelText.setCharacterSize(75);
+	m_LevelText.setCharacterSize(40);
 	m_LevelText.setFillColor(Color::Black);
 	m_LevelText.setPosition(resolution.x - 1900, 0);
 	m_LevelText.setString("1");
 
 	//Score
 	m_ScoreText.setFont(m_Font);
-	m_ScoreText.setCharacterSize(75);
+	m_ScoreText.setCharacterSize(40);
 	m_ScoreText.setFillColor(Color::Black);
 	m_ScoreText.setPosition(resolution.x - 1900, 100);
 	m_ScoreText.setString("Score: -");
 
 	//Background
-	hudBackground.setSize(sf::Vector2f(600, 300));
-	hudBackground.setPosition(resolution.x - 570, 0);
+	hudBackground.setSize(sf::Vector2f(400, 150));
+	hudBackground.setPosition(resolution.x - 300, 0);
 	hudBackground.setFillColor(sf::Color(255, 255, 255, 120));
 
 	//Background 2
-	hudBackground2.setSize(sf::Vector2f(600, 200));
+	hudBackground2.setSize(sf::Vector2f(250, 150));
 	hudBackground2.setPosition(resolution.x - 1920, 0);
 	hudBackground2.setFillColor(sf::Color(255, 255, 255, 120));
 }

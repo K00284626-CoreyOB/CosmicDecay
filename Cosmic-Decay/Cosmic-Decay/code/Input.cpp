@@ -90,20 +90,19 @@ void Engine::input()
 			// Reloading
 			if (event.key.code == Keyboard::R)
 			{
+				//updating reload - changed so it reloads only the ammo that is needed, fixed issue where it reloaded double clip size
 				int bulletsNeeded = clipSize - bulletsInClip;
 
 				if (bulletsSpare >= bulletsNeeded) {
-					// Enough bullets in spare to fill the clip
 					bulletsInClip += bulletsNeeded;
 					bulletsSpare -= bulletsNeeded;
 				}
 				else if (bulletsSpare > 0) {
-					// Not enough bullets in spare, so add all remaining
 					bulletsInClip += bulletsSpare;
 					bulletsSpare = 0;
 				}
 
-				// Update the HUD ammo display
+				//display ammo count to hud
 				std::stringstream ss;
 				ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
 				m_Hud.setAmmo(ss.str());
