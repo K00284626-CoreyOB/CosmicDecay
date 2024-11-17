@@ -5,37 +5,20 @@ void Engine::input()
 {
 	bool exit_loop = false;
 	Event event;
+	Event event2;
 
 	while (m_Window.pollEvent(event))
 	{
 		if (state == State::MAIN_MENU) 
 		{
-			// Handle the player levelling up
 			if (event.key.code == Keyboard::Num1)
 			{
-				// Increase fire rate
-				m_LM.setCurrentLevel(0);
-				m_NewLevelRequired = true;
-				state = State::PLAYING;
-
-				//wave = 0;
-				score = 0;
-
-				// Prepare the gun and ammo for next game
-				currentBullet = 0;
-				bulletsSpare = 24;
-				bulletsInClip = 6;
-				clipSize = 6;
-				fireRate = 1;
-
-				// Reset the player's stats
-				//player.resetPlayerStats();
-			
+				event.key.code = Keyboard::Num0;
+				state = State::CHAR_SELECT;
 			}
 
 			if (event.key.code == Keyboard::Num2)
 			{
-				
 				state = State::PLAYING;
 			}
 
@@ -44,6 +27,43 @@ void Engine::input()
 				state = State::GAME_OVER;
 			}
 		}
+
+		if (state == State::CHAR_SELECT)
+		{
+			if (event.type == Event::KeyPressed)
+			{
+				if (event.key.code == Keyboard::Num1) //Choose Zach
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num2) //Choose Szymon
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num3) //Choose Matthew
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num4) //Choose Corey
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num5) //Return to menu
+				{
+					event.key.code = Keyboard::Num0;
+					state = State::MAIN_MENU;
+				}
+			}
+		}
+
 		if (state == State::PAUSED)
 		{
 
@@ -62,6 +82,7 @@ void Engine::input()
 			}
 
 		}
+
 		if (state == State::GAME_OVER)
 		{
 			m_Window.close();
@@ -156,9 +177,25 @@ void Engine::input()
 		// Play a jump sound
 	}
 
-	if (state == State::MAIN_MENU)
-	{
-	//	window.draw(spriteMainMenu);
-	//	window.draw(levelUpText);
-	}
+}
+
+void Engine::startPlaying()
+{
+	// Increase fire rate
+	m_LM.setCurrentLevel(0);
+	m_NewLevelRequired = true;
+	state = State::PLAYING;
+
+	//wave = 0;
+	score = 0;
+
+	// Prepare the gun and ammo for next game
+	currentBullet = 0;
+	bulletsSpare = 24;
+	bulletsInClip = 6;
+	clipSize = 6;
+	fireRate = 1;
+
+	// Reset the player's stats
+	//player.resetPlayerStats();
 }

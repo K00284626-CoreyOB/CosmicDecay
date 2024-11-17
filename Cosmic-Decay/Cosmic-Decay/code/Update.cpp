@@ -10,6 +10,7 @@ int score = 0;
 int health = 100;
 int fuses = 0;
 
+
 void Engine::update(float dtAsSeconds)
 {
 	if (m_Character1)
@@ -169,8 +170,8 @@ void Engine::update(float dtAsSeconds)
 
 		}
 
-		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
-			if (!m_Invincible && m_Player.getPosition().intersects((itA)->getPosition()))
+		for (auto itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
+			if (m_Player.getPosition().intersects((itA)->getPosition()))
 			{
 
 				//calculate distance d between the 2 points
@@ -185,10 +186,9 @@ void Engine::update(float dtAsSeconds)
 
 				
 
-				if (d < 30)
+				if (d < 50 && !m_Invincible)
 				{
 					//ammo update on pickup - adds to ammo stockpile
-					m_AmmoPickupList.erase(itA++);
 					bulletsSpare = bulletsSpare + 16;
 					//debug
 					cout << bulletsSpare << endl;
@@ -197,6 +197,13 @@ void Engine::update(float dtAsSeconds)
 					std::stringstream ss;
 					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
 					m_Hud.setAmmo(ss.str());
+
+					m_AmmoPickupList.erase(itA++);
+					std::cout << "Pickup erased, iterator advanced." << std::endl;
+
+
+					m_Invincible = true;
+					m_InvincibleTime = INVINCIBILITY_DURATION;
 				}
 				else
 				{

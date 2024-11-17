@@ -78,6 +78,7 @@ private:
 
 	Font font;
 	Text mainMenuText;
+	Text charSelectText;
 	Text pauseMenuText;
 
 	// Is the game currently playing?
@@ -153,7 +154,9 @@ public:
 	// Run will call all the private functions
 	void run();
 
-	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU};
+	void startPlaying();
+
+	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT};
 	State state = State::GAME_OVER;
 
 

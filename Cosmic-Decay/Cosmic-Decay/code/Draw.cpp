@@ -98,6 +98,19 @@ void Engine::draw()
 
 	}
 
+	if (state == State::CHAR_SELECT)
+	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+		// Draw the background
+		m_Window.draw(spriteMainMenu);
+		m_Window.draw(charSelectText);
+
+	}
+
 	if (state == State::PAUSED)
 	{
 		m_Window.clear(Color::Black);
