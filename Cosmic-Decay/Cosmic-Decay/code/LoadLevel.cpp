@@ -104,6 +104,7 @@ void Engine::loadLevel()
 	m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
 	m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
 	m_shuttle.spawn(Vector2f(600, 700), GRAVITY, 0);
+	m_Arm.spawn(Vector2f(1500, 700), GRAVITY, 0);
 
 	float speed_Val = m_Player.getSpeed();
 	m_ZombieAlien1.setSpeed(speed_Val * 0.2);

@@ -8,9 +8,9 @@ Arm::Arm()
 	// Associate a texture with the sprite
 	m_Sprite = sf::Sprite(TextureHolder::GetTexture(
 		"graphics/playerSpriteSheet2.png"));
-	m_Sprite.setTextureRect(sf::IntRect{ 0, 50, 50, 50 });
+	m_Sprite.setTextureRect(sf::IntRect{ 0, 0, 0, 0 });
 
-	m_Sprite.setOrigin(15, 77);
+	m_Sprite.setOrigin(0, 0);
 }
 
 
@@ -30,10 +30,7 @@ void Arm::setRotation(float angle)
 	m_Sprite.setRotation(angle);
 }
 
-// Return the sprite of the arm
-sf::Sprite& Arm::getSprite() {
-	return m_Sprite;
-}
+
 
 void Arm::rotateTowardsMouse(sf::Vector2f playerPosition, sf::RenderWindow& window)
 {
@@ -50,6 +47,4 @@ void Arm::rotateTowardsMouse(sf::Vector2f playerPosition, sf::RenderWindow& wind
 	m_Sprite.setRotation(angle);
 }
 
-void Arm::draw(sf::RenderWindow& window) {
-	window.draw(m_Sprite);
-}
+

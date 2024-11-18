@@ -17,14 +17,12 @@ public:
     // Method to set the rotation of the arm
     void setRotation(float angle);
 
-    // Method to get the sprite of the arm
-    sf::Sprite& getSprite();
+   
 
     // Rotate the arm towards the mouse position
     void rotateTowardsMouse(Vector2f playerPosition, RenderWindow& window);
 
-    // Draw the arm
-    void draw(RenderWindow& window);
+    
 
 private:
     Sprite m_Sprite; // Arm sprite
