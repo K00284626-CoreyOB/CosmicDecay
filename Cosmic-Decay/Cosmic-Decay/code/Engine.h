@@ -11,6 +11,9 @@
 #include <list>
 #include <math.h>
 #include "LevelManager.h"
+#include "Arm.h"
+#include "HUD.h"
+#include "Shuttle.h"
 
 using namespace sf;
 
@@ -25,7 +28,8 @@ private:
 
 	int score;            // Score value
 
-	Text ammoText;
+	sf::Text ammoText;
+	sf::Font ammoFont;
 
 
 	Bullet bullets[100];
@@ -44,6 +48,8 @@ private:
 	//Arm m_Arm;
 	Enemy m_ZombieAlien2;
 	Enemy m_ZombieAlien3;
+
+	Shuttle m_shuttle;
 
 	// A class to manage all the levels
 	LevelManager m_LM;
@@ -75,7 +81,10 @@ private:
 
 	Font font;
 	Text mainMenuText;
+	Text charSelectText;
 	Text pauseMenuText;
+
+	Text shopText;
 
 	// Is the game currently playing?
 	bool m_Playing = false;
@@ -136,6 +145,14 @@ private:
 
 	// Run will call all the private functions
 	bool detectCollisions(PlayableCharacter& character);
+
+	//HUD
+	Hud m_Hud;
+
+	int m_FramesSinceLastHUDUpdate = 0;
+	int m_TargetFramesPerHUDUpdate = 500;
+
+	
 	
 public:
 	// The Engine constructor
@@ -144,7 +161,10 @@ public:
 	// Run will call all the private functions
 	void run();
 
-	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU};
+	void startPlaying();
+
+	enum class State { PAUSED, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT, SHOP
+	};
 	State state = State::GAME_OVER;
 
 

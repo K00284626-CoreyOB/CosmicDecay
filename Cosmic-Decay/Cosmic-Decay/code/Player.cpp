@@ -1,14 +1,23 @@
 #include "Player.h"
 #include "TextureHolder.h"
-#include <iostream>
 
-Player::Player()
-{
+#include "Arm.h"
+#include "Hud.h"
+#include <iostream>
+#include <sstream>
+#include <SFML/Graphics.hpp>
+
+Player::Player() {
     // Associate a texture with the sprite
-    m_Sprite = sf::Sprite(TextureHolder::GetTexture(
-        "graphics/playerSpriteSheet2.png"));
+    m_Sprite = sf::Sprite(TextureHolder::GetTexture("graphics/playerSpriteSheet2.png"));
     m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
 }
+
+void Player::draw(sf::RenderWindow& window) {
+    window.draw(m_Sprite);       // Draw the player sprite
+   
+}
+
 
 bool Player::handleInput()
 {
@@ -91,6 +100,8 @@ void Player::update(float elapsedTime)
         setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         moveTextureRect(elapsedTime);
     }
+
+   
 
     // Update collision boxes
     sf::FloatRect r = getPosition();
@@ -218,4 +229,9 @@ void Player::setFireRateMultiplier(float multiplier) {
 void Player::setInfiniteAmmo(bool state) {
     m_InfiniteAmmo = state;
     std::cout << "Infinite ammo set to " << (state ? "true" : "false") << ".\n";
+}
+
+void Player::increaseSpeed()
+{
+    m_Speed = m_Speed + 100;
 }

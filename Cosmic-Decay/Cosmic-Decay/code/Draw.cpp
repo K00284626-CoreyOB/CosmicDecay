@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Engine.h"
 
+
 void Engine::draw()
 {
 
@@ -20,6 +21,8 @@ void Engine::draw()
 		// Draw the 
 
 		m_Window.draw(m_VALevel, &m_TextureTiles);
+
+		m_Window.draw(m_shuttle.getSprite());
 
 		//Dec 13th 2021 Draw fuses
 		std::list<PlayableCharacter>::iterator it;
@@ -41,9 +44,8 @@ void Engine::draw()
 		}
 		m_Window.draw(spriteCrosshair);
 
-		// Draw player
 		m_Window.draw(m_Player.getSpriteFromSheet());
-		//m_Window.draw(m_Arm.getSpriteFromSheet());
+		
 
 		// Draw Enemy
 		if (m_ZombieAlien1.isActive())
@@ -60,6 +62,7 @@ void Engine::draw()
 		}
 
 		
+		
 		for (int i = 0; i < 100; i++)
 		{
 			if (bullets[i].isInFlight())
@@ -68,12 +71,22 @@ void Engine::draw()
 			}
 		}
 
-
 		// Draw the HUD
-		// Switch to m_HudView
+	// Switch to m_HudView
 		m_Window.setView(m_HudView);
+		m_Window.draw(m_Hud.getLevel());
+		m_Window.draw(m_Hud.getScore());
+		m_Window.draw(m_Hud.getAmmo());
+		m_Window.draw(m_Hud.getHealth());
+		m_Window.draw(m_Hud.getFuse());
+		m_Window.draw(m_Hud.getBackground());
+		m_Window.draw(m_Hud.getBackground2());
+		if (!m_Playing)
+		{
+			m_Window.draw(m_Hud.getMessage());
+		}
 
-		m_Window.draw(scoreText);
+		//m_Window.draw(scoreText);
 	}
 	if (state == State::MAIN_MENU)
 	{
@@ -85,9 +98,19 @@ void Engine::draw()
 		// Draw the background
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(mainMenuText);
-		// Switch to m_MainView
-//		m_Window.setView(m_MainView);
-		m_Window.setView(m_HudView);
+
+	}
+
+	if (state == State::CHAR_SELECT)
+	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+		// Draw the background
+		m_Window.draw(spriteMainMenu);
+		m_Window.draw(charSelectText);
 
 	}
 
@@ -101,10 +124,19 @@ void Engine::draw()
 		// Draw the background
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(pauseMenuText);
-		// Switch to m_MainView
-//		m_Window.setView(m_MainView);
-		m_Window.setView(m_HudView);
 
+	}
+
+	if (state == State::SHOP)
+	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+
+		m_Window.draw(spriteMainMenu);
+		m_Window.draw(shopText);
 	}
 	
 	// Show everything we have just drawn

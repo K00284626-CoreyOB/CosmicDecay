@@ -7,6 +7,9 @@
 using namespace sf;
 
 int score = 0;
+int health = 100;
+int fuses = 0;
+
 
 void Engine::update(float dtAsSeconds)
 {
@@ -31,6 +34,7 @@ void Engine::update(float dtAsSeconds)
 		Vector2f playerPosition(m_Player.getCenter());
 		FloatRect pr = m_Player.getPosition();
 
+		
 
 		// May 4 moving to top left coords not centre coords
 		m_ZombieAlien1.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien1.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
@@ -102,12 +106,14 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
+					//adds fuse to inventory
 					m_FusesList.erase(it++);
+					fuses++;
 					score++;
-					cout << score << endl;
+					cout << fuses << endl;
 					std::stringstream ss;
-					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					ss << "Fuses: " << fuses;
+					m_Hud.setFuse(ss.str());
 				}
 				else
 				{
@@ -137,8 +143,22 @@ void Engine::update(float dtAsSeconds)
 
 				if (d < 30)
 				{
+					//added health update - refills health by 50
 					m_HealthPickupList.erase(itH++);
-					//ADD A LINE TO TO REGAIN HEALTH**************************************************
+					if (health > 50)
+					{
+						health = 100;
+						std::stringstream ss;
+						ss << "Health: " << health;
+						m_Hud.setHealth(ss.str());
+					}
+					else if (health <= 50)
+					{
+						health = health + 50;
+						std::stringstream ss;
+						ss << "Health: " << health;
+						m_Hud.setHealth(ss.str());
+					}
 				}
 				else
 				{
@@ -152,8 +172,8 @@ void Engine::update(float dtAsSeconds)
 
 		}
 
-		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
-			if (!m_Invincible && m_Player.getPosition().intersects((itA)->getPosition()))
+		for (auto itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
+			if (m_Player.getPosition().intersects((itA)->getPosition()))
 			{
 
 				//calculate distance d between the 2 points
@@ -168,19 +188,24 @@ void Engine::update(float dtAsSeconds)
 
 				
 
-				if (d < 30)
+				if (d < 50 && !m_Invincible)
 				{
-					m_AmmoPickupList.erase(itA++);
-					//ADD A LINE A TO ADD AMMO TO STOCKPILE******** - Done
+					//ammo update on pickup - adds to ammo stockpile
 					bulletsSpare = bulletsSpare + 16;
 					//debug
 					cout << bulletsSpare << endl;
 
-					if (!m_Invincible)
-					{
-						m_Invincible = true;
-						m_InvincibleTime = INVINCIBILITY_DURATION;
-					}
+					//update hud element
+					std::stringstream ss;
+					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+					m_Hud.setAmmo(ss.str());
+
+					m_AmmoPickupList.erase(itA++);
+					std::cout << "Pickup erased, iterator advanced." << std::endl;
+
+
+					m_Invincible = true;
+					m_InvincibleTime = INVINCIBILITY_DURATION;
 				}
 				else
 				{
@@ -200,10 +225,10 @@ void Engine::update(float dtAsSeconds)
 		{
 			m_Player.setSpriteFromSheet(sf::IntRect{ 12,622,550,50 });
 			m_Player.moveTextureRect(dtAsSeconds);
-			//score--;
+			health--;
 			std::stringstream ss;
-			ss << "Score = " << score;
-			scoreText.setString(ss.str());
+			ss << "Health: " << health;
+			m_Hud.setHealth(ss.str());
 		}
 
 		//BULLET COLLISION WIP**************** - Matthew
@@ -219,7 +244,7 @@ void Engine::update(float dtAsSeconds)
 					m_ZombieAlien1.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 				else if (bullets[i].getPosition().intersects(m_ZombieAlien2.getPosition()) && m_ZombieAlien2.isActive())
 				{
@@ -228,7 +253,7 @@ void Engine::update(float dtAsSeconds)
 					m_ZombieAlien2.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 				else if (bullets[i].getPosition().intersects(m_ZombieAlien3.getPosition()) && m_ZombieAlien3.isActive())
 				{
@@ -237,12 +262,27 @@ void Engine::update(float dtAsSeconds)
 					m_ZombieAlien3.gotShot();
 					std::stringstream ss;
 					ss << "Score = " << score;
-					scoreText.setString(ss.str());
+					m_Hud.setScore(ss.str());
 				}
 			}
 		}
 
 	}// End if playing
-		
+	
+	//HUD Update
+	m_FramesSinceLastHUDUpdate++;
+
+	// Update the HUD every m_TargetFramesPerHUDUpdate frames
+	if (m_FramesSinceLastHUDUpdate > m_TargetFramesPerHUDUpdate)
+	{
+		// Update game HUD text
+		stringstream ssLevel;
+
+		// Update the level text
+		ssLevel << "Level:" << m_LM.getCurrentLevel();
+		m_Hud.setLevel(ssLevel.str());
+
+		m_FramesSinceLastHUDUpdate = 0;
+	}
 
 }

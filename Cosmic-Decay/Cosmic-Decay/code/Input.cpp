@@ -1,41 +1,25 @@
 #include "stdafx.h"
 #include "Engine.h"
+#include "PlayableCharacter.h"
 
 void Engine::input()
 {
 	bool exit_loop = false;
 	Event event;
+	Event event2;
 
 	while (m_Window.pollEvent(event))
 	{
 		if (state == State::MAIN_MENU) 
 		{
-			// Handle the player levelling up
 			if (event.key.code == Keyboard::Num1)
 			{
-				// Increase fire rate
-				m_LM.setCurrentLevel(0);
-				m_NewLevelRequired = true;
-				state = State::PLAYING;
-
-				//wave = 0;
-				score = 0;
-
-				// Prepare the gun and ammo for next game
-				currentBullet = 0;
-				bulletsSpare = 24;
-				bulletsInClip = 6;
-				clipSize = 6;
-				fireRate = 1;
-
-				// Reset the player's stats
-				//player.resetPlayerStats();
-			
+				event.key.code = Keyboard::Num0;
+				state = State::CHAR_SELECT;
 			}
 
 			if (event.key.code == Keyboard::Num2)
 			{
-				
 				state = State::PLAYING;
 			}
 
@@ -44,6 +28,48 @@ void Engine::input()
 				state = State::GAME_OVER;
 			}
 		}
+
+		if (state == State::CHAR_SELECT)
+		{
+			if (event.type == Event::KeyPressed)
+			{
+				if (event.key.code == Keyboard::Num1) //Choose Zach
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num2) //Choose Szymon
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num3) //Choose Matthew
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num4) //Choose Corey
+				{
+					event.key.code = Keyboard::Num0;
+					startPlaying();
+				}
+
+				if (event.key.code == Keyboard::Num5) //Return to menu
+				{
+					event.key.code = Keyboard::Num0;
+					state = State::MAIN_MENU;
+				}
+
+				if (event.key.code == Keyboard::S)
+				{
+					state = State::SHOP;
+				}
+			}
+		}
+
 		if (state == State::PAUSED)
 		{
 
@@ -62,6 +88,38 @@ void Engine::input()
 			}
 
 		}
+
+		//Shop system WIP************
+		if (state == State::SHOP)
+		{
+			if (event.key.code == Keyboard::Num1 && score >= 10)
+			{
+				//Increase the fire rate by 1
+				fireRate++;
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num2 && score >= 20)
+			{
+				//double the clip size
+				clipSize += clipSize;
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num3 && score >= 15)
+			{
+				// Increase speed
+				m_Player.increaseSpeed();
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num4)
+			{
+				//exit shop
+				state = State::PLAYING;
+			}
+		}// End levelling up
+
 		if (state == State::GAME_OVER)
 		{
 			m_Window.close();
@@ -90,25 +148,23 @@ void Engine::input()
 			// Reloading
 			if (event.key.code == Keyboard::R)
 			{
-				if (bulletsSpare >= clipSize)
-				{
-					// Plenty of bullets. Reload.
-					bulletsInClip = clipSize;
-					bulletsSpare -= clipSize;
-					//reload.play();
+				//updating reload - changed so it reloads only the ammo that is needed, fixed issue where it reloaded double clip size
+				int bulletsNeeded = clipSize - bulletsInClip;
+
+				if (bulletsSpare >= bulletsNeeded) {
+					bulletsInClip += bulletsNeeded;
+					bulletsSpare -= bulletsNeeded;
 				}
-				else if (bulletsSpare > 0)
-				{
-					// Only few bullets left
-					bulletsInClip = bulletsSpare;
+				else if (bulletsSpare > 0) {
+					bulletsInClip += bulletsSpare;
 					bulletsSpare = 0;
-					//reload.play();
 				}
-				else
-				{
-					// More here soon?!
-					//reloadFailed.play();
-				}
+
+				//display ammo count to hud
+				std::stringstream ss;
+				ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+				m_Hud.setAmmo(ss.str());
+				
 			}
 
 			// Fire a bullet
@@ -119,7 +175,6 @@ void Engine::input()
 					- m_LastPressed.asMilliseconds()
 					> 1000 / fireRate && bulletsInClip > 0)
 				{
-
 					// Pass the centre of the player and the centre of the crosshair
 					// to the shoot function
 					bullets[currentBullet].shoot(
@@ -134,6 +189,11 @@ void Engine::input()
 					m_LastPressed = m_GameTimeTotal;
 					//shoot.play();
 					bulletsInClip--;
+
+					//update ammo count on screen
+					std::stringstream ss;
+					ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
+					m_Hud.setAmmo(ss.str());
 				}
 
 			}// End fire a bullet
@@ -154,9 +214,25 @@ void Engine::input()
 		// Play a jump sound
 	}
 
-	if (state == State::MAIN_MENU)
-	{
-	//	window.draw(spriteMainMenu);
-	//	window.draw(levelUpText);
-	}
+}
+
+void Engine::startPlaying()
+{
+	// Increase fire rate
+	m_LM.setCurrentLevel(0);
+	m_NewLevelRequired = true;
+	state = State::PLAYING;
+
+	//wave = 0;
+	score = 0;
+
+	// Prepare the gun and ammo for next game
+	currentBullet = 0;
+	bulletsSpare = 24;
+	bulletsInClip = 6;
+	clipSize = 6;
+	fireRate = 1;
+
+	// Reset the player's stats
+	//player.resetPlayerStats();
 }
