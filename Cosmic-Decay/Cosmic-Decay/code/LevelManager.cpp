@@ -30,7 +30,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	{
 	
 	case 1:
-		levelToLoad = "levels/level1-pac-narrow.txt";
+		levelToLoad = "levels/level1.txt";
 		m_StartPosition.x = 100;
 		m_StartPosition.y = 100;
 		m_BaseTimeLimit = 30.0f;
@@ -199,17 +199,17 @@ int** LevelManager::nextLevelSpawningPoints()
 	{
 
 	case 1:
-		levelToLoad = "levels/level1-pac-narrow-pellets.txt";
+		levelToLoad = "levels/level1Pickups.txt";
 
 		break;
 
 	case 2:
-		levelToLoad = "levels/level2.txt";
+		levelToLoad = "levels/level2Pickups.txt";
 
 		break;
 
 	case 3:
-		levelToLoad = "levels/level3.txt";
+		levelToLoad = "levels/level3Pickups.txt";
 
 		break;
 
