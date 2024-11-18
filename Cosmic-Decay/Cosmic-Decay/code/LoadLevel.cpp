@@ -3,7 +3,17 @@
 
 void Engine::loadLevel()
 {
+	int currentLevel = m_LM.getCurrentLevel();
+
+	std::cout << currentLevel << endl;
+
 	m_Playing = false;
+
+	
+	if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3)
+	{
+		state = State::SHOP;
+	}
 
 	// Delete the previously allocated memory
 	for (int i = 0; i < m_LM.getLevelSize().y; ++i)
@@ -50,12 +60,12 @@ void Engine::loadLevel()
 
 			if (artefact == 9)
 			{
-				//create a fuse object , this calls the fuses constructor
+				//create a health object , this calls the health constructor
 				HealthPickup t_Health;
 				int locx = (x * 50) + 11;
 				int locy = (y * 50) + 11;
 
-				//set the fuse location
+				//set the health location
 				t_Health.spawn(Vector2f(locx, locy), GRAVITY, 4);
 
 				//add to the list
@@ -64,12 +74,12 @@ void Engine::loadLevel()
 
 			if (artefact == 8)
 			{
-				//create a fuse object , this calls the fuses constructor
+				//create a ammo object , this calls the ammo constructor
 				AmmoPickup t_Ammo;
 				int locx = (x * 50) + 11;
 				int locy = (y * 50) + 11;
 
-				//set the fuse location
+				//set the ammo location
 				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY, 4);
 
 				//add to the list
@@ -79,6 +89,7 @@ void Engine::loadLevel()
 		}
 	}
 
+	
 	// How long is this new time limit
 	m_TimeRemaining = m_LM.getTimeLimit();
 

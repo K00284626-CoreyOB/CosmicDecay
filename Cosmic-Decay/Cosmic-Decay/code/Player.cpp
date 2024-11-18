@@ -229,3 +229,13 @@ void Player::setInfiniteAmmo(bool state) {
     m_InfiniteAmmo = state;
     std::cout << "Infinite ammo set to " << (state ? "true" : "false") << ".\n";
 }
+
+void Player::increaseHealth()
+{
+    m_Health = m_Health + 10;
+}
+
+void Player::increaseSpeed()
+{
+    m_Speed = m_Speed + 5;
+}

@@ -39,6 +39,10 @@ public:
 
    
 
+    //for shop
+    void increaseHealth();
+    void increaseSpeed();
+
 private:
     
     // Member variables

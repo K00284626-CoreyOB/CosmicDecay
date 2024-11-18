@@ -78,7 +78,10 @@ private:
 
 	Font font;
 	Text mainMenuText;
+	Text charSelectText;
 	Text pauseMenuText;
+
+	Text shopText;
 
 	// Is the game currently playing?
 	bool m_Playing = false;
@@ -145,6 +148,8 @@ private:
 
 	int m_FramesSinceLastHUDUpdate = 0;
 	int m_TargetFramesPerHUDUpdate = 500;
+
+	
 	
 public:
 	// The Engine constructor
@@ -153,7 +158,10 @@ public:
 	// Run will call all the private functions
 	void run();
 
-	enum class State { PAUSED, LEVELING_UP, GAME_OVER, PLAYING, MAIN_MENU};
+	void startPlaying();
+
+	enum class State { PAUSED, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT, SHOP
+	};
 	State state = State::GAME_OVER;
 
 

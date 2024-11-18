@@ -15,6 +15,18 @@ Engine::Engine()
 	scoreText.setPosition(1500, 20);
 	score = 0;
 
+	shopText.setFont(scoreFont);
+	shopText.setCharacterSize(80);
+	shopText.setFillColor(Color::White);
+	shopText.setPosition(150, 250);
+	std::stringstream shopStream;
+	shopStream <<
+		"1- Increased rate of fire" <<
+		"\n2- Double clip size" <<
+		"\n3- Increased max health" <<
+		"\n4- Increased sprint speed";
+	shopText.setString(shopStream.str());
+
 	m_InvincibleTime = 0;
 
 	// Ammo
@@ -31,7 +43,7 @@ Engine::Engine()
 	
 
 	m_Window.create(VideoMode(resolution.x, resolution.y),
-		"Maze follow",
+		"Cosmic Decay",
 		Style::Fullscreen);
 //	m_Window.setFramerateLimit(30);
 	//sf::Window::setFramerateLimit(unsigned int 	limit)
@@ -89,9 +101,10 @@ Engine::Engine()
 	
 
 
-	textureMainMenu = TextureHolder::GetTexture("graphics/background-menu.png");
+	textureMainMenu = TextureHolder::GetTexture("graphics/cosmicDecayPoster.png");
 	spriteMainMenu.setTexture(textureMainMenu);
 	spriteMainMenu.setPosition(0, 0);
+	spriteMainMenu.setScale(0.4, 0.75);
 
 
 	font.loadFromFile("fonts/KOMIKAP_.ttf");
@@ -100,15 +113,30 @@ Engine::Engine()
 	mainMenuText.setFont(font);
 	mainMenuText.setCharacterSize(80);
 	mainMenuText.setFillColor(Color::White);
-	mainMenuText.setPosition(150, 250);
+	mainMenuText.setPosition(150, 50);
 	std::stringstream mainMenuStream;
 	mainMenuStream <<
-		"Run Away !" <<
 		"\n1 - Play Game" <<
 		"\n2 - High Scores " <<
-		"\n3- Exit";
+		"\n3 - Exit";
 
 	mainMenuText.setString(mainMenuStream.str());
+
+	//character selection screen
+	charSelectText.setFont(font);
+	charSelectText.setCharacterSize(80);
+	charSelectText.setFillColor(Color::White);
+	charSelectText.setPosition(150, 50);
+	std::stringstream charSelectStream;
+	charSelectStream <<
+		"\n1 - Zach" <<
+		"\n2 - Szymon" <<
+		"\n3 - Matthew" <<
+		"\n4 - Corey" <<
+		"\n5 - Return to Menu";
+
+	charSelectText.setString(charSelectStream.str());
+
 	// pause menu options
 	pauseMenuText.setFont(font);
 	pauseMenuText.setCharacterSize(80);
