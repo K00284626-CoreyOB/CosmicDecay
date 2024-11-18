@@ -113,6 +113,13 @@ void Engine::input()
 				state = State::PLAYING;
 			}
 
+			if (event.key.code == Keyboard::Num6)
+			{
+				// Increase speed
+				m_Player.increaseSpeed();
+				state = State::PLAYING;
+			}
+
 			if (event.key.code == Keyboard::Num4)
 			{
 				//exit shop

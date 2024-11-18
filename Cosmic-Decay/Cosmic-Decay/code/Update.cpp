@@ -22,10 +22,14 @@ void Engine::update(float dtAsSeconds)
 	//start of a new game we will need a new level
 	if (m_NewLevelRequired)
 	{
+		m_FusesList.clear();
+		m_HealthPickupList.clear();
+		m_AmmoPickupList.clear();
 		loadLevel();
 		m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 1);
 		m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
 		m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
+		
 	}
 
 	if (state == State::PLAYING)
