@@ -16,24 +16,37 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity, int m_type)
 
 	//Initialise the health
 
-	if (m_type == 0) //Player
+	if (m_type == 0) //Pickup
+	{
+		
+	}
+	else if (m_type == 1) //Zach
 	{
 		m_Health = 100;
 	}
-	else if (m_type == 1) //ZombieAlien1
+	else if (m_type == 2) //Szymon
+	{
+		m_Health = 100;
+	}
+	else if (m_type == 3) //Matthew
+	{
+		m_Health = 100;
+	}
+	else if (m_type == 4) //Corey
+	{
+		m_Health = 100;
+	}
+	else if (m_type == 5) //ZombieAlien1
 	{
 		m_Health = 3;
 	}
-	else if (m_type == 2) //ZombieAlien2
+	else if (m_type == 6) //ZombieAlien2
 	{
 		m_Health = 5;
 	}
-	else if (m_type == 3) //ZombieAlien3
+	else if (m_type == 7) //ZombieAlien3
 	{
 		m_Health = 2;
-	}
-	else if (m_type == 4) //Pickups
-	{
 	}
 
 	// Move the sprite in to position
@@ -446,7 +459,7 @@ void PlayableCharacter::updateLeftRightHeadFeet()
 }
 
 
-void PlayableCharacter::update(float elapsedTime)
+void PlayableCharacter::update(float elapsedTime, int m_type)
 {
 
 

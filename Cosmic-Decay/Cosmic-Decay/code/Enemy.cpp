@@ -17,17 +17,17 @@ void Enemy::setSprite(int e_type)
 	// Associate a texture with the sprite
 	if (e_type == 1)
 	{
-		//Blinky Red
+		//ZombieAlien1
 		m_Sprite.setTextureRect(sf::IntRect{ 0, 0, 150, 50 });
 	}
 	else if (e_type == 2)
 	{
-		//Pinky Pink
+		//ZombieAlien2
 		m_Sprite.setTextureRect(sf::IntRect{ 0, 50, 150, 50 });
 	}
 	else if (e_type == 3)
 	{
-		//inky Cyan
+		//ZombieAlien3
 		m_Sprite.setTextureRect(sf::IntRect{ 0, 100, 150, 50 });
 	}
 	else if (e_type == 4)

@@ -13,6 +13,32 @@ Player::Player() {
     m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
 }
 
+void Player::setSprite(int m_type)
+{
+    m_Sprite = sf::Sprite(TextureHolder::GetTexture("graphics/playerSpriteSheet2.png"));
+
+    if (m_type == 1)
+    {
+        //Zach
+        m_Sprite.setTextureRect(sf::IntRect{ 50, 150, 50, 50 });
+    }
+    else if (m_type == 2)
+    {
+        //Szymon
+        m_Sprite.setTextureRect(sf::IntRect{ 50, 50, 50, 50 });
+    }
+    else if (m_type == 3)
+    {
+        //Matthew
+        m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
+    }
+    else if (m_type == 4)
+    {
+        //Corey
+        m_Sprite.setTextureRect(sf::IntRect{ 50, 0, 50, 50 });
+    }
+}
+
 void Player::draw(sf::RenderWindow& window) {
     window.draw(m_Sprite);       // Draw the player sprite
    
@@ -78,26 +104,86 @@ bool Player::handleInput()
     return m_JustJumped;
 }
 
-void Player::update(float elapsedTime)
+void Player::update(float elapsedTime, int m_type)
 {
     if (m_RightPressed) {
         m_Position.x += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        if (m_type == 1)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
+        }
+        else if (m_type == 2)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        }
+        else if (m_type == 3)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
+        }
+        else if (m_type == 4)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
+        }
         moveTextureRect(elapsedTime);
     }
     else if (m_LeftPressed) {
         m_Position.x -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        if (m_type == 1)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
+        }
+        else if (m_type == 2)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        }
+        else if (m_type == 3)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
+        }
+        else if (m_type == 4)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
+        }
         moveTextureRect(elapsedTime);
     }
     else if (m_UpPressed) {
         m_Position.y -= m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        if (m_type == 1)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
+        }
+        else if (m_type == 2)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        }
+        else if (m_type == 3)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
+        }
+        else if (m_type == 4)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
+        }
         moveTextureRect(elapsedTime);
     }
     else if (m_DownPressed) {
         m_Position.y += m_Speed * elapsedTime;
-        setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        if (m_type == 1)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
+        }
+        else if (m_type == 2)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
+        }
+        else if (m_type == 3)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
+        }
+        else if (m_type == 4)
+        {
+            setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
+        }
         moveTextureRect(elapsedTime);
     }
 

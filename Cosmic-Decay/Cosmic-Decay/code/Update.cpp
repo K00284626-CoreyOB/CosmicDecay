@@ -33,7 +33,7 @@ void Engine::update(float dtAsSeconds)
 		// Update Player
 		
 		
-		m_Player.update(dtAsSeconds);
+		m_Player.update(dtAsSeconds, m_Type);
 		Vector2f playerPosition(m_Player.getCenter());
 		FloatRect pr = m_Player.getPosition();
 
