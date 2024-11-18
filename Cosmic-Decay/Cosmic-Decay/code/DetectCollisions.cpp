@@ -104,9 +104,9 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 			}
 			
 			// More collision detection here once we have learned about particle effects
-
+			
 			// Has the character reached the goal?
-			if (m_ArrayLevel[y][x] == 4)
+			if (character.getPosition().intersects(m_shuttle.getPosition()))
 			{
 				// Character has reached the goal
 				reachedGoal = true;

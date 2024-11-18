@@ -13,6 +13,7 @@
 #include "LevelManager.h"
 #include "Arm.h"
 #include "HUD.h"
+#include "Shuttle.h"
 
 using namespace sf;
 
@@ -47,6 +48,8 @@ private:
 	//Arm m_Arm;
 	Enemy m_ZombieAlien2;
 	Enemy m_ZombieAlien3;
+
+	Shuttle m_shuttle;
 
 	// A class to manage all the levels
 	LevelManager m_LM;
