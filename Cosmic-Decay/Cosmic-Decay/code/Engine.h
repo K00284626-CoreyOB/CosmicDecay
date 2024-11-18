@@ -51,6 +51,8 @@ private:
 
 	Shuttle m_shuttle;
 
+	int m_Type;
+
 	// A class to manage all the levels
 	LevelManager m_LM;
 

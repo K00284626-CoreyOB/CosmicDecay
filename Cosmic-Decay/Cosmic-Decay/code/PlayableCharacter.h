@@ -131,7 +131,7 @@ public:
 	Vector2f getCenter();
 
 	// We will call this function once every frame
-	void virtual update(float elapsedTime);
+	void virtual update(float elapsedTime, int m_type);
 	void moveToFR(float elapsedTime, FloatRect playerLocation, float speed, int** map_ArrayLevel);
 	void GhostChaseMoveTo(float elapsedTime, FloatRect playerLocation, float speed, int** map_ArrayLevel, int levelRows, int LevelCols);
 	void updateLeftRightHeadFeet();

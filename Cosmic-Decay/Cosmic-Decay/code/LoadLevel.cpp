@@ -52,7 +52,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the fuse location
-				t_Fuse.spawn(Vector2f(locx,locy), GRAVITY, 4);
+				t_Fuse.spawn(Vector2f(locx,locy), GRAVITY, 0);
 
 				//add to the list
 				m_FusesList.push_back(t_Fuse);
@@ -66,7 +66,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the health location
-				t_Health.spawn(Vector2f(locx, locy), GRAVITY, 4);
+				t_Health.spawn(Vector2f(locx, locy), GRAVITY, 0);
 
 				//add to the list
 				m_HealthPickupList.push_back(t_Health);
@@ -80,7 +80,7 @@ void Engine::loadLevel()
 				int locy = (y * 50) + 11;
 
 				//set the ammo location
-				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY, 4);
+				t_Ammo.spawn(Vector2f(locx, locy), GRAVITY, 0);
 
 				//add to the list
 				m_AmmoPickupList.push_back(t_Ammo);
@@ -97,12 +97,14 @@ void Engine::loadLevel()
 	m_ZombieAlien1.setSprite(1);
 	m_ZombieAlien2.setSprite(2);
 	m_ZombieAlien3.setSprite(3);
+
+	m_Player.setSprite(m_Type);
 	
 	m_Player.setName("Player");
-	m_Player.spawn(Vector2f(1500, 700), GRAVITY, 0);
-	m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 1);
-	m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
-	m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
+	m_Player.spawn(Vector2f(1500, 700), GRAVITY, m_Type);
+	m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 5);
+	m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 6);
+	m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 7);
 	m_shuttle.spawn(Vector2f(600, 700), GRAVITY, 0);
 	m_Arm.spawn(Vector2f(1500, 700), GRAVITY, 0);
 

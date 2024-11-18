@@ -35,24 +35,28 @@ void Engine::input()
 			{
 				if (event.key.code == Keyboard::Num1) //Choose Zach
 				{
+					m_Type = 1;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
 				if (event.key.code == Keyboard::Num2) //Choose Szymon
 				{
+					m_Type = 2;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
 				if (event.key.code == Keyboard::Num3) //Choose Matthew
 				{
+					m_Type = 3;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
 				if (event.key.code == Keyboard::Num4) //Choose Corey
 				{
+					m_Type = 4;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}

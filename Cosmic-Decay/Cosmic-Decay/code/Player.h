@@ -9,11 +9,13 @@ public:
     // Constructor specific to Player
     Player();
 
+    void setSprite(int m_type);
+
     // Overridden input handler for Player
     bool handleInput() override;
 
     // Overridden update method for Player
-    void update(float elapsedTime) override;
+    void update(float elapsedTime, int m_type) override;
 
     void moveTextureRect(float timeElapsed) override;
 
