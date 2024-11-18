@@ -61,6 +61,11 @@ void Engine::input()
 					event.key.code = Keyboard::Num0;
 					state = State::MAIN_MENU;
 				}
+
+				if (event.key.code == Keyboard::S)
+				{
+					state = State::SHOP;
+				}
 			}
 		}
 
@@ -82,6 +87,38 @@ void Engine::input()
 			}
 
 		}
+
+		//Shop system WIP************
+		if (state == State::SHOP)
+		{
+			if (event.key.code == Keyboard::Num1)
+			{
+				//Increase the fire rate by 1
+				fireRate++;
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num2)
+			{
+				//double the clip size
+				clipSize += clipSize;
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num3)
+			{
+				// Increase health
+				m_Player.increaseHealth();
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num4)
+			{
+				// Increase speed
+				m_Player.increaseSpeed();
+				state = State::PLAYING;
+			}
+		}// End levelling up
 
 		if (state == State::GAME_OVER)
 		{

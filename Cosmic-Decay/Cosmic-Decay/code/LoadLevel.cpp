@@ -3,7 +3,17 @@
 
 void Engine::loadLevel()
 {
+	int currentLevel = m_LM.getCurrentLevel();
+
+	std::cout << currentLevel << endl;
+
 	m_Playing = false;
+
+	
+	if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3)
+	{
+		state = State::SHOP;
+	}
 
 	// Delete the previously allocated memory
 	for (int i = 0; i < m_LM.getLevelSize().y; ++i)
@@ -79,6 +89,7 @@ void Engine::loadLevel()
 		}
 	}
 
+	
 	// How long is this new time limit
 	m_TimeRemaining = m_LM.getTimeLimit();
 

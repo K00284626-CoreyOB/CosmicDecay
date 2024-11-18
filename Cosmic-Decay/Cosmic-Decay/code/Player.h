@@ -40,6 +40,10 @@ public:
     // Method to rotate the arm towards the mouse position
     void rotateArm(sf::RenderWindow& window);
 
+    //for shop
+    void increaseHealth();
+    void increaseSpeed();
+
 private:
     // Arm instance
     Arm m_Arm;

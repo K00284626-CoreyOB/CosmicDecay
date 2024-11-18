@@ -123,6 +123,12 @@ void Engine::draw()
 		m_Window.draw(pauseMenuText);
 
 	}
+
+	if (state == State::SHOP)
+	{
+		m_Window.draw(spriteMainMenu);
+		m_Window.draw(shopText);
+	}
 	
 	// Show everything we have just drawn
 	m_Window.display();
