@@ -62,8 +62,7 @@ void Engine::update(float dtAsSeconds)
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
 		if  (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 1 && fuses >= 3 || 
-			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 2 && fuses >= 6 ||
-			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
+			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 2 && fuses >= 6)
 		{
 			// New level required
 			m_NewLevelRequired = true;
@@ -85,6 +84,11 @@ void Engine::update(float dtAsSeconds)
 			{
 				detectCollisions(m_ZombieAlien3);
 			}
+		}
+
+		if (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
+		{
+			state = State::MAIN_MENU;
 		}
 
 		if (m_Invincible)
