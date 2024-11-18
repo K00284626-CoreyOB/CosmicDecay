@@ -32,6 +32,12 @@ void Engine::update(float dtAsSeconds)
 	{
 		// Update Player
 		
+		if (health <= 0)
+		{
+			state = State::MAIN_MENU;
+			health = 100;
+			score = 0;
+		}
 		
 		m_Player.update(dtAsSeconds);
 		Vector2f playerPosition(m_Player.getCenter());
