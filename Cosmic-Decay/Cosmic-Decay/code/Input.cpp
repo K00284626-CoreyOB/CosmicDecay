@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Engine.h"
+#include "PlayableCharacter.h"
 
 void Engine::input()
 {
@@ -91,31 +92,30 @@ void Engine::input()
 		//Shop system WIP************
 		if (state == State::SHOP)
 		{
-			if (event.key.code == Keyboard::Num1)
+			if (event.key.code == Keyboard::Num1 && score >= 10)
 			{
 				//Increase the fire rate by 1
 				fireRate++;
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num2)
+			if (event.key.code == Keyboard::Num2 && score >= 20)
 			{
 				//double the clip size
 				clipSize += clipSize;
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num3)
+			if (event.key.code == Keyboard::Num3 && score >= 15)
 			{
-				// Increase health
-				m_Player.increaseHealth();
+				// Increase speed
+				m_Player.increaseSpeed();
 				state = State::PLAYING;
 			}
 
 			if (event.key.code == Keyboard::Num4)
 			{
-				// Increase speed
-				m_Player.increaseSpeed();
+				//exit shop
 				state = State::PLAYING;
 			}
 		}// End levelling up

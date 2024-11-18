@@ -2,9 +2,10 @@
 #include "TextureHolder.h"
 
 #include "Arm.h"
+#include "Hud.h"
 #include <iostream>
-using namespace sf;
-using namespace std;
+#include <sstream>
+#include <SFML/Graphics.hpp>
 
 Player::Player() {
     // Associate a texture with the sprite
@@ -230,12 +231,7 @@ void Player::setInfiniteAmmo(bool state) {
     std::cout << "Infinite ammo set to " << (state ? "true" : "false") << ".\n";
 }
 
-void Player::increaseHealth()
-{
-    m_Health = m_Health + 10;
-}
-
 void Player::increaseSpeed()
 {
-    m_Speed = m_Speed + 5;
+    m_Speed = m_Speed + 100;
 }

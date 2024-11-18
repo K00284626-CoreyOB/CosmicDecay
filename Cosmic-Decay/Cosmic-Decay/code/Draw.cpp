@@ -129,6 +129,12 @@ void Engine::draw()
 
 	if (state == State::SHOP)
 	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(shopText);
 	}
