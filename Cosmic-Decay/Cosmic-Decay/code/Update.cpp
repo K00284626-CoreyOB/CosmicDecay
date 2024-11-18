@@ -23,6 +23,9 @@ void Engine::update(float dtAsSeconds)
 	if (m_NewLevelRequired)
 	{
 		loadLevel();
+		m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 1);
+		m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
+		m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
 	}
 
 	if (state == State::PLAYING)
