@@ -20,7 +20,7 @@ public:
     // Draw method for the player and arm
     void draw(sf::RenderWindow& window);
 
-    Arm& getArm();  // Return a reference to Arm
+   
 
     // Where is the player
     FloatRect getPosition();
@@ -37,13 +37,10 @@ public:
     void setFireRateMultiplier(float multiplier);
     void setInfiniteAmmo(bool state);
 
-    // Method to rotate the arm towards the mouse position
-    void rotateArm(sf::RenderWindow& window);
+   
 
 private:
-    // Arm instance
-    Arm m_Arm;
-
+    
     // Member variables
     float m_Speed = 200.0f;
     float m_JumpDuration = 0.25f;

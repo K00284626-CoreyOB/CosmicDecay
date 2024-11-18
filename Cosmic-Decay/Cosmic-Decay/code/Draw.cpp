@@ -43,7 +43,7 @@ void Engine::draw()
 		m_Window.draw(spriteCrosshair);
 
 		m_Window.draw(m_Player.getSpriteFromSheet());
-		m_Window.draw(m_Player.getArm().getSprite());
+		
 
 		// Draw Enemy
 		if (m_ZombieAlien1.isActive())
