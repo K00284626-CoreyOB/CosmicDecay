@@ -16,15 +16,15 @@ Engine::Engine()
 	score = 0;
 
 	shopText.setFont(scoreFont);
-	shopText.setCharacterSize(80);
+	shopText.setCharacterSize(40);
 	shopText.setFillColor(Color::White);
 	shopText.setPosition(150, 250);
 	std::stringstream shopStream;
 	shopStream <<
-		"1- Increased rate of fire" <<
-		"\n2- Double clip size" <<
-		"\n3- Increased max health" <<
-		"\n4- Increased sprint speed";
+		"1- Increased rate of fire (10 points)" <<
+		"\n2- Double clip size (20 points)" <<
+		"\n3- Increased sprint speed (15 points)"<<
+		"\n4- Exit";
 	shopText.setString(shopStream.str());
 
 	m_InvincibleTime = 0;

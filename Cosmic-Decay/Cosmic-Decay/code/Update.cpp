@@ -108,6 +108,7 @@ void Engine::update(float dtAsSeconds)
 					//adds fuse to inventory
 					m_FusesList.erase(it++);
 					fuses++;
+					score++;
 					cout << fuses << endl;
 					std::stringstream ss;
 					ss << "Fuses: " << fuses;
