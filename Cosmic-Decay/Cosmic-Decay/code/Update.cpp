@@ -51,9 +51,9 @@ void Engine::update(float dtAsSeconds)
 		// Detect collisions and see if characters have reached the goal tile
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
-		if  (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 1 && fuses >= 6 || 
-			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 2 && fuses >= 12 ||
-			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 18)
+		if  (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 1 && fuses >= 3 || 
+			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 2 && fuses >= 6 ||
+			detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
 		{
 			// New level required
 			m_NewLevelRequired = true;
