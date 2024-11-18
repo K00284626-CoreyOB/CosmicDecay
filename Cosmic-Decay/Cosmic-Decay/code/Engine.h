@@ -44,8 +44,8 @@ private:
 
 	// Enemy and his friend, Player
 	Enemy m_ZombieAlien1;
+	Player m_Arm;
 	Player m_Player;
-	//Arm m_Arm;
 	Enemy m_ZombieAlien2;
 	Enemy m_ZombieAlien3;
 
