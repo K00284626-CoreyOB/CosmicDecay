@@ -169,7 +169,7 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 	double rightDist = 9999999;
 	double leftDist = 9999999;
 	//check to see if cell to the right is empty if so calculate distance from proposed new square from pacman
-	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol + 1] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4)
+	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol + 1] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		x2 = m_Position.x + 50; //location of new square
 		x2 = x2 + 25;//measure d from centre of proposed new square
@@ -180,7 +180,7 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 		rightDist = d;
 	}
 	//check to see if cell to the left is empty if so calculate distance from proposed new square from pacman
-	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 0 || map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 4)
+	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 0 || map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		x2 = m_Position.x - 50; //location of new square
 		x2 = x2 + 25;//measure d from centre of proposed new square
@@ -194,7 +194,7 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 
 	//check to see if cell above is empty if so calculate distance from proposed new square from pacman
 
-	if (map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4)
+	if (map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		y2 = m_Position.y - 50; //location of new square
 		y2 = y2 + 25;//measure d from centre of proposed new square
@@ -207,7 +207,7 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 	}
 
 	//check to see if cell below is empty if so calculate distance from proposed new square from pacman
-	if (map_ArrayLevel[enemyGridLocRow + 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4)
+	if (map_ArrayLevel[enemyGridLocRow + 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		y2 = m_Position.y + 50; //location of new square
 		y2 = y2 + 25;//measure d from centre of proposed new square

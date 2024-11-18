@@ -53,21 +53,13 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 
 			// Has character been burnt or drowned?
 			// Use head as this allows him to sink a bit
-			if (m_ArrayLevel[y][x] == 2 || m_ArrayLevel[y][x] == 3)
+			if ( m_ArrayLevel[y][x] == 3)
 			{
 				if (character.getHead().intersects(block))
 				{
 					character.spawn(m_LM.getStartPosition(), GRAVITY, 0);
 					// Which sound should be played?
-					if (m_ArrayLevel[y][x] == 2)// Fire, ouch!
-					{
-						// Play a sound
-
-					}
-					else // Water
-					{
-						// Play a sound
-					}
+					
 				}
 			}
 
