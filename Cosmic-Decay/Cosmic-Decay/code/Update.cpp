@@ -37,6 +37,7 @@ void Engine::update(float dtAsSeconds)
 		Vector2f playerPosition(m_Player.getCenter());
 		FloatRect pr = m_Player.getPosition();
 
+		
 
 		// May 4 moving to top left coords not centre coords
 		m_ZombieAlien1.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien1.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );

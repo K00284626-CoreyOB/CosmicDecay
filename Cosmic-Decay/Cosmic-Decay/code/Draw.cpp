@@ -22,6 +22,8 @@ void Engine::draw()
 
 		m_Window.draw(m_VALevel, &m_TextureTiles);
 
+		m_Window.draw(m_shuttle.getSprite());
+
 		//Dec 13th 2021 Draw fuses
 		std::list<PlayableCharacter>::iterator it;
 
@@ -43,7 +45,7 @@ void Engine::draw()
 		m_Window.draw(spriteCrosshair);
 
 		m_Window.draw(m_Player.getSpriteFromSheet());
-		m_Window.draw(m_Player.getArm().getSprite());
+		
 
 		// Draw Enemy
 		if (m_ZombieAlien1.isActive())
@@ -59,6 +61,7 @@ void Engine::draw()
 			m_Window.draw(m_ZombieAlien3.getSprite());
 		}
 
+		
 		
 		for (int i = 0; i < 100; i++)
 		{
