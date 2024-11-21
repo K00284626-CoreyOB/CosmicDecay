@@ -7,6 +7,7 @@ using namespace std;
 class Hud
 {
 private:
+	//font holder and text objects for hud
 	Font m_Font;
 	Text m_StartText;
 	Text m_LevelText;
@@ -22,6 +23,7 @@ private:
 
 public:
 	Hud();
+	//methods to get variables for hud
 	Text getMessage();
 	Text getLevel();
 	Text getScore();
@@ -32,6 +34,7 @@ public:
 	RectangleShape getBackground();
 	RectangleShape getBackground2();
 
+	//methods for setting values on screen for hud
 	void setLevel(String text);
 	void setScore(String text);
 	void setStart(String text);

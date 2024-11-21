@@ -7,6 +7,7 @@ class Player;
 class Abilities
 {
 public:
+    //UNUSED CODE*************
     Abilities(Player& player) : m_Player(player), m_Active(false) {}
     virtual ~Abilities() = default;
 

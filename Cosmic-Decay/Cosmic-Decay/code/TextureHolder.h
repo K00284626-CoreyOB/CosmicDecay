@@ -19,6 +19,7 @@ private:
 
 public:
 	TextureHolder();
+	//constructor to load files for textures
 	static sf::Texture& GetTexture(std::string const& filename);
 
 };

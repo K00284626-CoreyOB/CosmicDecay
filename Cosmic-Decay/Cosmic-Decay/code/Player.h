@@ -67,6 +67,7 @@ private:
     float m_FireRateMultiplier = 1.0f;
     bool m_InfiniteAmmo = false;
 
+    //SOUND
     bool isMoving;
     SoundBuffer walkingBuffer;
     Sound walkingSound;

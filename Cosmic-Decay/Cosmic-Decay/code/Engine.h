@@ -21,14 +21,18 @@ using namespace sf;
 class Engine
 {
 private:
+	//Level manager object
 	LevelManager m_levelManager;
 
+	//Score text
+	sf::Text scoreText;
+	//Score font holder
+	sf::Font scoreFont;
 
-	sf::Text scoreText;   // Text object to display the score
-	sf::Font scoreFont;   // Font for the score text
+	//Variable for score
+	int score;          
 
-	int score;            // Score value
-
+	//Ammo text and font holder
 	sf::Text ammoText;
 	sf::Font ammoFont;
 
@@ -52,6 +56,7 @@ private:
 	Sound enemyHurtSound;
 	
 
+	//Bullet object array and variables for ammo and fire rate
 	Bullet bullets[100];
 	int currentBullet;
 	int bulletsSpare;
@@ -101,6 +106,7 @@ private:
 	Sprite spriteMainMenu;
 	Texture textureMainMenu;
 
+	//font holder and text objects for menus
 	Font font;
 	Text mainMenuText;
 	Text charSelectText;
@@ -185,6 +191,7 @@ public:
 
 	void startPlaying();
 
+	//state holders, orders load order of states
 	enum class State { PAUSED, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT, SHOP
 	};
 	State state = State::GAME_OVER;

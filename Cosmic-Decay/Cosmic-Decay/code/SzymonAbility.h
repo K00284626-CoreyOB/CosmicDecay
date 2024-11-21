@@ -1,6 +1,8 @@
 #pragma once
 #include "Abilities.h"
 
+
+//UNUSED CODE*************
 class Player; // Forward declaration
 
 class SzymonAbility : public Abilities

@@ -54,7 +54,7 @@ Hud::Hud()
 	m_ScoreText.setCharacterSize(40);
 	m_ScoreText.setFillColor(Color::Black);
 	m_ScoreText.setPosition(resolution.x - 1900, 100);
-	m_ScoreText.setString("Score: -");
+	m_ScoreText.setString("Score: 0");
 
 	//Background
 	hudBackground.setSize(sf::Vector2f(400, 150));
