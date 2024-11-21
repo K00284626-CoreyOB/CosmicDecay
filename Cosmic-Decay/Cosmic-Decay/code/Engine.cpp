@@ -136,7 +136,6 @@ Engine::Engine()
 	std::stringstream mainMenuStream;
 	mainMenuStream <<
 		"\n1 - Play Game" <<
-		"\n2 - High Scores " <<
 		"\n3 - Exit";
 
 	mainMenuText.setString(mainMenuStream.str());

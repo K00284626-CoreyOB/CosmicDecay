@@ -20,10 +20,10 @@ void Engine::input()
 				state = State::CHAR_SELECT;
 			}
 
-			if (event.key.code == Keyboard::Num2)
-			{
-				state = State::PLAYING;
-			}
+			//if (event.key.code == Keyboard::Num2)
+			//{
+				//state = State::PLAYING;
+			//}
 
 			if (event.key.code == Keyboard::Num3)
 			{
