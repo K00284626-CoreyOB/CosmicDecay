@@ -138,6 +138,8 @@ void Engine::update(float dtAsSeconds)
 				{
 					++it;
 				}
+
+				pickupSound.play();
 			}
 			else
 			{
@@ -178,11 +180,14 @@ void Engine::update(float dtAsSeconds)
 						ss << "Health: " << health;
 						m_Hud.setHealth(ss.str());
 					}
+
 				}
 				else
 				{
 					++itH;
 				}
+
+				pickupSound.play();
 			}
 			else
 			{
@@ -230,6 +235,8 @@ void Engine::update(float dtAsSeconds)
 				{
 					++itA;
 				}
+
+				pickupSound.play();
 			}
 			else
 			{
@@ -248,6 +255,8 @@ void Engine::update(float dtAsSeconds)
 			std::stringstream ss;
 			ss << "Health: " << health;
 			m_Hud.setHealth(ss.str());
+
+			playerHurtSound.play();
 		}
 
 		//BULLET COLLISION WIP**************** - Matthew
@@ -264,6 +273,8 @@ void Engine::update(float dtAsSeconds)
 					std::stringstream ss;
 					ss << "Score = " << score;
 					m_Hud.setScore(ss.str());
+
+					enemyHurtSound.play();
 				}
 				else if (bullets[i].getPosition().intersects(m_ZombieAlien2.getPosition()) && m_ZombieAlien2.isActive())
 				{
@@ -273,6 +284,8 @@ void Engine::update(float dtAsSeconds)
 					std::stringstream ss;
 					ss << "Score = " << score;
 					m_Hud.setScore(ss.str());
+
+					enemyHurtSound.play();
 				}
 				else if (bullets[i].getPosition().intersects(m_ZombieAlien3.getPosition()) && m_ZombieAlien3.isActive())
 				{
@@ -282,6 +295,8 @@ void Engine::update(float dtAsSeconds)
 					std::stringstream ss;
 					ss << "Score = " << score;
 					m_Hud.setScore(ss.str());
+
+					enemyHurtSound.play();
 				}
 			}
 		}

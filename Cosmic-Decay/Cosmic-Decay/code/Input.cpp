@@ -4,6 +4,8 @@
 
 void Engine::input()
 {
+	
+
 	bool exit_loop = false;
 	Event event;
 	Event event2;
@@ -171,6 +173,7 @@ void Engine::input()
 					bulletsSpare = 0;
 				}
 
+				reloadSound.play();
 				//display ammo count to hud
 				std::stringstream ss;
 				ss << "Ammo: " << bulletsInClip << "/" << bulletsSpare;
@@ -198,7 +201,7 @@ void Engine::input()
 						currentBullet = 0;
 					}
 					m_LastPressed = m_GameTimeTotal;
-					//shoot.play();
+					shootSound.play();
 					bulletsInClip--;
 
 					//update ammo count on screen

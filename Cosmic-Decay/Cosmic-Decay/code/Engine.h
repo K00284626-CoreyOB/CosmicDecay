@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "TextureHolder.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -31,6 +32,25 @@ private:
 	sf::Text ammoText;
 	sf::Font ammoFont;
 
+	//Sound
+	SoundBuffer shootBuffer;
+	Sound shootSound;
+
+	SoundBuffer reloadBuffer;
+	Sound reloadSound;
+
+	SoundBuffer reachedGoalBuffer;
+	Sound reachedGoalSound;
+
+	SoundBuffer pickupBuffer;
+	Sound pickupSound;
+
+	SoundBuffer playerHurtBuffer;
+	Sound playerHurtSound;
+
+	SoundBuffer enemyHurtBuffer;
+	Sound enemyHurtSound;
+	
 
 	Bullet bullets[100];
 	int currentBullet;

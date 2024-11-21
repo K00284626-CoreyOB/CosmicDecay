@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "Arm.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class Player : public PlayableCharacter {
 public:
@@ -65,4 +66,8 @@ private:
     bool m_CanAttack = true;
     float m_FireRateMultiplier = 1.0f;
     bool m_InfiniteAmmo = false;
+
+    bool isMoving;
+    SoundBuffer walkingBuffer;
+    Sound walkingSound;
 };

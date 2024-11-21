@@ -101,6 +101,7 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 			if (character.getPosition().intersects(m_shuttle.getPosition()))
 			{
 				// Character has reached the goal
+				reachedGoalSound.play();
 				reachedGoal = true;
 			}
 

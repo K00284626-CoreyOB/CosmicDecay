@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "TextureHolder.h"
-
+#include <SFML/Audio.hpp>
 #include "Arm.h"
 #include "Hud.h"
 #include <iostream>
@@ -11,6 +11,9 @@ Player::Player() {
     // Associate a texture with the sprite
     m_Sprite = sf::Sprite(TextureHolder::GetTexture("graphics/playerSpriteSheet2.png"));
     m_Sprite.setTextureRect(sf::IntRect{ 50, 100, 50, 50 });
+
+    walkingBuffer.loadFromFile("sound/walkingSound.MP3");
+    walkingSound.setBuffer(walkingBuffer);
 }
 
 void Player::setSprite(int m_type)
@@ -47,6 +50,8 @@ void Player::draw(sf::RenderWindow& window) {
 
 bool Player::handleInput()
 {
+    
+
     m_JustJumped = false;
 
     // Joystick input variables
@@ -100,6 +105,16 @@ bool Player::handleInput()
     }
 
 
+    // Determine if the player is moving
+    isMoving = m_UpPressed || m_DownPressed || m_LeftPressed || m_RightPressed;
+
+    // Play or stop the walking sound
+    if (isMoving && walkingSound.getStatus() != sf::Sound::Playing) {
+        walkingSound.play();
+    }
+    else if (!isMoving && walkingSound.getStatus() == sf::Sound::Playing) {
+        walkingSound.stop();
+    }
 
     return m_JustJumped;
 }

@@ -7,6 +7,25 @@ using namespace sf;
 
 Engine::Engine()
 {
+	//Sounds
+	shootBuffer.loadFromFile("sound/shoot.MP3");
+	shootSound.setBuffer(shootBuffer);
+
+	reloadBuffer.loadFromFile("sound/reload.WAV");
+	reloadSound.setBuffer(reloadBuffer);
+
+	reachedGoalBuffer.loadFromFile("sound/reachgoal.WAV");
+	reachedGoalSound.setBuffer(reachedGoalBuffer);
+
+	pickupBuffer.loadFromFile("sound/pickup.WAV");
+	pickupSound.setBuffer(pickupBuffer);
+
+	playerHurtBuffer.loadFromFile("sound/playerHurt.WAV");
+	playerHurtSound.setBuffer(playerHurtBuffer);
+
+	enemyHurtBuffer.loadFromFile("sound/enemyHurt.WAV");
+	enemyHurtSound.setBuffer(enemyHurtBuffer);
+
 	scoreFont.loadFromFile("fonts/KOMIKAP_.ttf");
 	scoreText.setFont(scoreFont);
 	scoreText.setString("Score = 0");
