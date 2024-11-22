@@ -14,24 +14,26 @@ Arm::Arm()
 }
 
 
-
+//returns the position of the sprite
 FloatRect Arm::getPosition()
 {
 	return m_Sprite.getGlobalBounds();
 }
 
+//Sets the position of the sprite
 void Arm::setPosition(sf::Vector2f position) 
 {
 	m_Sprite.setPosition(position);
 }
 
+//Used to rotate the sprite
 void Arm::setRotation(float angle) 
 {
 	m_Sprite.setRotation(angle);
 }
 
 
-
+//Finds the mouse and rotates the sprite towards the mouse
 void Arm::rotateTowardsMouse(sf::Vector2f playerPosition, sf::RenderWindow& window)
 {
 	// Get the current mouse position relative to the window

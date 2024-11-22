@@ -18,33 +18,36 @@ void Engine::draw()
 		// Switch to m_MainView
 		m_Window.setView(m_MainView);
 
-		// Draw the 
-
+		// Draw the level
 		m_Window.draw(m_VALevel, &m_TextureTiles);
 
+		//draw the shuttle
 		m_Window.draw(m_shuttle.getSprite());
-		m_Window.draw(m_Arm.getSprite());
+		//m_Window.draw(m_Arm.getSprite());
 
-		//Dec 13th 2021 Draw fuses
+		//Draw pickups
 		std::list<PlayableCharacter>::iterator it;
 
-		for (it = m_FusesList.begin(); it != m_FusesList.end(); it++) {
+		for (it = m_FusesList.begin(); it != m_FusesList.end(); it++) { //fuses
 			m_Window.draw((it)->getSprite());
 		}
 
 		std::list<PlayableCharacter>::iterator itH;
 
-		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end(); itH++) {
+		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end(); itH++) { //Health
 			m_Window.draw((itH)->getSprite());
 		}
 
 		std::list<PlayableCharacter>::iterator itA;
 
-		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end(); itA++) {
+		for (itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end(); itA++) { //Ammo
 			m_Window.draw((itA)->getSprite());
 		}
+
+		//Draw crosshair
 		m_Window.draw(spriteCrosshair);
 
+		//Draw player sprite
 		m_Window.draw(m_Player.getSpriteFromSheet());
 		
 
@@ -63,7 +66,7 @@ void Engine::draw()
 		}
 
 		
-		
+		//Draw the enemies
 		for (int i = 0; i < 100; i++)
 		{
 			if (bullets[i].isInFlight())
@@ -102,6 +105,7 @@ void Engine::draw()
 
 	}
 
+	//Draw the character selection screen
 	if (state == State::CHAR_SELECT)
 	{
 		m_Window.clear(Color::Black);
@@ -115,6 +119,7 @@ void Engine::draw()
 
 	}
 
+	//Draw the paused menu
 	if (state == State::PAUSED)
 	{
 		m_Window.clear(Color::Black);
@@ -128,6 +133,7 @@ void Engine::draw()
 
 	}
 
+	//Draw the shop menu
 	if (state == State::SHOP)
 	{
 		m_Window.clear(Color::Black);

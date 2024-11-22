@@ -10,6 +10,8 @@ Enemy::Enemy()
 
 	m_JumpDuration = .45;
 }
+
+//Sets the sprite for the enemy
 void Enemy::setSprite(int e_type)
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture(
@@ -39,6 +41,7 @@ void Enemy::setSprite(int e_type)
 	m_JumpDuration = .45;
 }
 
+//Updates the sprite position and animation
 void Enemy::updateSprite(int e_type, float timeElapsed)
 {
 	int offset=0;
@@ -66,18 +69,18 @@ void Enemy::updateSprite(int e_type, float timeElapsed)
 		offset = 50;
 	}
 
-	if (e_type == 1)
+	if (e_type == 1) //ZombieAlien1
 	{
 
 		setSpriteFromSheet(sf::IntRect{ 0+ offset, 0, 150, 50 });
 		moveTextureRect(timeElapsed);
 	}
-	else if (e_type == 2)
+	else if (e_type == 2) //ZombieAlien2
 	{
 		setSpriteFromSheet(sf::IntRect{ 0 + offset, 50, 150, 50 });
 		moveTextureRect(timeElapsed);
 	}
-	else if (e_type == 3)
+	else if (e_type == 3) //ZombieAlien3
 	{
 
 		setSpriteFromSheet(sf::IntRect{ 0 + offset, 100, 150, 50 });
@@ -94,6 +97,7 @@ void Enemy::updateSprite(int e_type, float timeElapsed)
 	m_Sprite.setPosition(m_Position);
 }
 
+//Handles the animation in spritesheet
 void Enemy::moveTextureRect(float timeElapsed)
 {
 	// if the animation counter is greater than the animation limit reset to 0
@@ -135,15 +139,19 @@ void Enemy::moveTextureRect(float timeElapsed)
 	//cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
+//Handles the enemy getting shot
 void Enemy::gotShot()
 {
+	//cout << "Shot!" << endl;
 	m_Health--;
+	//cout << "Health: " << m_Health;
 	if (m_Health <= 0)
 	{
 		m_Active = false;
 	}
 }
 
+//returns wether enemy is alive.
 bool Enemy::isActive()
 {
 	return m_Active;

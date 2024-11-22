@@ -3,13 +3,14 @@
 
 void Engine::loadLevel()
 {
+	//Gets the level to load
 	int currentLevel = m_LM.getCurrentLevel();
 
 	std::cout << currentLevel << endl;
 
 	m_Playing = false;
 
-	
+	//Go to shop menu befor advancing to the next level.
 	if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3)
 	{
 		state = State::SHOP;
@@ -93,21 +94,23 @@ void Engine::loadLevel()
 	// How long is this new time limit
 	m_TimeRemaining = m_LM.getTimeLimit();
 
-	// Spawn Enemy and Player
+	// Set enemy sprites
 	m_ZombieAlien1.setSprite(1);
 	m_ZombieAlien2.setSprite(2);
 	m_ZombieAlien3.setSprite(3);
 
+	//Set player sprite
 	m_Player.setSprite(m_Type);
 	
+	//Spawn player, enemies and shuttle
 	m_Player.setName("Player");
 	m_Player.spawn(Vector2f(1500, 700), GRAVITY, m_Type);
 	m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 5);
 	m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 6);
 	m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 7);
 	m_shuttle.spawn(Vector2f(600, 700), GRAVITY, 0);
-	m_Arm.spawn(Vector2f(1500, 700), GRAVITY, 0);
 
+	//Set the speeds
 	float speed_Val = m_Player.getSpeed();
 	m_ZombieAlien1.setSpeed(speed_Val * 0.2);
 	m_ZombieAlien2.setSpeed(speed_Val * 0.25);

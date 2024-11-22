@@ -9,6 +9,7 @@ Bullet::Bullet()
 	m_BulletShape.setFillColor(sf::Color::Green);
 }
 
+//Shoot method
 void Bullet::shoot(float startX, float startY,
 	float targetX, float targetY)
 {
@@ -60,27 +61,31 @@ void Bullet::shoot(float startX, float startY,
 	m_BulletShape.setPosition(m_Position);
 }
 
+//Stops the bullet travelling
 void Bullet::stop()
 {
 	m_InFlight = false;
 }
 
+//return true if bullet is in flight
 bool Bullet::isInFlight()
 {
 	return m_InFlight;
 }
 
+//Returns the position of the sprite
 FloatRect Bullet::getPosition()
 {
 	return m_BulletShape.getGlobalBounds();
 }
 
+//Return the shape of the bullet
 RectangleShape Bullet::getShape()
 {
 	return m_BulletShape;
 }
 
-
+//Update function
 void Bullet::update(float elapsedTime)
 {
 	// Update the bullet position variables

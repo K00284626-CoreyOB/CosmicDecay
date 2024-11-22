@@ -26,6 +26,7 @@ Engine::Engine()
 	enemyHurtBuffer.loadFromFile("sound/enemyHurt.WAV");
 	enemyHurtSound.setBuffer(enemyHurtBuffer);
 
+	//Score text
 	scoreFont.loadFromFile("fonts/KOMIKAP_.ttf");
 	scoreText.setFont(scoreFont);
 	scoreText.setString("Score = 0");
@@ -34,6 +35,7 @@ Engine::Engine()
 	scoreText.setPosition(1500, 20);
 	score = 0;
 
+	//Shop text
 	shopText.setFont(scoreFont);
 	shopText.setCharacterSize(40);
 	shopText.setFillColor(Color::White);
@@ -46,6 +48,7 @@ Engine::Engine()
 		"\n4- Exit";
 	shopText.setString(shopStream.str());
 
+	//Invincibility timer to stop multiple collisions
 	m_InvincibleTime = 0;
 
 	// Ammo
@@ -78,7 +81,7 @@ Engine::Engine()
 	m_HudView.reset(
 		FloatRect(0, 0, resolution.x, resolution.y));
 
-	// 100 bullets should do
+	//Create bullet and clip
 	currentBullet = 0;
 	bulletsSpare = 24;
 	bulletsInClip = 6;
@@ -119,16 +122,16 @@ Engine::Engine()
 	
 	
 
-
+	//Main menu background
 	textureMainMenu = TextureHolder::GetTexture("graphics/cosmicDecayPoster.png");
 	spriteMainMenu.setTexture(textureMainMenu);
 	spriteMainMenu.setPosition(0, 0);
 	spriteMainMenu.setScale(0.4, 0.75);
 
-
+	//Set font
 	font.loadFromFile("fonts/KOMIKAP_.ttf");
 
-
+	//main meni text
 	mainMenuText.setFont(font);
 	mainMenuText.setCharacterSize(80);
 	mainMenuText.setFillColor(Color::White);
@@ -169,6 +172,7 @@ Engine::Engine()
 	pauseMenuText.setString(pauseMenuStream.str());
 }
 
+//Run the engine
 void Engine::run()
 {
 	// Timing 	

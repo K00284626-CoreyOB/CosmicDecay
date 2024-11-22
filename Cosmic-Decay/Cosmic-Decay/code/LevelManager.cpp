@@ -11,6 +11,7 @@
 using namespace sf;
 using namespace std;
 
+//Finds the next level to load
 int** LevelManager::nextLevel(VertexArray& rVaLevel)
 {
 	m_LevelSize.x = 0;
@@ -152,39 +153,49 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	return arrayLevel;
 }
 
+//returns the level to load
 std::string LevelManager::getLevelToLoad() const {
 	return levelToLoad;
 }
 
+//returns level size
 Vector2i LevelManager::getLevelSize()
 {
 	return m_LevelSize;
 }
 
+//returns the spawning points
 Vector2i LevelManager::getLevelSpawningPointsSize()
 {
 	return m_LevelSpawningPointsSize;
 }
 
+//returns the current level
 int LevelManager::getCurrentLevel()
 {
 	return m_CurrentLevel;
 }
 
+//sest the level number
 void LevelManager::setCurrentLevel(int levelNum)
 {
 	m_CurrentLevel = levelNum;
 }
 
+//returns the time limit
 float LevelManager::getTimeLimit()
 {
 	return m_BaseTimeLimit * m_TimeModifier;
 
 }
+
+//returns start positions
 Vector2f LevelManager::getStartPosition()
 {
 	return m_StartPosition;
 }
+
+//returns the next spawning points
 int** LevelManager::nextLevelSpawningPoints()
 {
 	m_LevelSpawningPointsSize.x = 0;

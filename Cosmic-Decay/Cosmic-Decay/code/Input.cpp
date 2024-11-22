@@ -12,12 +12,12 @@ void Engine::input()
 
 	while (m_Window.pollEvent(event))
 	{
-		if (state == State::MAIN_MENU) 
+		if (state == State::MAIN_MENU) //Input while in main menu
 		{
 			if (event.key.code == Keyboard::Num1)
 			{
 				event.key.code = Keyboard::Num0;
-				state = State::CHAR_SELECT;
+				state = State::CHAR_SELECT; //changes to character selection
 			}
 
 			//if (event.key.code == Keyboard::Num2)
@@ -27,11 +27,11 @@ void Engine::input()
 
 			if (event.key.code == Keyboard::Num3)
 			{
-				state = State::GAME_OVER;
+				state = State::GAME_OVER; //Closes the game
 			}
 		}
 
-		if (state == State::CHAR_SELECT)
+		if (state == State::CHAR_SELECT) //Input while in character selection
 		{
 			if (event.type == Event::KeyPressed)
 			{
@@ -69,25 +69,25 @@ void Engine::input()
 					state = State::MAIN_MENU;
 				}
 
-				if (event.key.code == Keyboard::S)
+				if (event.key.code == Keyboard::S) //Debug to enter shop
 				{
 					state = State::SHOP;
 				}
 			}
 		}
 
-		if (state == State::PAUSED)
+		if (state == State::PAUSED) //Input while in paused
 		{
 
 			if (event.key.code == Keyboard::R)
 			{
 
-				state = State::PLAYING;
+				state = State::PLAYING; //resumes playing
 			}
 
 			if (event.key.code == Keyboard::M)
 			{
-				state = State::MAIN_MENU;
+				state = State::MAIN_MENU; //Returns to main menu
 				exit_loop = true;
 
 				
@@ -96,49 +96,49 @@ void Engine::input()
 		}
 
 		//Shop system WIP************
-		if (state == State::SHOP)
+		if (state == State::SHOP) //Input while in shop menu
 		{
-			if (event.key.code == Keyboard::Num1 && score >= 10)
+			if (event.key.code == Keyboard::Num1 && score >= 10) //Need 10 points to buy
 			{
 				//Increase the fire rate by 1
 				fireRate++;
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num2 && score >= 20)
+			if (event.key.code == Keyboard::Num2 && score >= 20) //Need 20 points to buy
 			{
 				//double the clip size
 				clipSize += clipSize;
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num3 && score >= 15)
+			if (event.key.code == Keyboard::Num3 && score >= 15) //Need 15 points to buy
 			{
 				// Increase speed
 				m_Player.increaseSpeed();
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num6)
+			if (event.key.code == Keyboard::Num6) //Testing debug
 			{
 				// Increase speed
 				m_Player.increaseSpeed();
 				state = State::PLAYING;
 			}
 
-			if (event.key.code == Keyboard::Num4)
+			if (event.key.code == Keyboard::Num4) //continues with no power up
 			{
 				//exit shop
 				state = State::PLAYING;
 			}
-		}// End levelling up
+		}// End lshop
 
-		if (state == State::GAME_OVER)
+		if (state == State::GAME_OVER) //closes on game over
 		{
 			m_Window.close();
 		}
 
-		if (state == State::PLAYING)
+		if (state == State::PLAYING) //Hanle gameplay input
 		{
 			bool joyMenuPressed = sf::Joystick::isButtonPressed(0, 7);
 
@@ -150,7 +150,7 @@ void Engine::input()
 				}
 		
 
-			// Handle the player quitting
+			// Handle the player pausing
 
 			if (event.key.code == (Keyboard::Space))
 			{
@@ -213,11 +213,6 @@ void Engine::input()
 			}// End fire a bullet
 		}
 
-
-
-			// Switch between Enemy and Player
-
-		
 	}	
 
 

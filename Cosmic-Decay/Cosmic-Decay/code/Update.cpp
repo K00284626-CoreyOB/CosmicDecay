@@ -15,6 +15,7 @@ void Engine::update(float dtAsSeconds)
 {
 	if (m_Character1)
 	{
+		//Sets the center of the screen to be the player
 		m_MainView.setCenter(m_Player.getCenter());
 	}
 	
@@ -26,16 +27,15 @@ void Engine::update(float dtAsSeconds)
 		m_HealthPickupList.clear();
 		m_AmmoPickupList.clear();
 		loadLevel();
-		m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 1);
-		m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 2);
-		m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 3);
+		m_ZombieAlien1.spawn(Vector2f(850, 100), GRAVITY, 5);
+		m_ZombieAlien2.spawn(Vector2f(600, 100), GRAVITY, 6);
+		m_ZombieAlien3.spawn(Vector2f(400, 100), GRAVITY, 7);
 		
 	}
 
-	if (state == State::PLAYING)
+	if (state == State::PLAYING) //While game is playing
 	{
-		// Update Player
-		
+		//Check if player has died
 		if (health <= 0)
 		{
 			state = State::MAIN_MENU;
@@ -43,13 +43,14 @@ void Engine::update(float dtAsSeconds)
 			score = 0;
 		}
 		
+		//Update player
 		m_Player.update(dtAsSeconds, m_Type);
 		Vector2f playerPosition(m_Player.getCenter());
 		FloatRect pr = m_Player.getPosition();
 
 		
 
-		// May 4 moving to top left coords not centre coords
+		//Update enemy movement
 		m_ZombieAlien1.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien1.getSpeed(), m_ArrayLevel,m_LM.getLevelSize().y, m_LM.getLevelSize().x );
 		m_ZombieAlien1.updateSprite(1, dtAsSeconds);
 
@@ -58,6 +59,7 @@ void Engine::update(float dtAsSeconds)
 
 		m_ZombieAlien3.GhostChaseMoveTo(dtAsSeconds, pr, m_ZombieAlien3.getSpeed(), m_ArrayLevel, m_LM.getLevelSize().y, m_LM.getLevelSize().x);
 		m_ZombieAlien3.updateSprite(3, dtAsSeconds);
+
 		// Detect collisions and see if characters have reached the goal tile
 		// The second part of the if condition is only executed
 		// when Enemy is touching the home tile
@@ -70,7 +72,7 @@ void Engine::update(float dtAsSeconds)
 		}
 		else
 		{
-			// Run Players collision detection
+			// Run Players and enemies collision detection
 			detectCollisions(m_Player);
 			if (m_ZombieAlien1.isActive())
 			{
@@ -86,11 +88,13 @@ void Engine::update(float dtAsSeconds)
 			}
 		}
 
+		//Back to menu when you beat the game
 		if (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
 		{
 			state = State::MAIN_MENU;
 		}
 
+		//Check if player is invincible
 		if (m_Invincible)
 		{
 			m_InvincibleTime -= dtAsSeconds;
@@ -109,7 +113,7 @@ void Engine::update(float dtAsSeconds)
 
 		std::list<PlayableCharacter>::iterator itA;
 		
-		for (it = m_FusesList.begin(); it != m_FusesList.end();) {
+		for (it = m_FusesList.begin(); it != m_FusesList.end();) {  //Update fuses
 			if (m_Player.getPosition().intersects ((it)->getPosition()))
 			{
 				
@@ -148,7 +152,7 @@ void Engine::update(float dtAsSeconds)
 
 		}
 
-		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end();) {
+		for (itH = m_HealthPickupList.begin(); itH != m_HealthPickupList.end();) {  //Update health pickup
 			if (m_Player.getPosition().intersects((itH)->getPosition()))
 			{
 
@@ -196,7 +200,7 @@ void Engine::update(float dtAsSeconds)
 
 		}
 
-		for (auto itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {
+		for (auto itA = m_AmmoPickupList.begin(); itA != m_AmmoPickupList.end();) {  //Update ammo pickup
 			if (m_Player.getPosition().intersects((itA)->getPosition()))
 			{
 
@@ -262,6 +266,7 @@ void Engine::update(float dtAsSeconds)
 		//BULLET COLLISION WIP**************** - Matthew
 		for (int i = 0; i <= 100; i++) 
 		{
+			//Check if active bullets have collided with enemies
 			if (bullets[i].isInFlight()) 
 			{
 				bullets[i].update(dtAsSeconds);

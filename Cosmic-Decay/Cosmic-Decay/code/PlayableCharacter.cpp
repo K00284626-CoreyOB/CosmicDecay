@@ -56,10 +56,14 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity, int m_type)
 	m_Active = true;
 
 }
+
+//Sets the speed of the character
 void PlayableCharacter::setSpeed(float value)
 {
 	m_Speed = value;
 }
+
+//Return the speed
 float PlayableCharacter::getSpeed()
 {
 	return m_Speed;
@@ -143,6 +147,7 @@ void PlayableCharacter::moveToFR(float elapsedTime, FloatRect playerLocation, fl
 
 }
 
+//Ghost AI code
 void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLocation, float speed, int** map_ArrayLevel, int levelRows, int LevelCols)
 {
 
@@ -157,20 +162,19 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 	int enemyGridLocRow = ((round(m_Position.y) + 50) / 50);
 	int enemyGridLocCol = ((round(m_Position.x) + 50) / 50);
 
-	//18 11 2022 2nd row, 2nd col  would have an array index of 1,1
+	//2nd row, 2nd col  would have an array index of 1,1
 	enemyGridLocRow -= 1;
 	enemyGridLocCol -= 1;
 	playerGridLocRow -= 1;
 	playerGridLocCol -= 1;
 
-	int x1 = playerX + 25; // center of pacman
-	int y1 = playerY + 25; // center of pacman
-	int x2 = m_Position.x + 25; //centre of the ghost
-	int y2 = m_Position.y + 25;//centre of the ghost
+	int x1 = playerX + 25; // center of player
+	int y1 = playerY + 25; // center of player
+	int x2 = m_Position.x + 25; //centre of the enemy
+	int y2 = m_Position.y + 25;//centre of the enemy
 	int xsquared = (x2 - x1) * (x2 - x1);
 	int ysquared = (y2 - y1) * (y2 - y1);
 	double d = sqrt(xsquared + ysquared);
-	//Dec 14 2021
 	//Set Up, Down, Left and Right Distances to a max value
 	// we will overwrite these values for certain conditions
 	// an updated value will be recorded if the square we are checking is empty
@@ -181,7 +185,7 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 	double downDist = 9999999;
 	double rightDist = 9999999;
 	double leftDist = 9999999;
-	//check to see if cell to the right is empty if so calculate distance from proposed new square from pacman
+	//check to see if cell to the right is empty if so calculate distance from proposed new square from player
 	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol + 1] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		x2 = m_Position.x + 50; //location of new square
@@ -192,12 +196,12 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 		d = sqrt(xsquared + ysquared);
 		rightDist = d;
 	}
-	//check to see if cell to the left is empty if so calculate distance from proposed new square from pacman
+	//check to see if cell to the left is empty if so calculate distance from proposed new square from player
 	if (map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 0 || map_ArrayLevel[enemyGridLocRow][enemyGridLocCol - 1] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		x2 = m_Position.x - 50; //location of new square
 		x2 = x2 + 25;//measure d from centre of proposed new square
-		y2 = m_Position.y + 25;//centre of the ghost
+		y2 = m_Position.y + 25;//centre of the enemy
 
 		xsquared = (x2 - x1) * (x2 - x1);
 		ysquared = (y2 - y1) * (y2 - y1);
@@ -205,13 +209,13 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 		leftDist = d;
 	}
 
-	//check to see if cell above is empty if so calculate distance from proposed new square from pacman
+	//check to see if cell above is empty if so calculate distance from proposed new square from player
 
 	if (map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		y2 = m_Position.y - 50; //location of new square
 		y2 = y2 + 25;//measure d from centre of proposed new square
-		x2 = m_Position.x + 25;//centre of the ghost
+		x2 = m_Position.x + 25;//centre of the enemy
 
 		xsquared = (x2 - x1) * (x2 - x1);
 		ysquared = (y2 - y1) * (y2 - y1);
@@ -219,12 +223,12 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 		upDist = d;
 	}
 
-	//check to see if cell below is empty if so calculate distance from proposed new square from pacman
+	//check to see if cell below is empty if so calculate distance from proposed new square from player
 	if (map_ArrayLevel[enemyGridLocRow + 1][enemyGridLocCol] == 0 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 4 || map_ArrayLevel[enemyGridLocRow - 1][enemyGridLocCol] == 2)
 	{
 		y2 = m_Position.y + 50; //location of new square
 		y2 = y2 + 25;//measure d from centre of proposed new square
-		x2 = m_Position.x + 25;//centre of the ghost
+		x2 = m_Position.x + 25;//centre of the enemy
 
 		xsquared = (x2 - x1) * (x2 - x1);
 		ysquared = (y2 - y1) * (y2 - y1);
@@ -232,9 +236,9 @@ void PlayableCharacter::GhostChaseMoveTo(float elapsedTime, FloatRect playerLoca
 		downDist = d;
 	}
 	//examine the surrounding cells, if a non reversing cell is empty then check the distance from that
-	// cell to pacman
+	// cell to player
 	//identify the non reversing cell with the closest distance and move that way
-	//pacman has to move
+	//player has to move
 
 	//store current direction
 	sf::Vector2f currentDirection = direction;
@@ -497,12 +501,14 @@ void PlayableCharacter::update(float elapsedTime, int m_type)
 
 }
 
+//Return the position
 FloatRect PlayableCharacter::getPosition()
 {
 
 	return m_Sprite.getGlobalBounds();
 }
 
+//Return the center
 Vector2f PlayableCharacter::getCenter()
 {
 	LevelManager l;
@@ -511,39 +517,45 @@ Vector2f PlayableCharacter::getCenter()
 		m_Position.y + (l.TILE_SIZE / 2));
 }
 
+//Return the feet
 FloatRect PlayableCharacter::getFeet()
 {
 	return m_Feet;
 }
 
+//Return the head
 FloatRect PlayableCharacter::getHead()
 {
 	return m_Head;
 }
 
+//Return the left of the character
 FloatRect PlayableCharacter::getLeft()
 {
 	return m_Left;
 }
 
+//Return the right of the character
 FloatRect PlayableCharacter::getRight()
 {
 	return m_Right;
 }
 
+//returns sprite
 Sprite PlayableCharacter::getSprite()
 {
 	return m_Sprite;
 }
 
+//returns sprite
 Sprite PlayableCharacter::getSpriteFromSheet()
 {
 	return m_Sprite;
 }
 
 
-
-void PlayableCharacter::stopDown(float position)
+//Stop the characyer falling
+/*void PlayableCharacter::stopDown(float position)
 {
 	if (getName() == "PacMan")
 	{
@@ -575,8 +587,9 @@ void PlayableCharacter::stopUp(float position)
 
 	m_Sprite.setPosition(m_Position);
 
-}
+}*/
 
+//Stop the character moving right
 void PlayableCharacter::stopRight(float position)
 //reduce x by the position - m_Sprite.getGlobalBounds().width;
 {
@@ -584,6 +597,7 @@ void PlayableCharacter::stopRight(float position)
 	m_Sprite.setPosition(m_Position);
 }
 
+//stop the character moving left
 void PlayableCharacter::stopLeft(float position)
 //increment X by the width of the sprite
 {
@@ -591,6 +605,7 @@ void PlayableCharacter::stopLeft(float position)
 	m_Sprite.setPosition(m_Position);
 }
 
+//Stop jumping
 void PlayableCharacter::stopJump()
 {
 	// Stop a jump early 
@@ -598,6 +613,7 @@ void PlayableCharacter::stopJump()
 	m_IsFalling = true;
 }
 
+//Set the sprite from the sprite sheet
 void PlayableCharacter::setSpriteFromSheet(sf::IntRect textureBox)
 {
 	LevelManager l;
@@ -621,18 +637,25 @@ void PlayableCharacter::setSpriteFromSheet(sf::IntRect textureBox)
 
 }
 
+//Set the name of the character
 void PlayableCharacter::setName(String id)
 {
 	m_Name = id;
 }
+
+//return the name
 String PlayableCharacter::getName()
 {
 	return m_Name;
 }
+
+//Handles the input of the character
 bool PlayableCharacter::handleInput()
 {
 	return true;
 }
+
+//Move the animation rectangle
 void PlayableCharacter::moveTextureRect(float timeElapsed)
 {
 	// if the animation counter is greater than the animation limit reset to 0

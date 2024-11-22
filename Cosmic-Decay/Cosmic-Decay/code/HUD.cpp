@@ -67,71 +67,85 @@ Hud::Hud()
 	hudBackground2.setFillColor(sf::Color(255, 255, 255, 120));
 }
 
+//Returns the start text
 Text Hud::getMessage()
 {
 	return m_StartText;
 }
 
+//Returns the level text
 Text Hud::getLevel()
 {
 	return m_LevelText;
 }
 
+//Returns the ammo text
 Text Hud::getAmmo()
 {
 	return m_AmmoText;
 }
 
+//Returns the health text
 Text Hud::getHealth()
 {
 	return m_HealthText;
 }
 
+//returns score text
 Text Hud::getScore()
 {
 	return m_ScoreText;
 }
 
+//Returns fuse text
 Text Hud::getFuse()
 {
 	return m_FuseText;
 }
 
+//returns the background hud 1
 RectangleShape Hud::getBackground()
 {
 	return hudBackground;
 }
 
+//returns the background hud 2
 RectangleShape Hud::getBackground2()
 {
 	return hudBackground2;
 }
 
+//Updates the level text 
 void Hud::setLevel(String text)
 {
 	m_LevelText.setString(text);
 }
 
+//Updates the ammo text
 void Hud::setAmmo(String text)
 {
 	m_AmmoText.setString(text);
 }
 
+//Updates the health text
 void Hud::setHealth(String text)
 {
 	m_HealthText.setString(text);
 }
 
+//Updates the score text
 void Hud::setScore(String text)
 {
 	m_ScoreText.setString(text);
 }
 
+//Updates the start text
 void Hud::setStart(String text)
 {
 	m_StartText.setString(text);
 }
 
+//Updates the fuse text
 void Hud::setFuse(String text)
 {
 	m_FuseText.setString(text);

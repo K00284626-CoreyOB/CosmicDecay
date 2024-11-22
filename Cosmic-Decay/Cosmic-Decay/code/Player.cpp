@@ -16,6 +16,8 @@ Player::Player() {
     walkingSound.setBuffer(walkingBuffer);
 }
 
+
+//Sets the sprite of the player
 void Player::setSprite(int m_type)
 {
     m_Sprite = sf::Sprite(TextureHolder::GetTexture("graphics/playerSpriteSheet2.png"));
@@ -44,10 +46,9 @@ void Player::setSprite(int m_type)
 
 void Player::draw(sf::RenderWindow& window) {
     window.draw(m_Sprite);       // Draw the player sprite
-   
 }
 
-
+//handles the players input
 bool Player::handleInput()
 {
     
@@ -63,8 +64,8 @@ bool Player::handleInput()
         joyOnePovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
     }
 
-    //2019 up and down movement
-    if (Keyboard::isKeyPressed(Keyboard::W) || (joyOnePovY == 100))
+    //up and down movement
+    if (Keyboard::isKeyPressed(Keyboard::W) || (joyOnePovY == 100)) //Moving up
     {
         m_UpPressed = true;
 
@@ -75,7 +76,7 @@ bool Player::handleInput()
     }
 
 
-    if (Keyboard::isKeyPressed(Keyboard::S) || (joyOnePovY == -100))
+    if (Keyboard::isKeyPressed(Keyboard::S) || (joyOnePovY == -100)) //Moving down
     {
         m_DownPressed = true;
 
@@ -84,7 +85,7 @@ bool Player::handleInput()
     {
         m_DownPressed = false;
     }
-    if (Keyboard::isKeyPressed(Keyboard::A) || (joyOnePovX == -100))
+    if (Keyboard::isKeyPressed(Keyboard::A) || (joyOnePovX == -100)) //Moving left
     {
         m_LeftPressed = true;
 
@@ -95,7 +96,7 @@ bool Player::handleInput()
     }
 
 
-    if (Keyboard::isKeyPressed(Keyboard::D) || (joyOnePovX == 100))
+    if (Keyboard::isKeyPressed(Keyboard::D) || (joyOnePovX == 100)) //Moving right
     {
         m_RightPressed = true;
     }
@@ -121,81 +122,81 @@ bool Player::handleInput()
 
 void Player::update(float elapsedTime, int m_type)
 {
-    if (m_RightPressed) {
+    if (m_RightPressed) {  //Update the player when right is pressed
         m_Position.x += m_Speed * elapsedTime;
-        if (m_type == 1)
+        if (m_type == 1) //Zach
         {
             setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
         }
-        else if (m_type == 2)
+        else if (m_type == 2) //Szymon
         {
             setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         }
-        else if (m_type == 3)
+        else if (m_type == 3)//Matthew
         {
             setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
         }
-        else if (m_type == 4)
+        else if (m_type == 4)//Corey
         {
             setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
         }
         moveTextureRect(elapsedTime);
     }
-    else if (m_LeftPressed) {
+    else if (m_LeftPressed) { //Update the player when left is pressed
         m_Position.x -= m_Speed * elapsedTime;
-        if (m_type == 1)
+        if (m_type == 1) //Zach
         {
             setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
         }
-        else if (m_type == 2)
+        else if (m_type == 2)//Szymon
         {
             setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         }
-        else if (m_type == 3)
+        else if (m_type == 3)//Matthew
         {
             setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
         }
-        else if (m_type == 4)
+        else if (m_type == 4)//Corey
         {
             setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
         }
         moveTextureRect(elapsedTime);
     }
-    else if (m_UpPressed) {
+    else if (m_UpPressed) { //Update the player when up is pressed
         m_Position.y -= m_Speed * elapsedTime;
-        if (m_type == 1)
+        if (m_type == 1) //Zach
         {
             setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
         }
-        else if (m_type == 2)
+        else if (m_type == 2)//Szymon
         {
             setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         }
-        else if (m_type == 3)
+        else if (m_type == 3)//Matthew
         {
             setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
         }
-        else if (m_type == 4)
+        else if (m_type == 4)//Corey
         {
             setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
         }
         moveTextureRect(elapsedTime);
     }
-    else if (m_DownPressed) {
+    else if (m_DownPressed) { //Update the player when down is pressed
         m_Position.y += m_Speed * elapsedTime;
-        if (m_type == 1)
+        if (m_type == 1) //Zach
         {
             setSpriteFromSheet(sf::IntRect(100, 150, 250, 50));
         }
-        else if (m_type == 2)
+        else if (m_type == 2)//Szymon
         {
             setSpriteFromSheet(sf::IntRect(100, 50, 250, 50));
         }
-        else if (m_type == 3)
+        else if (m_type == 3)//Matthew
         {
             setSpriteFromSheet(sf::IntRect(100, 100, 250, 50));
         }
-        else if (m_type == 4)
+        else if (m_type == 4)//Corey
         {
             setSpriteFromSheet(sf::IntRect(100, 0, 250, 50));
         }
@@ -277,6 +278,7 @@ void Player::moveTextureRect(float timeElapsed)
     //cout << "Current Texture Rect: " << m_Sprite.getTextureRect().left << ", " << m_Sprite.getTextureRect().top << std::endl;
 }
 
+//Returns positiom
 FloatRect Player::getPosition()
 {
     return m_Sprite.getGlobalBounds();
@@ -303,35 +305,42 @@ void Player::setHealth(float health) {
     std::cout << "Health set to " << health << ".\n";
 }
 
+//returns the max health
 float Player::getMaxHealth() const {
     return m_MaxHealth;
 }
 
+//set being invulnerable
 void Player::setInvulnerable(bool state) {
     m_Invulnerable = state;
     std::cout << "Invulnerability set to " << (state ? "true" : "false") << ".\n";
 }
 
+//stop the enemies following you
 void Player::setEnemiesIgnore(bool state) {
     m_EnemiesIgnore = state;
     std::cout << "Enemies ignore set to " << (state ? "true" : "false") << ".\n";
 }
 
+//Stops the enemies from attacking
 void Player::setCanAttack(bool state) {
     m_CanAttack = state;
     std::cout << "Can attack set to " << (state ? "true" : "false") << ".\n";
 }
 
+//Sets multiplier to fire rate
 void Player::setFireRateMultiplier(float multiplier) {
     m_FireRateMultiplier = multiplier;
     std::cout << "Fire rate multiplier set to " << multiplier << ".\n";
 }
 
+//Sets infinite ammo
 void Player::setInfiniteAmmo(bool state) {
     m_InfiniteAmmo = state;
     std::cout << "Infinite ammo set to " << (state ? "true" : "false") << ".\n";
 }
 
+//Increases the speed.
 void Player::increaseSpeed()
 {
     m_Speed = m_Speed + 100;

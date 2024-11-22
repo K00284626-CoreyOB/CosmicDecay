@@ -4,7 +4,7 @@
 #include <iostream>
 
 Shuttle::Shuttle()
-{
+{//Sets the texture of the shuttle
 	m_Sprite = Sprite(TextureHolder::GetTexture(
 		"graphics/Shuttle.png"));
 

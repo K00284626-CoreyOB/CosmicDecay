@@ -5,6 +5,7 @@
 
 Fuses::Fuses()
 {
+	//Sets the sprite to the pickup
 	m_Sprite = Sprite(TextureHolder::GetTexture(
 		"graphics/fuse.png"));
 
