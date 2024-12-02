@@ -555,7 +555,7 @@ Sprite PlayableCharacter::getSpriteFromSheet()
 
 
 //Stop the characyer falling
-/*void PlayableCharacter::stopDown(float position)
+void PlayableCharacter::stopDown(float position)
 {
 	if (getName() == "PacMan")
 	{
@@ -587,7 +587,7 @@ void PlayableCharacter::stopUp(float position)
 
 	m_Sprite.setPosition(m_Position);
 
-}*/
+}
 
 //Stop the character moving right
 void PlayableCharacter::stopRight(float position)
