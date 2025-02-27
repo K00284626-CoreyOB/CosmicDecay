@@ -14,20 +14,43 @@ void Engine::input()
 	{
 		if (state == State::MAIN_MENU) //Input while in main menu
 		{
+
 			if (event.key.code == Keyboard::Num1)
 			{
-				event.key.code = Keyboard::Num0;
 				state = State::CHAR_SELECT; //changes to character selection
 			}
 
-			//if (event.key.code == Keyboard::Num2)
-			//{
-				//state = State::PLAYING;
-			//}
+			if (event.key.code == Keyboard::Num2)
+			{
+				state = State::INSTRUCTIONS;; //changes to character selection
+			}
 
 			if (event.key.code == Keyboard::Num3)
 			{
-				state = State::GAME_OVER; //Closes the game
+				state = State::LEADERBOARD;; //changes to character selection
+			}
+
+			if (event.key.code == Keyboard::Num4)
+			{
+				m_Window.close(); //Closes the game
+			}
+		}
+
+		if (state == State::INSTRUCTIONS) //Input while in paused
+		{
+			if (event.key.code == Keyboard::Enter)
+			{
+				state = State::MAIN_MENU; //Returns to main menu
+
+			}
+		}
+
+		if (state == State::LEADERBOARD) //Input while in paused
+		{
+			if (event.key.code == Keyboard::Escape)
+			{
+				state = State::MAIN_MENU; //Returns to main menu
+
 			}
 		}
 
@@ -63,7 +86,7 @@ void Engine::input()
 					startPlaying();
 				}
 
-				if (event.key.code == Keyboard::Num5) //Return to menu
+				if (event.key.code == Keyboard::Enter) //Return to menu
 				{
 					event.key.code = Keyboard::Num0;
 					state = State::MAIN_MENU;
@@ -135,8 +158,36 @@ void Engine::input()
 
 		if (state == State::GAME_OVER) //closes on game over
 		{
-			m_Window.close();
+			// When in GAME_OVER, allow the player to press Enter or Esc.
+			if (event.key.code == Keyboard::Return)  // Enter pressed
+			{
+				state = State::CAPTURE_INITIALS; // Switch to capture initials state
+			}
+			
 		}
+
+		//CAPTURE INISTIALS STATE================================================================
+		if (state == State::CAPTURE_INITIALS)
+		{
+			std::string playerInitials = scoreboard.captureInitials(m_Window, scoreFont);
+			if (!playerInitials.empty())
+			{
+				// Submit the score using the captured initials.
+				scoreboard.submitScore(playerInitials, score);
+
+				// Optionally, wait a moment before fetching updated leaderboard data.
+				//sf::sleep(sf::seconds(2));
+
+				std::string leaderboardData = scoreboard.getLeaderboardText();
+				if (leaderboardData.empty() || leaderboardData == "Error fetching leaderboard!")
+					leaderboardText.setString("Leaderboard unavailable. Check connection.");
+				else
+					leaderboardText.setString(leaderboardData);
+
+				state = State::LEADERBOARD;
+			}
+		}
+		//======================================================================================
 
 		if (state == State::PLAYING) //Hanle gameplay input
 		{

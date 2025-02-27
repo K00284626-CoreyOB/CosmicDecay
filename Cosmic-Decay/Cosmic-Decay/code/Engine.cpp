@@ -128,6 +128,12 @@ Engine::Engine()
 	spriteMainMenu.setPosition(0, 0);
 	spriteMainMenu.setScale(0.4, 0.75);
 
+	//Instructions Image background
+	textureInstructions = TextureHolder::GetTexture("graphics/instructionsImage.png");
+	spriteInstructions.setTexture(textureInstructions);
+	spriteInstructions.setPosition(0, 0);
+	spriteInstructions.setScale(0.52, 0.87);
+
 	//Set font
 	font.loadFromFile("fonts/KOMIKAP_.ttf");
 
@@ -139,13 +145,88 @@ Engine::Engine()
 	std::stringstream mainMenuStream;
 	mainMenuStream <<
 		"\n1 - Play Game" <<
-		"\n3 - Exit";
+		"\n2 - Instructions" <<
+		"\n3 - Leaderboard" <<
+		"\n4 - Exit";
 
 	mainMenuText.setString(mainMenuStream.str());
 
+	//Leaderboard Text
+
+
+	// Load the score from a text file/
+	std::ifstream inputFile("gamedata/scores.txt");
+	if (inputFile.is_open())
+	{
+		inputFile >> score;
+		inputFile.close();
+	}
+
+
+	// Ensure the font is loaded (assuming you have already loaded 'font' elsewhere)
+	leaderboardText.setFont(font);
+	leaderboardText.setCharacterSize(50);
+	leaderboardText.setFillColor(sf::Color::White);
+	leaderboardText.setPosition(350, 200);
+
+	
+	std::stringstream s;
+	s << "Hi Score:" << score;
+	leaderboardText.setString(s.str());
+
+
+	//Leaderboard heading text============================================
+	
+	leaderboardHeadingText.setFont(font); // Use your loaded font
+	leaderboardHeadingText.setCharacterSize(80);
+	leaderboardHeadingText.setFillColor(Color::Yellow);
+	leaderboardHeadingText.setString("Top 10 Scores");
+
+	// Get the local bounds of the text to center it
+	FloatRect textRectHeading = leaderboardHeadingText.getLocalBounds();
+	leaderboardHeadingText.setOrigin(textRectHeading.left + textRectHeading.width / 2.0f,
+	textRectHeading.top + textRectHeading.height / 2.0f);
+
+	// Position the text: centered horizontally and 90% down from the top of the screen.
+	leaderboardHeadingText.setPosition(resolution.x / 4.f, resolution.y * 0.1f);
+
+	//======================================================================================
+	
+	//Leaderboard Return Text
+	leaderboardReturnText.setFont(font); // Use your loaded font
+	leaderboardReturnText.setCharacterSize(40);
+	leaderboardReturnText.setFillColor(Color::Yellow);
+	leaderboardReturnText.setString("Press Escape to return to main menu");
+
+	// Get the local bounds of the text to center it
+	FloatRect textRectangle = leaderboardReturnText.getLocalBounds();
+	leaderboardReturnText.setOrigin(textRectangle.left + textRectangle.width / 2.0f,
+		textRectangle.top + textRectangle.height / 2.0f);
+
+	// Position the text: centered horizontally and 90% down from the top of the screen.
+	leaderboardReturnText.setPosition(resolution.x / 4.f, resolution.y * 0.9f);
+
+	//======================================================================================
+	// 
+	//Return Menu Text
+	returnMenuText.setFont(font); // Use your loaded font
+	returnMenuText.setCharacterSize(40);
+	returnMenuText.setFillColor(Color::Yellow);
+	returnMenuText.setString("Press ENTER to return to main menu");
+
+	// Get the local bounds of the text to center it
+	FloatRect textRect = returnMenuText.getLocalBounds();
+	returnMenuText.setOrigin(textRect.left + textRect.width / 2.0f,
+		textRect.top + textRect.height / 2.0f);
+
+	// Position the text: centered horizontally and 90% down from the top of the screen.
+	returnMenuText.setPosition(resolution.x / 4.f, resolution.y * 0.9f);
+
+	//======================================================================================
+	
 	//character selection screen
 	charSelectText.setFont(font);
-	charSelectText.setCharacterSize(80);
+	charSelectText.setCharacterSize(70);
 	charSelectText.setFillColor(Color::White);
 	charSelectText.setPosition(150, 50);
 	std::stringstream charSelectStream;
@@ -153,8 +234,7 @@ Engine::Engine()
 		"\n1 - Zach" <<
 		"\n2 - Szymon" <<
 		"\n3 - Matthew" <<
-		"\n4 - Corey" <<
-		"\n5 - Return to Menu";
+		"\n4 - Corey";
 
 	charSelectText.setString(charSelectStream.str());
 

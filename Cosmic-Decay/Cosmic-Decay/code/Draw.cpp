@@ -90,7 +90,6 @@ void Engine::draw()
 			m_Window.draw(m_Hud.getMessage());
 		}
 
-		//m_Window.draw(scoreText);
 	}
 	if (state == State::MAIN_MENU)
 	{
@@ -105,6 +104,33 @@ void Engine::draw()
 
 	}
 
+	if (state == State::INSTRUCTIONS)
+	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+		// Draw the background
+		m_Window.draw(spriteInstructions);
+		m_Window.draw(returnMenuText);
+	}
+
+	if (state == State::LEADERBOARD)
+	{
+		m_Window.clear(Color::Black);
+
+
+		// Switch to background view
+		m_Window.setView(m_BGMainView);
+		// Draw the background
+		m_Window.draw(spriteMainMenu);
+		m_Window.draw(leaderboardHeadingText);
+		m_Window.draw(leaderboardText);
+		m_Window.draw(leaderboardReturnText);
+	}
+
+
 	//Draw the character selection screen
 	if (state == State::CHAR_SELECT)
 	{
@@ -116,6 +142,7 @@ void Engine::draw()
 		// Draw the background
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(charSelectText);
+		m_Window.draw(returnMenuText);
 
 	}
 
@@ -145,6 +172,16 @@ void Engine::draw()
 		m_Window.draw(spriteMainMenu);
 		m_Window.draw(shopText);
 	}
+
+
+	if (state == State::GAME_OVER)
+	{
+		m_Window.clear();
+		m_Window.draw(scoreText);
+		m_Window.draw(leaderboardText);
+		m_Window.draw(returnMenuText);
+	}
+
 	
 	// Show everything we have just drawn
 	m_Window.display();

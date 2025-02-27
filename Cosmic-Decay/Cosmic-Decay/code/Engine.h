@@ -15,6 +15,10 @@
 #include "Arm.h"
 #include "HUD.h"
 #include "Shuttle.h"
+#include "ScoreBoard.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 using namespace sf;
 
@@ -78,6 +82,8 @@ private:
 
 	int m_Type;
 
+	ScoreBoard scoreboard;
+
 	// A class to manage all the levels
 	LevelManager m_LM;
 
@@ -105,12 +111,18 @@ private:
 	Texture m_BackgroundTexture;
 	Sprite spriteMainMenu;
 	Texture textureMainMenu;
+	Sprite spriteInstructions;
+	Texture textureInstructions;
 
 	//font holder and text objects for menus
 	Font font;
 	Text mainMenuText;
 	Text charSelectText;
 	Text pauseMenuText;
+	Text leaderboardText;
+	Text leaderboardHeadingText;
+	Text leaderboardReturnText;
+	Text returnMenuText;
 
 	Text shopText;
 
@@ -192,9 +204,7 @@ public:
 	void startPlaying();
 
 	//state holders, orders load order of states
-	enum class State { PAUSED, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT, SHOP
-	};
+	enum class State { PAUSED, GAME_OVER, PLAYING, MAIN_MENU, CHAR_SELECT, SHOP, LEADERBOARD, CAPTURE_INITIALS, INSTRUCTIONS};
 	State state = State::GAME_OVER;
-
 
 };
