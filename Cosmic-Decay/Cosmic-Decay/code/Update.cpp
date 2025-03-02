@@ -91,7 +91,7 @@ void Engine::update(float dtAsSeconds)
 		//Back to menu when you beat the game
 		if (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
 		{
-			state = State::MAIN_MENU;
+			state = State::GAME_OVER;
 		}
 
 		//Check if player is invincible
