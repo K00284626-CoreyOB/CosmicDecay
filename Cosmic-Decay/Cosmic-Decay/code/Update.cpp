@@ -38,9 +38,10 @@ void Engine::update(float dtAsSeconds)
 		//Check if player has died
 		if (health <= 0)
 		{
-			state = State::MAIN_MENU;
+			state = State::GAME_OVER;
 			health = 100;
-			score = 0;
+			fuses = 0;
+			//score = 0;
 		}
 		
 		//Update player
@@ -92,6 +93,7 @@ void Engine::update(float dtAsSeconds)
 		if (detectCollisions(m_Player) && m_LM.getCurrentLevel() == 3 && fuses >= 9)
 		{
 			state = State::GAME_OVER;
+			fuses = 0;
 		}
 
 		//Check if player is invincible

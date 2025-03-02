@@ -231,10 +231,10 @@ Engine::Engine()
 	charSelectText.setPosition(150, 50);
 	std::stringstream charSelectStream;
 	charSelectStream <<
-		"\n1 - Zach" <<
-		"\n2 - Szymon" <<
-		"\n3 - Matthew" <<
-		"\n4 - Corey";
+		"\nZ - Zach" <<
+		"\nS - Szymon" <<
+		"\nM - Matthew" <<
+		"\nC - Corey";
 
 	charSelectText.setString(charSelectStream.str());
 

@@ -12,6 +12,7 @@ void Engine::input()
 
 	while (m_Window.pollEvent(event))
 	{
+
 		if (state == State::MAIN_MENU) //Input while in main menu
 		{
 
@@ -58,28 +59,28 @@ void Engine::input()
 		{
 			if (event.type == Event::KeyPressed)
 			{
-				if (event.key.code == Keyboard::Num1) //Choose Zach
+				if (event.key.code == Keyboard::Z) //Choose Zach
 				{
 					m_Type = 1;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
-				if (event.key.code == Keyboard::Num2) //Choose Szymon
+				if (event.key.code == Keyboard::S) //Choose Szymon
 				{
 					m_Type = 2;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
-				if (event.key.code == Keyboard::Num3) //Choose Matthew
+				if (event.key.code == Keyboard::M) //Choose Matthew
 				{
 					m_Type = 3;
 					event.key.code = Keyboard::Num0;
 					startPlaying();
 				}
 
-				if (event.key.code == Keyboard::Num4) //Choose Corey
+				if (event.key.code == Keyboard::C) //Choose Corey
 				{
 					m_Type = 4;
 					event.key.code = Keyboard::Num0;
